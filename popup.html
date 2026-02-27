@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web Change Alert</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --accent: #2f7d32;
+        --accent-soft: #e6f4ea;
+        --accent-text: #1b5e20;
+        --link: #1f5a4f;
+        --border: #e0e3e7;
+      }
+      body {
+        margin: 0;
+        padding: 8px;
+        font-family: "Noto Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+        width: 420px;
+        min-height: 520px;
+        color: #1f1f1f;
+        background: #f7f9fb;
+      }
+      .topbar {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 6px;
+        position: relative;
+      }
+      .topbar-right {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .icon-btn {
+        width: 28px;
+        height: 28px;
+        border-radius: 8px;
+        border: 1px solid #dfe1e5;
+        background: #fff;
+        color: #3c4043;
+        font-size: 14px;
+        line-height: 1;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+      }
+      .popover {
+        position: absolute;
+        top: 34px;
+        right: 0;
+        z-index: 30;
+        width: 190px;
+        max-height: 260px;
+        overflow: auto;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        padding: 8px;
+        display: grid;
+        gap: 6px;
+      }
+      .popover-title {
+        font-size: 11px;
+        color: #5f6368;
+      }
+      .lang-option {
+        width: 100%;
+        border: 1px solid #dfe1e5;
+        background: #fff;
+        color: #202124;
+        border-radius: 8px;
+        padding: 6px 8px;
+        cursor: pointer;
+        font-size: 12px;
+        text-align: left;
+      }
+      .lang-option.active {
+        border-color: var(--accent);
+        color: var(--accent-text);
+        background: var(--accent-soft);
+      }
+      .list {
+        max-height: 420px;
+        overflow-y: auto;
+        display: grid;
+        gap: 8px;
+      }
+      .card {
+        background: #fff;
+        border-radius: 12px;
+        padding: 8px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        display: grid;
+        gap: 6px;
+        border: 1px solid var(--border);
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .tag {
+        background: #f1f3f4;
+        color: #5f6368;
+        padding: 2px 6px;
+        border-radius: 999px;
+        font-size: 10px;
+        display: inline-block;
+      }
+      .title-link {
+        font-size: 12px;
+        color: var(--link);
+        text-decoration: underline;
+        word-break: break-all;
+        max-height: 36px;
+        overflow: auto;
+      }
+      .value {
+        font-size: 13px;
+        font-weight: 600;
+        word-break: break-word;
+      }
+      .value-row {
+        width: 100%;
+        flex-basis: 100%;
+        font-size: 12px;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: 8px;
+        align-items: start;
+      }
+      .value-col {
+        min-width: 0;
+        display: grid;
+        gap: 4px;
+      }
+      .value-col-prev {
+        padding-right: 8px;
+        border-right: 1px solid var(--border);
+      }
+      .value-col-current {
+        padding-left: 2px;
+      }
+      .value-col-label {
+        font-size: 10px;
+        color: #9aa0a6;
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      .value-main {
+        min-width: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px;
+      }
+      .value-main.is-image {
+        align-items: flex-start;
+      }
+      .value-col .time {
+        color: #9aa0a6;
+        font-size: 11px;
+        line-height: 1.2;
+      }
+      .value-image {
+        width: 56px;
+        height: 56px;
+        object-fit: cover;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #fff;
+        display: block;
+      }
+      .value-image-prev {
+        opacity: 0.65;
+      }
+      .value-image-wrap {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 56px;
+        min-height: 56px;
+      }
+      .value-image-wrap-prev {
+        position: relative;
+      }
+      .value-image-strike {
+        position: absolute;
+        left: 2px;
+        right: 2px;
+        top: 50%;
+        height: 2px;
+        transform: translateY(-50%);
+        background: #111;
+        border-radius: 999px;
+        pointer-events: none;
+      }
+      .value-image-broken {
+        border: 1px dashed var(--border);
+        border-radius: 8px;
+        font-size: 10px;
+        color: #5f6368;
+        padding: 4px;
+        box-sizing: border-box;
+      }
+      .delete-btn {
+        width: 24px;
+        height: 24px;
+        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        background: #fff;
+        color: #d93025;
+        cursor: pointer;
+        font-size: 14px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .run-btn {
+        height: 24px;
+        min-width: 36px;
+        border-radius: 6px;
+        border: 1px solid #e0e0e0;
+        background: #fff;
+        color: #2f7d32;
+        cursor: pointer;
+        font-size: 11px;
+        padding: 0 6px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .header-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .empty {
+        padding: 16px;
+        font-size: 12px;
+        color: #5f6368;
+        text-align: center;
+        background: #fff;
+        border-radius: 10px;
+      }
+      .footer {
+        margin-top: 10px;
+      }
+      .footer button {
+        width: 100%;
+      }
+      button {
+        padding: 8px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+      button.primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      button.secondary {
+        background: #e8eaed;
+        color: #202124;
+      }
+      .hidden {
+        display: none;
+      }
+
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 32px;
+        height: 18px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #c7c7c7;
+        transition: 0.2s;
+        border-radius: 999px;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 14px;
+        width: 14px;
+        left: 2px;
+        bottom: 2px;
+        background-color: white;
+        transition: 0.2s;
+        border-radius: 50%;
+      }
+      .switch input:checked + .slider {
+        background-color: var(--accent);
+      }
+      .switch input:checked + .slider:before {
+        transform: translateX(14px);
+      }
+
+      .add-section {
+        margin-top: 10px;
+        background: #fff;
+        border-radius: 12px;
+        padding: 10px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+        display: grid;
+        gap: 8px;
+      }
+      label {
+        font-size: 12px;
+        color: #5f6368;
+        display: block;
+        margin-bottom: 6px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 7px 8px;
+        border: 1px solid #dfe1e5;
+        border-radius: 8px;
+        font-size: 12px;
+      }
+      .notice {
+        margin-top: 10px;
+        background: #fff7e6;
+        color: #7a4d00;
+        border-radius: 10px;
+        padding: 10px;
+        font-size: 11px;
+        line-height: 1.5;
+      }
+      .confirm-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.35);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 20;
+      }
+      .confirm-overlay.hidden {
+        display: none;
+      }
+      .confirm-dialog {
+        width: 230px;
+        background: #fff;
+        border-radius: 12px;
+        padding: 10px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+      .confirm-title {
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .confirm-sub {
+        font-size: 10px;
+        color: #5f6368;
+        margin-top: 4px;
+        max-height: 50px;
+        overflow: auto;
+      }
+      .confirm-actions {
+        margin-top: 12px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .header-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .error-inline {
+        font-size: 11px;
+        color: #d93025;
+        white-space: nowrap;
+      }
+      .error-link {
+        color: #d93025;
+        cursor: pointer;
+        text-decoration: underline;
+        margin-left: 4px;
+        white-space: nowrap;
+      }
+      .line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 6px;
+        padding-top: 6px;
+        border-top: 1px solid var(--border);
+      }
+      .about-dialog {
+        width: 260px;
+        background: #fff;
+        border-radius: 12px;
+        padding: 10px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        display: grid;
+        gap: 8px;
+      }
+      .about-grid {
+        display: grid;
+        gap: 8px;
+      }
+      .about-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        font-size: 12px;
+      }
+      .about-label {
+        color: #5f6368;
+      }
+      .about-value {
+        color: #1f1f1f;
+        font-weight: 600;
+        text-align: right;
+        word-break: break-all;
+      }
+      .coffee-btn {
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        padding: 9px 10px;
+        border-radius: 8px;
+        text-decoration: none;
+        background: #ff7a2f;
+        color: #fff;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .about-close {
+        width: 100%;
+      }
+      .language-options {
+        margin-top: 8px;
+        display: grid;
+        gap: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="topbar">
+      <div class="topbar-right">
+        <button id="langBtn" class="icon-btn" type="button" title="Language">🌐</button>
+        <button id="aboutBtn" class="icon-btn" type="button" title="About">i</button>
+      </div>
+      <div id="langMenu" class="popover hidden">
+        <div class="popover-title" data-i18n="languageMenuTitle"></div>
+        <div id="langOptions"></div>
+      </div>
+    </div>
+
+    <div id="list" class="list"></div>
+
+    <div id="addWrap" hidden>
+      <div id="addSection" class="add-section">
+        <div>
+          <label id="urlLabel" for="urlInput" data-i18n="urlLabel"></label>
+          <input id="urlInput" type="url" placeholder="https://example.com" />
+          <div class="row" style="margin-top:8px;">
+            <button id="startPicker" class="primary" style="width:100%;" data-i18n="pickFromPage"></button>
+          </div>
+        </div>
+
+        <div id="noticeText" class="notice"></div>
+      </div>
+    </div>
+
+    <div class="footer" style="margin-top:10px;">
+      <button id="addBtn" class="primary" data-i18n="add"></button>
+    </div>
+
+    <div id="confirmOverlay" class="confirm-overlay hidden">
+      <div class="confirm-dialog">
+        <div id="confirmTitle" class="confirm-title" data-i18n="confirmDeleteTitle"></div>
+        <div id="confirmTarget" class="confirm-sub"></div>
+        <div class="confirm-actions">
+          <button id="confirmCancel" class="secondary" data-i18n="cancel"></button>
+          <button id="confirmDelete" class="primary" data-i18n="delete"></button>
+        </div>
+      </div>
+    </div>
+
+    <div id="aboutOverlay" class="confirm-overlay hidden">
+      <div class="about-dialog">
+        <div class="confirm-title" data-i18n="aboutTitle"></div>
+        <div class="about-grid">
+          <div class="about-row">
+            <span class="about-label" data-i18n="aboutAppNameLabel"></span>
+            <span id="aboutAppName" class="about-value"></span>
+          </div>
+          <div class="about-row">
+            <span class="about-label" data-i18n="aboutVersionLabel"></span>
+            <span id="aboutVersion" class="about-value"></span>
+          </div>
+          <div class="about-row">
+            <span class="about-label" data-i18n="aboutAuthorLabel"></span>
+            <span id="aboutAuthor" class="about-value"></span>
+          </div>
+        </div>
+        <a id="coffeeLink" class="coffee-btn" href="https://ko-fi.com/minwookim" target="_blank" rel="noreferrer" data-i18n="buyCoffee"></a>
+        <button id="aboutClose" type="button" class="secondary about-close" data-i18n="close"></button>
+      </div>
+    </div>
+
+    <script src="localizer.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

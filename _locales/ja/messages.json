@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "Web変更アラート"
+  },
+  "extensionDescription": {
+    "message": "Webページの選択項目をスケジュール監視し、browser-based crawlingで定期確認して変更時のみ通知します。"
+  },
+  "actionTitle": {
+    "message": "Web変更アラート"
+  },
+  "documentTitle": {
+    "message": "Web Change Alert"
+  },
+  "languageMenuTitle": {
+    "message": "言語"
+  },
+  "languageButton": {
+    "message": "言語"
+  },
+  "aboutButton": {
+    "message": "情報"
+  },
+  "urlLabel": {
+    "message": "URL"
+  },
+  "pickFromPage": {
+    "message": "ページで監視対象を選択"
+  },
+  "add": {
+    "message": "追加"
+  },
+  "emptyMonitors": {
+    "message": "登録されたモニターはありません。"
+  },
+  "collectFailedPrefix": {
+    "message": "❗ 取得失敗 -"
+  },
+  "reselect": {
+    "message": "再選択"
+  },
+  "runNow": {
+    "message": "今すぐ実行"
+  },
+  "delete": {
+    "message": "削除"
+  },
+  "confirmDeleteTitle": {
+    "message": "このモニターを削除しますか？"
+  },
+  "cancel": {
+    "message": "キャンセル"
+  },
+  "valueEmpty": {
+    "message": "(値なし)"
+  },
+  "prevValueEmpty": {
+    "message": "(前の値なし)"
+  },
+  "imageLabel": {
+    "message": "画像"
+  },
+  "pickerStartFailed": {
+    "message": "選択開始に失敗しました"
+  },
+  "alarmOff": {
+    "message": "通知オフ"
+  },
+  "alarm": {
+    "message": "通知"
+  },
+  "everyMinutes": {
+    "message": "{minutes}分ごと"
+  },
+  "dailyTime": {
+    "message": "毎日 {time}"
+  },
+  "weeklyTime": {
+    "message": "毎週 {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "毎月 {day}日 {time}"
+  },
+  "notice": {
+    "message": "ログインが必要なサイトはログイン状態を維持してください。Cloudflare などの bot 対策サイトは手動認証が必要な場合があります。"
+  },
+  "aboutTitle": {
+    "message": "情報"
+  },
+  "aboutAppNameLabel": {
+    "message": "アプリ名"
+  },
+  "aboutVersionLabel": {
+    "message": "バージョン"
+  },
+  "aboutAuthorLabel": {
+    "message": "作成者"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "閉じる"
+  },
+  "languageSetupTitle": {
+    "message": "言語を選択してください"
+  },
+  "languageSetupDesc": {
+    "message": "最初に一度設定すれば、右上の 🌐 でいつでも変更できます。"
+  },
+  "weekday0": {
+    "message": "日"
+  },
+  "weekday1": {
+    "message": "月"
+  },
+  "weekday2": {
+    "message": "火"
+  },
+  "weekday3": {
+    "message": "水"
+  },
+  "weekday4": {
+    "message": "木"
+  },
+  "weekday5": {
+    "message": "金"
+  },
+  "weekday6": {
+    "message": "土"
+  },
+  "hint": {
+    "message": "要素にカーソルを合わせてクリックしてください。ESC でキャンセル"
+  },
+  "noValue": {
+    "message": "(値なし)"
+  },
+  "typeText": {
+    "message": "text"
+  },
+  "typeImage": {
+    "message": "image"
+  },
+  "typeValue": {
+    "message": "value"
+  },
+  "typeAttr": {
+    "message": "attr"
+  },
+  "confirmTitle": {
+    "message": "選択した値"
+  },
+  "valueLabel": {
+    "message": "値"
+  },
+  "confirmQuestion": {
+    "message": "この値でよろしいですか？"
+  },
+  "confirm": {
+    "message": "確認"
+  },
+  "updateTitle": {
+    "message": "モニター更新"
+  },
+  "createTitle": {
+    "message": "モニター登録"
+  },
+  "selectedValue": {
+    "message": "選択した値"
+  },
+  "scheduleLabel": {
+    "message": "周期設定"
+  },
+  "scheduleInterval": {
+    "message": "間隔"
+  },
+  "scheduleDaily": {
+    "message": "毎日"
+  },
+  "scheduleWeekly": {
+    "message": "毎週"
+  },
+  "scheduleMonthly": {
+    "message": "毎月"
+  },
+  "minute": {
+    "message": "分"
+  },
+  "hour": {
+    "message": "時間"
+  },
+  "day": {
+    "message": "日"
+  },
+  "register": {
+    "message": "登録"
+  },
+  "registering": {
+    "message": "登録中..."
+  },
+  "registerDone": {
+    "message": "登録完了"
+  },
+  "registerFailed": {
+    "message": "登録失敗"
+  },
+  "notificationTitle": {
+    "message": "値が変更されました"
+  },
+  "notificationPrevious": {
+    "message": "前"
+  },
+  "notificationCurrent": {
+    "message": "現在"
+  },
+  "notificationValueEmpty": {
+    "message": "(値なし)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(前の値なし)"
+  },
+  "notificationImageChanged": {
+    "message": "前の画像 -> 新しい画像"
+  },
+  "languageSystem": {
+    "message": "システム既定 (Chrome)"
+  }
+}

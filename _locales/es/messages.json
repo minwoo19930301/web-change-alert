@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "Alerta de Cambios Web"
+  },
+  "extensionDescription": {
+    "message": "Supervisa elementos web seleccionados con browser-based crawling programado y recibe alertas solo cuando cambian."
+  },
+  "actionTitle": {
+    "message": "Alerta de Cambios Web"
+  },
+  "documentTitle": {
+    "message": "Alerta de Cambios Web"
+  },
+  "languageMenuTitle": {
+    "message": "Idioma"
+  },
+  "languageButton": {
+    "message": "Idioma"
+  },
+  "aboutButton": {
+    "message": "Acerca de"
+  },
+  "urlLabel": {
+    "message": "URL"
+  },
+  "pickFromPage": {
+    "message": "Seleccionar objetivo en la página"
+  },
+  "add": {
+    "message": "Agregar"
+  },
+  "emptyMonitors": {
+    "message": "No hay monitores."
+  },
+  "collectFailedPrefix": {
+    "message": "❗ Error al obtener -"
+  },
+  "reselect": {
+    "message": "Volver a seleccionar"
+  },
+  "runNow": {
+    "message": "Ejecutar ahora"
+  },
+  "delete": {
+    "message": "Eliminar"
+  },
+  "confirmDeleteTitle": {
+    "message": "¿Eliminar este monitor?"
+  },
+  "cancel": {
+    "message": "Cancelar"
+  },
+  "valueEmpty": {
+    "message": "(sin valor)"
+  },
+  "prevValueEmpty": {
+    "message": "(sin valor anterior)"
+  },
+  "imageLabel": {
+    "message": "imagen"
+  },
+  "pickerStartFailed": {
+    "message": "No se pudo iniciar el selector"
+  },
+  "alarmOff": {
+    "message": "Alarma desactivada"
+  },
+  "alarm": {
+    "message": "Alarma"
+  },
+  "everyMinutes": {
+    "message": "Cada {minutes} min"
+  },
+  "dailyTime": {
+    "message": "Diario {time}"
+  },
+  "weeklyTime": {
+    "message": "Semanal {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "Mensual día {day} {time}"
+  },
+  "notice": {
+    "message": "Para sitios que requieren inicio de sesión, mantén la sesión activa. Sitios con Cloudflare o anti-bot pueden requerir verificación manual."
+  },
+  "aboutTitle": {
+    "message": "Acerca de"
+  },
+  "aboutAppNameLabel": {
+    "message": "App"
+  },
+  "aboutVersionLabel": {
+    "message": "Versión"
+  },
+  "aboutAuthorLabel": {
+    "message": "Autor"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "Cerrar"
+  },
+  "languageSetupTitle": {
+    "message": "Elige tu idioma"
+  },
+  "languageSetupDesc": {
+    "message": "Configúralo una vez. Luego puedes cambiarlo con 🌐 arriba a la derecha."
+  },
+  "weekday0": {
+    "message": "Dom"
+  },
+  "weekday1": {
+    "message": "Lun"
+  },
+  "weekday2": {
+    "message": "Mar"
+  },
+  "weekday3": {
+    "message": "Mié"
+  },
+  "weekday4": {
+    "message": "Jue"
+  },
+  "weekday5": {
+    "message": "Vie"
+  },
+  "weekday6": {
+    "message": "Sáb"
+  },
+  "hint": {
+    "message": "Pasa el cursor y haz clic en el elemento objetivo. ESC para cancelar"
+  },
+  "noValue": {
+    "message": "(sin valor)"
+  },
+  "typeText": {
+    "message": "texto"
+  },
+  "typeImage": {
+    "message": "imagen"
+  },
+  "typeValue": {
+    "message": "valor"
+  },
+  "typeAttr": {
+    "message": "atributo"
+  },
+  "confirmTitle": {
+    "message": "Valor seleccionado"
+  },
+  "valueLabel": {
+    "message": "Valor"
+  },
+  "confirmQuestion": {
+    "message": "¿Es correcto este valor?"
+  },
+  "confirm": {
+    "message": "Confirmar"
+  },
+  "updateTitle": {
+    "message": "Actualizar monitor"
+  },
+  "createTitle": {
+    "message": "Crear monitor"
+  },
+  "selectedValue": {
+    "message": "Valor seleccionado"
+  },
+  "scheduleLabel": {
+    "message": "Programación"
+  },
+  "scheduleInterval": {
+    "message": "Intervalo"
+  },
+  "scheduleDaily": {
+    "message": "Diario"
+  },
+  "scheduleWeekly": {
+    "message": "Semanal"
+  },
+  "scheduleMonthly": {
+    "message": "Mensual"
+  },
+  "minute": {
+    "message": "minuto(s)"
+  },
+  "hour": {
+    "message": "hora(s)"
+  },
+  "day": {
+    "message": "día(s)"
+  },
+  "register": {
+    "message": "Registrar"
+  },
+  "registering": {
+    "message": "Registrando..."
+  },
+  "registerDone": {
+    "message": "Registrado"
+  },
+  "registerFailed": {
+    "message": "Error al registrar"
+  },
+  "notificationTitle": {
+    "message": "El valor cambió"
+  },
+  "notificationPrevious": {
+    "message": "Antes"
+  },
+  "notificationCurrent": {
+    "message": "Ahora"
+  },
+  "notificationValueEmpty": {
+    "message": "(sin valor)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(sin valor anterior)"
+  },
+  "notificationImageChanged": {
+    "message": "Imagen anterior -> Nueva imagen"
+  },
+  "languageSystem": {
+    "message": "Sistema (Chrome)"
+  }
+}

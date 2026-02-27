@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "Оповещение об изменениях веб-страниц"
+  },
+  "extensionDescription": {
+    "message": "Отслеживайте выбранные элементы сайта с плановым browser-based crawling и получайте уведомления только при изменениях."
+  },
+  "actionTitle": {
+    "message": "Оповещение об изменениях веб-страниц"
+  },
+  "documentTitle": {
+    "message": "Оповещение об изменениях"
+  },
+  "languageMenuTitle": {
+    "message": "Язык"
+  },
+  "languageButton": {
+    "message": "Язык"
+  },
+  "aboutButton": {
+    "message": "О программе"
+  },
+  "urlLabel": {
+    "message": "URL"
+  },
+  "pickFromPage": {
+    "message": "Выбрать элемент на странице"
+  },
+  "add": {
+    "message": "Добавить"
+  },
+  "emptyMonitors": {
+    "message": "Мониторы не добавлены."
+  },
+  "collectFailedPrefix": {
+    "message": "❗ Ошибка сбора -"
+  },
+  "reselect": {
+    "message": "Выбрать снова"
+  },
+  "runNow": {
+    "message": "Запустить сейчас"
+  },
+  "delete": {
+    "message": "Удалить"
+  },
+  "confirmDeleteTitle": {
+    "message": "Удалить этот монитор?"
+  },
+  "cancel": {
+    "message": "Отмена"
+  },
+  "valueEmpty": {
+    "message": "(нет значения)"
+  },
+  "prevValueEmpty": {
+    "message": "(нет предыдущего значения)"
+  },
+  "imageLabel": {
+    "message": "изображение"
+  },
+  "pickerStartFailed": {
+    "message": "Не удалось запустить выбор"
+  },
+  "alarmOff": {
+    "message": "Уведомления выкл."
+  },
+  "alarm": {
+    "message": "Уведомления"
+  },
+  "everyMinutes": {
+    "message": "Каждые {minutes} мин"
+  },
+  "dailyTime": {
+    "message": "Ежедневно {time}"
+  },
+  "weeklyTime": {
+    "message": "Еженедельно {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "Ежемесячно {day} {time}"
+  },
+  "notice": {
+    "message": "Для сайтов с авторизацией сохраняйте вход. Сайты с Cloudflare и антиботом могут потребовать ручную проверку."
+  },
+  "aboutTitle": {
+    "message": "О программе"
+  },
+  "aboutAppNameLabel": {
+    "message": "Приложение"
+  },
+  "aboutVersionLabel": {
+    "message": "Версия"
+  },
+  "aboutAuthorLabel": {
+    "message": "Автор"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "Закрыть"
+  },
+  "languageSetupTitle": {
+    "message": "Выберите язык"
+  },
+  "languageSetupDesc": {
+    "message": "Настройте один раз. Затем язык можно менять через 🌐 справа сверху."
+  },
+  "weekday0": {
+    "message": "Вс"
+  },
+  "weekday1": {
+    "message": "Пн"
+  },
+  "weekday2": {
+    "message": "Вт"
+  },
+  "weekday3": {
+    "message": "Ср"
+  },
+  "weekday4": {
+    "message": "Чт"
+  },
+  "weekday5": {
+    "message": "Пт"
+  },
+  "weekday6": {
+    "message": "Сб"
+  },
+  "hint": {
+    "message": "Наведите курсор и кликните по нужному элементу. ESC — отмена"
+  },
+  "noValue": {
+    "message": "(нет значения)"
+  },
+  "typeText": {
+    "message": "текст"
+  },
+  "typeImage": {
+    "message": "изображение"
+  },
+  "typeValue": {
+    "message": "значение"
+  },
+  "typeAttr": {
+    "message": "атрибут"
+  },
+  "confirmTitle": {
+    "message": "Выбранное значение"
+  },
+  "valueLabel": {
+    "message": "Значение"
+  },
+  "confirmQuestion": {
+    "message": "Это правильное значение?"
+  },
+  "confirm": {
+    "message": "Подтвердить"
+  },
+  "updateTitle": {
+    "message": "Обновить монитор"
+  },
+  "createTitle": {
+    "message": "Создать монитор"
+  },
+  "selectedValue": {
+    "message": "Выбранное значение"
+  },
+  "scheduleLabel": {
+    "message": "Расписание"
+  },
+  "scheduleInterval": {
+    "message": "Интервал"
+  },
+  "scheduleDaily": {
+    "message": "Ежедневно"
+  },
+  "scheduleWeekly": {
+    "message": "Еженедельно"
+  },
+  "scheduleMonthly": {
+    "message": "Ежемесячно"
+  },
+  "minute": {
+    "message": "мин"
+  },
+  "hour": {
+    "message": "час"
+  },
+  "day": {
+    "message": "день"
+  },
+  "register": {
+    "message": "Сохранить"
+  },
+  "registering": {
+    "message": "Сохранение..."
+  },
+  "registerDone": {
+    "message": "Сохранено"
+  },
+  "registerFailed": {
+    "message": "Ошибка сохранения"
+  },
+  "notificationTitle": {
+    "message": "Значение изменилось"
+  },
+  "notificationPrevious": {
+    "message": "Было"
+  },
+  "notificationCurrent": {
+    "message": "Стало"
+  },
+  "notificationValueEmpty": {
+    "message": "(нет значения)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(нет предыдущего значения)"
+  },
+  "notificationImageChanged": {
+    "message": "Предыдущее изображение -> Новое изображение"
+  },
+  "languageSystem": {
+    "message": "Системный (Chrome)"
+  }
+}

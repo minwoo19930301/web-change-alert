@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "웹 변경 알림"
+  },
+  "extensionDescription": {
+    "message": "웹페이지에서 선택한 항목을 스케줄링해 브라우저 기반 크롤링으로 주기 확인하고, 변경될 때만 알림을 보냅니다."
+  },
+  "actionTitle": {
+    "message": "웹 변경 알림"
+  },
+  "documentTitle": {
+    "message": "웹 변경 알림"
+  },
+  "languageMenuTitle": {
+    "message": "언어 선택"
+  },
+  "languageButton": {
+    "message": "언어"
+  },
+  "aboutButton": {
+    "message": "정보"
+  },
+  "urlLabel": {
+    "message": "URL"
+  },
+  "pickFromPage": {
+    "message": "페이지에서 변동 감지할 부분 선택"
+  },
+  "add": {
+    "message": "추가"
+  },
+  "emptyMonitors": {
+    "message": "등록된 모니터가 없습니다."
+  },
+  "collectFailedPrefix": {
+    "message": "❗ 수집에 실패 -"
+  },
+  "reselect": {
+    "message": "다시선택"
+  },
+  "runNow": {
+    "message": "지금 실행"
+  },
+  "delete": {
+    "message": "삭제"
+  },
+  "confirmDeleteTitle": {
+    "message": "정말 없애시겠습니까?"
+  },
+  "cancel": {
+    "message": "취소"
+  },
+  "valueEmpty": {
+    "message": "(값 없음)"
+  },
+  "prevValueEmpty": {
+    "message": "(이전 값 없음)"
+  },
+  "imageLabel": {
+    "message": "이미지"
+  },
+  "pickerStartFailed": {
+    "message": "선택 시작 실패"
+  },
+  "alarmOff": {
+    "message": "알람 꺼짐"
+  },
+  "alarm": {
+    "message": "알람"
+  },
+  "everyMinutes": {
+    "message": "매{minutes}분"
+  },
+  "dailyTime": {
+    "message": "매일 {time}"
+  },
+  "weeklyTime": {
+    "message": "매주 {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "매월 {day}일 {time}"
+  },
+  "notice": {
+    "message": "로그인 필요한 사이트는 로그인 상태를 유지해야 합니다. Cloudflare 같은 크롤링 방지가 있는 사이트는 직접 인증/퀴즈를 풀어야 정상 동작할 수 있습니다."
+  },
+  "aboutTitle": {
+    "message": "정보"
+  },
+  "aboutAppNameLabel": {
+    "message": "앱 이름"
+  },
+  "aboutVersionLabel": {
+    "message": "버전"
+  },
+  "aboutAuthorLabel": {
+    "message": "제작"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "닫기"
+  },
+  "languageSetupTitle": {
+    "message": "언어를 선택하세요"
+  },
+  "languageSetupDesc": {
+    "message": "처음 한 번만 설정하면, 이후에는 오른쪽 위 🌐에서 바꿀 수 있습니다."
+  },
+  "weekday0": {
+    "message": "일"
+  },
+  "weekday1": {
+    "message": "월"
+  },
+  "weekday2": {
+    "message": "화"
+  },
+  "weekday3": {
+    "message": "수"
+  },
+  "weekday4": {
+    "message": "목"
+  },
+  "weekday5": {
+    "message": "금"
+  },
+  "weekday6": {
+    "message": "토"
+  },
+  "hint": {
+    "message": "원하는 요소 위에 마우스를 올리고 클릭하세요. ESC로 취소"
+  },
+  "noValue": {
+    "message": "(값 없음)"
+  },
+  "typeText": {
+    "message": "text"
+  },
+  "typeImage": {
+    "message": "image"
+  },
+  "typeValue": {
+    "message": "value"
+  },
+  "typeAttr": {
+    "message": "attr"
+  },
+  "confirmTitle": {
+    "message": "선택한 값"
+  },
+  "valueLabel": {
+    "message": "값"
+  },
+  "confirmQuestion": {
+    "message": "이 값이 맞나요?"
+  },
+  "confirm": {
+    "message": "맞아요"
+  },
+  "updateTitle": {
+    "message": "선택 업데이트"
+  },
+  "createTitle": {
+    "message": "모니터 등록"
+  },
+  "selectedValue": {
+    "message": "선택된 값"
+  },
+  "scheduleLabel": {
+    "message": "주기 설정"
+  },
+  "scheduleInterval": {
+    "message": "간격마다"
+  },
+  "scheduleDaily": {
+    "message": "매일 특정 시간"
+  },
+  "scheduleWeekly": {
+    "message": "매주 특정 요일"
+  },
+  "scheduleMonthly": {
+    "message": "매월 특정 일"
+  },
+  "minute": {
+    "message": "분"
+  },
+  "hour": {
+    "message": "시간"
+  },
+  "day": {
+    "message": "일"
+  },
+  "register": {
+    "message": "등록"
+  },
+  "registering": {
+    "message": "등록 중..."
+  },
+  "registerDone": {
+    "message": "등록 완료!"
+  },
+  "registerFailed": {
+    "message": "등록 실패"
+  },
+  "notificationTitle": {
+    "message": "값이 변경되었습니다."
+  },
+  "notificationPrevious": {
+    "message": "이전"
+  },
+  "notificationCurrent": {
+    "message": "현재"
+  },
+  "notificationValueEmpty": {
+    "message": "(값 없음)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(이전 값 없음)"
+  },
+  "notificationImageChanged": {
+    "message": "이전 이미지 -> 새 이미지"
+  },
+  "languageSystem": {
+    "message": "시스템 기본값 (Chrome)"
+  }
+}

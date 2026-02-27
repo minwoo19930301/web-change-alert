@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "网页变更提醒"
+  },
+  "extensionDescription": {
+    "message": "为网页选定目标设置计划任务，通过浏览器爬取定期检查，仅在值变化时提醒。"
+  },
+  "actionTitle": {
+    "message": "网页变更提醒"
+  },
+  "documentTitle": {
+    "message": "网页变更提醒"
+  },
+  "languageMenuTitle": {
+    "message": "语言"
+  },
+  "languageButton": {
+    "message": "语言"
+  },
+  "aboutButton": {
+    "message": "关于"
+  },
+  "urlLabel": {
+    "message": "URL"
+  },
+  "pickFromPage": {
+    "message": "在页面上选择监控目标"
+  },
+  "add": {
+    "message": "添加"
+  },
+  "emptyMonitors": {
+    "message": "暂无监控项。"
+  },
+  "collectFailedPrefix": {
+    "message": "❗ 抓取失败 -"
+  },
+  "reselect": {
+    "message": "重新选择"
+  },
+  "runNow": {
+    "message": "立即执行"
+  },
+  "delete": {
+    "message": "删除"
+  },
+  "confirmDeleteTitle": {
+    "message": "确定删除该监控吗？"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "valueEmpty": {
+    "message": "(无值)"
+  },
+  "prevValueEmpty": {
+    "message": "(无上一值)"
+  },
+  "imageLabel": {
+    "message": "图片"
+  },
+  "pickerStartFailed": {
+    "message": "启动选择失败"
+  },
+  "alarmOff": {
+    "message": "通知已关闭"
+  },
+  "alarm": {
+    "message": "通知"
+  },
+  "everyMinutes": {
+    "message": "每{minutes}分钟"
+  },
+  "dailyTime": {
+    "message": "每天 {time}"
+  },
+  "weeklyTime": {
+    "message": "每周 {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "每月 {day}日 {time}"
+  },
+  "notice": {
+    "message": "需要登录的网站请保持登录状态。带有 Cloudflare 或反爬验证的网站可能需要你先手动完成验证。"
+  },
+  "aboutTitle": {
+    "message": "关于"
+  },
+  "aboutAppNameLabel": {
+    "message": "应用名"
+  },
+  "aboutVersionLabel": {
+    "message": "版本"
+  },
+  "aboutAuthorLabel": {
+    "message": "作者"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "关闭"
+  },
+  "languageSetupTitle": {
+    "message": "请选择语言"
+  },
+  "languageSetupDesc": {
+    "message": "首次设置一次即可，之后可在右上角 🌐 随时切换。"
+  },
+  "weekday0": {
+    "message": "日"
+  },
+  "weekday1": {
+    "message": "一"
+  },
+  "weekday2": {
+    "message": "二"
+  },
+  "weekday3": {
+    "message": "三"
+  },
+  "weekday4": {
+    "message": "四"
+  },
+  "weekday5": {
+    "message": "五"
+  },
+  "weekday6": {
+    "message": "六"
+  },
+  "hint": {
+    "message": "将鼠标悬停在目标元素上并点击。按 ESC 取消"
+  },
+  "noValue": {
+    "message": "(无值)"
+  },
+  "typeText": {
+    "message": "text"
+  },
+  "typeImage": {
+    "message": "image"
+  },
+  "typeValue": {
+    "message": "value"
+  },
+  "typeAttr": {
+    "message": "attr"
+  },
+  "confirmTitle": {
+    "message": "已选取的值"
+  },
+  "valueLabel": {
+    "message": "值"
+  },
+  "confirmQuestion": {
+    "message": "这个值正确吗？"
+  },
+  "confirm": {
+    "message": "确认"
+  },
+  "updateTitle": {
+    "message": "更新监控"
+  },
+  "createTitle": {
+    "message": "创建监控"
+  },
+  "selectedValue": {
+    "message": "已选值"
+  },
+  "scheduleLabel": {
+    "message": "周期设置"
+  },
+  "scheduleInterval": {
+    "message": "按间隔"
+  },
+  "scheduleDaily": {
+    "message": "每天"
+  },
+  "scheduleWeekly": {
+    "message": "每周"
+  },
+  "scheduleMonthly": {
+    "message": "每月"
+  },
+  "minute": {
+    "message": "分钟"
+  },
+  "hour": {
+    "message": "小时"
+  },
+  "day": {
+    "message": "天"
+  },
+  "register": {
+    "message": "注册"
+  },
+  "registering": {
+    "message": "注册中..."
+  },
+  "registerDone": {
+    "message": "注册完成"
+  },
+  "registerFailed": {
+    "message": "注册失败"
+  },
+  "notificationTitle": {
+    "message": "检测到值变化"
+  },
+  "notificationPrevious": {
+    "message": "之前"
+  },
+  "notificationCurrent": {
+    "message": "当前"
+  },
+  "notificationValueEmpty": {
+    "message": "(无值)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(无上一值)"
+  },
+  "notificationImageChanged": {
+    "message": "上一张图片 -> 新图片"
+  },
+  "languageSystem": {
+    "message": "系统默认 (Chrome)"
+  }
+}

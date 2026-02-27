@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "Web-Änderungsalarm"
+  },
+  "extensionDescription": {
+    "message": "Überwache ausgewählte Webinhalte per geplantem browser-based crawling und erhalte nur bei Änderungen eine Benachrichtigung."
+  },
+  "actionTitle": {
+    "message": "Web-Änderungsalarm"
+  },
+  "documentTitle": {
+    "message": "Web-Änderungsalarm"
+  },
+  "languageMenuTitle": {
+    "message": "Sprache"
+  },
+  "languageButton": {
+    "message": "Sprache"
+  },
+  "aboutButton": {
+    "message": "Info"
+  },
+  "urlLabel": {
+    "message": "URL"
+  },
+  "pickFromPage": {
+    "message": "Element auf der Seite auswählen"
+  },
+  "add": {
+    "message": "Hinzufügen"
+  },
+  "emptyMonitors": {
+    "message": "Keine Monitore vorhanden."
+  },
+  "collectFailedPrefix": {
+    "message": "❗ Abruf fehlgeschlagen -"
+  },
+  "reselect": {
+    "message": "Neu wählen"
+  },
+  "runNow": {
+    "message": "Jetzt ausführen"
+  },
+  "delete": {
+    "message": "Löschen"
+  },
+  "confirmDeleteTitle": {
+    "message": "Diesen Monitor löschen?"
+  },
+  "cancel": {
+    "message": "Abbrechen"
+  },
+  "valueEmpty": {
+    "message": "(kein Wert)"
+  },
+  "prevValueEmpty": {
+    "message": "(kein vorheriger Wert)"
+  },
+  "imageLabel": {
+    "message": "Bild"
+  },
+  "pickerStartFailed": {
+    "message": "Auswahl konnte nicht gestartet werden"
+  },
+  "alarmOff": {
+    "message": "Alarm aus"
+  },
+  "alarm": {
+    "message": "Alarm"
+  },
+  "everyMinutes": {
+    "message": "Alle {minutes} Min"
+  },
+  "dailyTime": {
+    "message": "Täglich {time}"
+  },
+  "weeklyTime": {
+    "message": "Wöchentlich {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "Monatlich Tag {day} {time}"
+  },
+  "notice": {
+    "message": "Bei Login-Seiten bitte angemeldet bleiben. Seiten mit Cloudflare oder Bot-Schutz erfordern ggf. eine manuelle Verifizierung."
+  },
+  "aboutTitle": {
+    "message": "Info"
+  },
+  "aboutAppNameLabel": {
+    "message": "App"
+  },
+  "aboutVersionLabel": {
+    "message": "Version"
+  },
+  "aboutAuthorLabel": {
+    "message": "Autor"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "Schließen"
+  },
+  "languageSetupTitle": {
+    "message": "Sprache auswählen"
+  },
+  "languageSetupDesc": {
+    "message": "Einmal festlegen, später über 🌐 oben rechts ändern."
+  },
+  "weekday0": {
+    "message": "So"
+  },
+  "weekday1": {
+    "message": "Mo"
+  },
+  "weekday2": {
+    "message": "Di"
+  },
+  "weekday3": {
+    "message": "Mi"
+  },
+  "weekday4": {
+    "message": "Do"
+  },
+  "weekday5": {
+    "message": "Fr"
+  },
+  "weekday6": {
+    "message": "Sa"
+  },
+  "hint": {
+    "message": "Element mit der Maus markieren und klicken. ESC zum Abbrechen"
+  },
+  "noValue": {
+    "message": "(kein Wert)"
+  },
+  "typeText": {
+    "message": "text"
+  },
+  "typeImage": {
+    "message": "bild"
+  },
+  "typeValue": {
+    "message": "wert"
+  },
+  "typeAttr": {
+    "message": "attribut"
+  },
+  "confirmTitle": {
+    "message": "Gewählter Wert"
+  },
+  "valueLabel": {
+    "message": "Wert"
+  },
+  "confirmQuestion": {
+    "message": "Ist dieser Wert korrekt?"
+  },
+  "confirm": {
+    "message": "Bestätigen"
+  },
+  "updateTitle": {
+    "message": "Monitor aktualisieren"
+  },
+  "createTitle": {
+    "message": "Monitor erstellen"
+  },
+  "selectedValue": {
+    "message": "Gewählter Wert"
+  },
+  "scheduleLabel": {
+    "message": "Zeitplan"
+  },
+  "scheduleInterval": {
+    "message": "Intervall"
+  },
+  "scheduleDaily": {
+    "message": "Täglich"
+  },
+  "scheduleWeekly": {
+    "message": "Wöchentlich"
+  },
+  "scheduleMonthly": {
+    "message": "Monatlich"
+  },
+  "minute": {
+    "message": "Minute(n)"
+  },
+  "hour": {
+    "message": "Stunde(n)"
+  },
+  "day": {
+    "message": "Tag(e)"
+  },
+  "register": {
+    "message": "Speichern"
+  },
+  "registering": {
+    "message": "Speichere..."
+  },
+  "registerDone": {
+    "message": "Gespeichert"
+  },
+  "registerFailed": {
+    "message": "Speichern fehlgeschlagen"
+  },
+  "notificationTitle": {
+    "message": "Wert geändert"
+  },
+  "notificationPrevious": {
+    "message": "Vorher"
+  },
+  "notificationCurrent": {
+    "message": "Jetzt"
+  },
+  "notificationValueEmpty": {
+    "message": "(kein Wert)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(kein vorheriger Wert)"
+  },
+  "notificationImageChanged": {
+    "message": "Vorheriges Bild -> Neues Bild"
+  },
+  "languageSystem": {
+    "message": "System (Chrome)"
+  }
+}

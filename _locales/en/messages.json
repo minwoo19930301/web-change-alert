@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "Web Change Alert"
+  },
+  "extensionDescription": {
+    "message": "Select parts of a webpage and schedule browser-based crawling checks. Get alerted only when the value changes."
+  },
+  "actionTitle": {
+    "message": "Web Change Alert"
+  },
+  "documentTitle": {
+    "message": "Web Change Alert"
+  },
+  "languageMenuTitle": {
+    "message": "Language"
+  },
+  "languageButton": {
+    "message": "Language"
+  },
+  "aboutButton": {
+    "message": "About"
+  },
+  "urlLabel": {
+    "message": "URL"
+  },
+  "pickFromPage": {
+    "message": "Select target element on page"
+  },
+  "add": {
+    "message": "Add"
+  },
+  "emptyMonitors": {
+    "message": "No monitors yet."
+  },
+  "collectFailedPrefix": {
+    "message": "❗ Fetch failed -"
+  },
+  "reselect": {
+    "message": "Re-select"
+  },
+  "runNow": {
+    "message": "Run now"
+  },
+  "delete": {
+    "message": "Delete"
+  },
+  "confirmDeleteTitle": {
+    "message": "Delete this monitor?"
+  },
+  "cancel": {
+    "message": "Cancel"
+  },
+  "valueEmpty": {
+    "message": "(no value)"
+  },
+  "prevValueEmpty": {
+    "message": "(no previous value)"
+  },
+  "imageLabel": {
+    "message": "image"
+  },
+  "pickerStartFailed": {
+    "message": "Failed to start picker"
+  },
+  "alarmOff": {
+    "message": "Alarm Off"
+  },
+  "alarm": {
+    "message": "Alarm"
+  },
+  "everyMinutes": {
+    "message": "Every {minutes} min"
+  },
+  "dailyTime": {
+    "message": "Daily {time}"
+  },
+  "weeklyTime": {
+    "message": "Weekly {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "Monthly day {day} {time}"
+  },
+  "notice": {
+    "message": "For login-required sites, keep your session signed in. Sites protected by Cloudflare or anti-bot checks may require manual verification to work."
+  },
+  "aboutTitle": {
+    "message": "About"
+  },
+  "aboutAppNameLabel": {
+    "message": "App"
+  },
+  "aboutVersionLabel": {
+    "message": "Version"
+  },
+  "aboutAuthorLabel": {
+    "message": "Author"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "Close"
+  },
+  "languageSetupTitle": {
+    "message": "Select Language"
+  },
+  "languageSetupDesc": {
+    "message": "Set this once now. You can change it later with 🌐 in the top-right."
+  },
+  "weekday0": {
+    "message": "Sun"
+  },
+  "weekday1": {
+    "message": "Mon"
+  },
+  "weekday2": {
+    "message": "Tue"
+  },
+  "weekday3": {
+    "message": "Wed"
+  },
+  "weekday4": {
+    "message": "Thu"
+  },
+  "weekday5": {
+    "message": "Fri"
+  },
+  "weekday6": {
+    "message": "Sat"
+  },
+  "hint": {
+    "message": "Hover and click the target element. Press ESC to cancel"
+  },
+  "noValue": {
+    "message": "(no value)"
+  },
+  "typeText": {
+    "message": "text"
+  },
+  "typeImage": {
+    "message": "image"
+  },
+  "typeValue": {
+    "message": "value"
+  },
+  "typeAttr": {
+    "message": "attr"
+  },
+  "confirmTitle": {
+    "message": "Selected Value"
+  },
+  "valueLabel": {
+    "message": "Value"
+  },
+  "confirmQuestion": {
+    "message": "Is this correct?"
+  },
+  "confirm": {
+    "message": "Confirm"
+  },
+  "updateTitle": {
+    "message": "Update Monitor"
+  },
+  "createTitle": {
+    "message": "Create Monitor"
+  },
+  "selectedValue": {
+    "message": "Selected value"
+  },
+  "scheduleLabel": {
+    "message": "Schedule"
+  },
+  "scheduleInterval": {
+    "message": "Interval"
+  },
+  "scheduleDaily": {
+    "message": "Daily at"
+  },
+  "scheduleWeekly": {
+    "message": "Weekly on"
+  },
+  "scheduleMonthly": {
+    "message": "Monthly on"
+  },
+  "minute": {
+    "message": "minute(s)"
+  },
+  "hour": {
+    "message": "hour(s)"
+  },
+  "day": {
+    "message": "day(s)"
+  },
+  "register": {
+    "message": "Register"
+  },
+  "registering": {
+    "message": "Registering..."
+  },
+  "registerDone": {
+    "message": "Registered!"
+  },
+  "registerFailed": {
+    "message": "Register failed"
+  },
+  "notificationTitle": {
+    "message": "Value changed"
+  },
+  "notificationPrevious": {
+    "message": "Before"
+  },
+  "notificationCurrent": {
+    "message": "Now"
+  },
+  "notificationValueEmpty": {
+    "message": "(no value)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(no previous value)"
+  },
+  "notificationImageChanged": {
+    "message": "Previous image -> New image"
+  },
+  "languageSystem": {
+    "message": "System (Chrome)"
+  }
+}

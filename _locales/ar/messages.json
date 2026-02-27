@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "تنبيه تغيّر الويب"
+  },
+  "extensionDescription": {
+    "message": "راقب عناصر محددة من صفحات الويب عبر browser-based crawling مجدول، وتلقَّ تنبيهًا فقط عند تغيّر القيمة."
+  },
+  "actionTitle": {
+    "message": "تنبيه تغيّر الويب"
+  },
+  "documentTitle": {
+    "message": "تنبيه تغيّر الويب"
+  },
+  "languageMenuTitle": {
+    "message": "اللغة"
+  },
+  "languageButton": {
+    "message": "اللغة"
+  },
+  "aboutButton": {
+    "message": "حول"
+  },
+  "urlLabel": {
+    "message": "الرابط"
+  },
+  "pickFromPage": {
+    "message": "اختر العنصر المراد مراقبته في الصفحة"
+  },
+  "add": {
+    "message": "إضافة"
+  },
+  "emptyMonitors": {
+    "message": "لا توجد عناصر مراقبة."
+  },
+  "collectFailedPrefix": {
+    "message": "❗ فشل الجلب -"
+  },
+  "reselect": {
+    "message": "إعادة التحديد"
+  },
+  "runNow": {
+    "message": "تشغيل الآن"
+  },
+  "delete": {
+    "message": "حذف"
+  },
+  "confirmDeleteTitle": {
+    "message": "هل تريد حذف هذه المراقبة؟"
+  },
+  "cancel": {
+    "message": "إلغاء"
+  },
+  "valueEmpty": {
+    "message": "(لا توجد قيمة)"
+  },
+  "prevValueEmpty": {
+    "message": "(لا توجد قيمة سابقة)"
+  },
+  "imageLabel": {
+    "message": "صورة"
+  },
+  "pickerStartFailed": {
+    "message": "تعذر بدء أداة التحديد"
+  },
+  "alarmOff": {
+    "message": "التنبيه متوقف"
+  },
+  "alarm": {
+    "message": "تنبيه"
+  },
+  "everyMinutes": {
+    "message": "كل {minutes} دقيقة"
+  },
+  "dailyTime": {
+    "message": "يوميًا {time}"
+  },
+  "weeklyTime": {
+    "message": "أسبوعيًا {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "شهريًا يوم {day} {time}"
+  },
+  "notice": {
+    "message": "للمواقع التي تتطلب تسجيل دخول، حافظ على الجلسة فعالة. المواقع المحمية بـ Cloudflare أو أنظمة مكافحة الروبوت قد تحتاج تحققًا يدويًا."
+  },
+  "aboutTitle": {
+    "message": "حول"
+  },
+  "aboutAppNameLabel": {
+    "message": "التطبيق"
+  },
+  "aboutVersionLabel": {
+    "message": "الإصدار"
+  },
+  "aboutAuthorLabel": {
+    "message": "المطور"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "إغلاق"
+  },
+  "languageSetupTitle": {
+    "message": "اختر لغتك"
+  },
+  "languageSetupDesc": {
+    "message": "اضبطها مرة واحدة، ثم غيّرها لاحقًا من زر 🌐 أعلى اليمين."
+  },
+  "weekday0": {
+    "message": "الأحد"
+  },
+  "weekday1": {
+    "message": "الاثنين"
+  },
+  "weekday2": {
+    "message": "الثلاثاء"
+  },
+  "weekday3": {
+    "message": "الأربعاء"
+  },
+  "weekday4": {
+    "message": "الخميس"
+  },
+  "weekday5": {
+    "message": "الجمعة"
+  },
+  "weekday6": {
+    "message": "السبت"
+  },
+  "hint": {
+    "message": "حرّك المؤشر فوق العنصر المطلوب ثم انقر. اضغط ESC للإلغاء"
+  },
+  "noValue": {
+    "message": "(لا توجد قيمة)"
+  },
+  "typeText": {
+    "message": "نص"
+  },
+  "typeImage": {
+    "message": "صورة"
+  },
+  "typeValue": {
+    "message": "قيمة"
+  },
+  "typeAttr": {
+    "message": "سمة"
+  },
+  "confirmTitle": {
+    "message": "القيمة المحددة"
+  },
+  "valueLabel": {
+    "message": "القيمة"
+  },
+  "confirmQuestion": {
+    "message": "هل هذه القيمة صحيحة؟"
+  },
+  "confirm": {
+    "message": "تأكيد"
+  },
+  "updateTitle": {
+    "message": "تحديث المراقبة"
+  },
+  "createTitle": {
+    "message": "إنشاء مراقبة"
+  },
+  "selectedValue": {
+    "message": "القيمة المحددة"
+  },
+  "scheduleLabel": {
+    "message": "الجدولة"
+  },
+  "scheduleInterval": {
+    "message": "فاصل زمني"
+  },
+  "scheduleDaily": {
+    "message": "يوميًا"
+  },
+  "scheduleWeekly": {
+    "message": "أسبوعيًا"
+  },
+  "scheduleMonthly": {
+    "message": "شهريًا"
+  },
+  "minute": {
+    "message": "دقيقة"
+  },
+  "hour": {
+    "message": "ساعة"
+  },
+  "day": {
+    "message": "يوم"
+  },
+  "register": {
+    "message": "تسجيل"
+  },
+  "registering": {
+    "message": "جارٍ التسجيل..."
+  },
+  "registerDone": {
+    "message": "تم التسجيل"
+  },
+  "registerFailed": {
+    "message": "فشل التسجيل"
+  },
+  "notificationTitle": {
+    "message": "تم تغيير القيمة"
+  },
+  "notificationPrevious": {
+    "message": "السابق"
+  },
+  "notificationCurrent": {
+    "message": "الحالي"
+  },
+  "notificationValueEmpty": {
+    "message": "(لا توجد قيمة)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(لا توجد قيمة سابقة)"
+  },
+  "notificationImageChanged": {
+    "message": "الصورة السابقة -> الصورة الجديدة"
+  },
+  "languageSystem": {
+    "message": "افتراضي النظام (Chrome)"
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "extensionName": {
+    "message": "網頁變更提醒"
+  },
+  "extensionDescription": {
+    "message": "為網頁選定目標設定排程任務，透過瀏覽器爬取定期檢查，僅在值變更時提醒。"
+  },
+  "actionTitle": {
+    "message": "網頁變更提醒"
+  },
+  "documentTitle": {
+    "message": "網頁變更提醒"
+  },
+  "languageMenuTitle": {
+    "message": "語言"
+  },
+  "languageButton": {
+    "message": "語言"
+  },
+  "aboutButton": {
+    "message": "關於"
+  },
+  "urlLabel": {
+    "message": "URL"
+  },
+  "pickFromPage": {
+    "message": "在頁面上選擇監控目標"
+  },
+  "add": {
+    "message": "新增"
+  },
+  "emptyMonitors": {
+    "message": "尚無監控項目。"
+  },
+  "collectFailedPrefix": {
+    "message": "❗ 擷取失敗 -"
+  },
+  "reselect": {
+    "message": "重新選擇"
+  },
+  "runNow": {
+    "message": "立即執行"
+  },
+  "delete": {
+    "message": "刪除"
+  },
+  "confirmDeleteTitle": {
+    "message": "確定刪除此監控嗎？"
+  },
+  "cancel": {
+    "message": "取消"
+  },
+  "valueEmpty": {
+    "message": "(無值)"
+  },
+  "prevValueEmpty": {
+    "message": "(無前值)"
+  },
+  "imageLabel": {
+    "message": "圖片"
+  },
+  "pickerStartFailed": {
+    "message": "啟動選擇失敗"
+  },
+  "alarmOff": {
+    "message": "通知關閉"
+  },
+  "alarm": {
+    "message": "通知"
+  },
+  "everyMinutes": {
+    "message": "每{minutes}分鐘"
+  },
+  "dailyTime": {
+    "message": "每天 {time}"
+  },
+  "weeklyTime": {
+    "message": "每週 {day} {time}"
+  },
+  "monthlyTime": {
+    "message": "每月 {day}日 {time}"
+  },
+  "notice": {
+    "message": "需要登入的網站請保持登入狀態。具有 Cloudflare 或反爬驗證的網站可能需要先手動完成驗證。"
+  },
+  "aboutTitle": {
+    "message": "關於"
+  },
+  "aboutAppNameLabel": {
+    "message": "應用名稱"
+  },
+  "aboutVersionLabel": {
+    "message": "版本"
+  },
+  "aboutAuthorLabel": {
+    "message": "作者"
+  },
+  "buyCoffee": {
+    "message": "Buy me a coffee"
+  },
+  "close": {
+    "message": "關閉"
+  },
+  "languageSetupTitle": {
+    "message": "請選擇語言"
+  },
+  "languageSetupDesc": {
+    "message": "首次設定一次即可，之後可在右上角 🌐 隨時切換。"
+  },
+  "weekday0": {
+    "message": "日"
+  },
+  "weekday1": {
+    "message": "一"
+  },
+  "weekday2": {
+    "message": "二"
+  },
+  "weekday3": {
+    "message": "三"
+  },
+  "weekday4": {
+    "message": "四"
+  },
+  "weekday5": {
+    "message": "五"
+  },
+  "weekday6": {
+    "message": "六"
+  },
+  "hint": {
+    "message": "將滑鼠移到目標元素並點擊。按 ESC 取消"
+  },
+  "noValue": {
+    "message": "(無值)"
+  },
+  "typeText": {
+    "message": "text"
+  },
+  "typeImage": {
+    "message": "image"
+  },
+  "typeValue": {
+    "message": "value"
+  },
+  "typeAttr": {
+    "message": "attr"
+  },
+  "confirmTitle": {
+    "message": "已選取的值"
+  },
+  "valueLabel": {
+    "message": "值"
+  },
+  "confirmQuestion": {
+    "message": "這個值正確嗎？"
+  },
+  "confirm": {
+    "message": "確認"
+  },
+  "updateTitle": {
+    "message": "更新監控"
+  },
+  "createTitle": {
+    "message": "建立監控"
+  },
+  "selectedValue": {
+    "message": "已選值"
+  },
+  "scheduleLabel": {
+    "message": "週期設定"
+  },
+  "scheduleInterval": {
+    "message": "間隔"
+  },
+  "scheduleDaily": {
+    "message": "每日"
+  },
+  "scheduleWeekly": {
+    "message": "每週"
+  },
+  "scheduleMonthly": {
+    "message": "每月"
+  },
+  "minute": {
+    "message": "分鐘"
+  },
+  "hour": {
+    "message": "小時"
+  },
+  "day": {
+    "message": "天"
+  },
+  "register": {
+    "message": "註冊"
+  },
+  "registering": {
+    "message": "註冊中..."
+  },
+  "registerDone": {
+    "message": "註冊完成"
+  },
+  "registerFailed": {
+    "message": "註冊失敗"
+  },
+  "notificationTitle": {
+    "message": "偵測到值變更"
+  },
+  "notificationPrevious": {
+    "message": "之前"
+  },
+  "notificationCurrent": {
+    "message": "目前"
+  },
+  "notificationValueEmpty": {
+    "message": "(無值)"
+  },
+  "notificationPrevEmpty": {
+    "message": "(無前值)"
+  },
+  "notificationImageChanged": {
+    "message": "前一張圖片 -> 新圖片"
+  },
+  "languageSystem": {
+    "message": "系統預設 (Chrome)"
+  }
+}
