@@ -1,5 +1,5 @@
 const manifest = chrome.runtime.getManifest();
-const APP_NAME = chrome.i18n.getMessage("extensionName") || manifest?.name || "Web Change Alert";
+const MANIFEST_NAME = manifest?.name || "Web Change Alert";
 const APP_VERSION = manifest?.version || "1.0.0";
 const AUTHOR_NAME = "Minwoo Kim";
 
@@ -232,7 +232,7 @@ function applyStaticTexts() {
   }
 
   noticeText.textContent = t("notice");
-  aboutAppName.textContent = APP_NAME;
+  aboutAppName.textContent = t("extensionName") || MANIFEST_NAME;
   aboutVersion.textContent = APP_VERSION;
   aboutAuthor.textContent = AUTHOR_NAME;
 }
