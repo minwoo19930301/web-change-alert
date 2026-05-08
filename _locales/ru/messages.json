@@ -81,7 +81,7 @@
     "message": "Ежемесячно {day} {time}"
   },
   "notice": {
-    "message": "Для сайтов с авторизацией сохраняйте вход. Сайты с Cloudflare и антиботом могут потребовать ручную проверку."
+    "message": "Для сайтов с авторизацией сохраняйте вход. Сайты с Cloudflare и антиботом могут потребовать ручную проверку. Слишком частые повторные проверки могут привести к ограничению или блокировке вашего IP/аккаунта сайтом; этот риск остается на вашей ответственности."
   },
   "aboutTitle": {
     "message": "О программе"
@@ -129,7 +129,7 @@
     "message": "Сб"
   },
   "hint": {
-    "message": "Наведите курсор и кликните по нужному элементу. ESC — отмена"
+    "message": "Нажмите и выберите из списка. ESC отменяет"
   },
   "noValue": {
     "message": "(нет значения)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "Системный (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "Устранение неполадок"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "Если уведомления не появляются"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: Системные настройки > Уведомления > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: Параметры > Уведомления > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "Если появляются неожиданные уведомления"
+  },
+  "helpUnexpectedIntro": {
+    "message": "Ранее разрешенные сайты могут продолжать отправлять уведомления."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Откройте разрешения уведомлений сайтов в Chrome:"
+  },
+  "helpUnexpectedAction": {
+    "message": "Заблокируйте сайт или удалите его из списка разрешенных."
+  },
+  "openSource": {
+    "message": "Открыть официальный источник"
+  },
+  "sourceApple": {
+    "message": "Поддержка Apple"
+  },
+  "sourceMicrosoft": {
+    "message": "Поддержка Microsoft"
+  },
+  "sourceGoogleChrome": {
+    "message": "Справка Google Chrome"
+  },
+  "helpOpenMacGuide": {
+    "message": "Открыть руководство для macOS"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Открыть руководство для Windows"
+  },
+  "save": {
+    "message": "Сохранить"
+  },
+  "editSchedule": {
+    "message": "Изменить расписание"
+  },
+  "editScheduleTitle": {
+    "message": "Изменить расписание"
+  },
+  "filterLabel": {
+    "message": "Фильтр"
+  },
+  "filterNone": {
+    "message": "Без фильтра"
+  },
+  "filterIgnoreContains": {
+    "message": "Только если значение содержит"
+  },
+  "filterIgnoreNotContains": {
+    "message": "Только если значения нет"
+  },
+  "filterIgnoreRegex": {
+    "message": "Только если regex совпадает"
+  },
+  "filterValuePlaceholder": {
+    "message": "Значение для сравнения"
+  },
+  "filterValuesPlaceholder": {
+    "message": "Введите значение и нажмите Enter"
+  },
+  "filterUseRegex": {
+    "message": "Использовать regex"
+  },
+  "advanced": {
+    "message": "Дополнительно"
+  },
+  "notificationFailureReselect": {
+    "message": "Выбрать цель заново"
+  },
+  "notificationFailureUnknown": {
+    "message": "Неизвестная ошибка"
+  },
+  "candidateMenuTitle": {
+    "message": "Выберите точное значение ниже. Разные селекторы могут иметь одинаковое значение."
+  },
+  "back": {
+    "message": "Назад"
+  },
+  "selectorLabel": {
+    "message": "Селектор"
+  },
+  "manualSelector": {
+    "message": "Изменить селектор вручную"
+  },
+  "manualSelectorHint": {
+    "message": "Вставьте селектор здесь."
+  },
+  "manualSelectorInvalid": {
+    "message": "Неверный синтаксис селектора."
+  },
+  "manualSelectorNotFound": {
+    "message": "Элемент с таким селектором не найден."
+  },
+  "manualSelectorUpdated": {
+    "message": "Предпросмотр обновлен по этому селектору."
   }
 }

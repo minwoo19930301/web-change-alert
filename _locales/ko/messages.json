@@ -81,7 +81,7 @@
     "message": "매월 {day}일 {time}"
   },
   "notice": {
-    "message": "로그인 필요한 사이트는 로그인 상태를 유지해야 합니다. Cloudflare 같은 크롤링 방지가 있는 사이트는 직접 인증/퀴즈를 풀어야 정상 동작할 수 있습니다."
+    "message": "로그인 필요한 사이트는 로그인 상태를 유지해야 합니다. Cloudflare 같은 크롤링 방지가 있는 사이트는 직접 인증/퀴즈를 풀어야 정상 동작할 수 있습니다. 너무 짧은 주기로 반복 확인하면 해당 사이트에서 IP나 계정을 제한할 수 있으며, 이로 인한 차단/제한은 책임지지 않습니다."
   },
   "aboutTitle": {
     "message": "정보"
@@ -129,7 +129,7 @@
     "message": "토"
   },
   "hint": {
-    "message": "원하는 요소 위에 마우스를 올리고 클릭하세요. ESC로 취소"
+    "message": "클릭 후 목록에서 선택. ESC 취소"
   },
   "noValue": {
     "message": "(값 없음)"
@@ -203,6 +203,42 @@
   "registerFailed": {
     "message": "등록 실패"
   },
+  "save": {
+    "message": "저장"
+  },
+  "editSchedule": {
+    "message": "주기 수정"
+  },
+  "editScheduleTitle": {
+    "message": "주기 수정"
+  },
+  "filterLabel": {
+    "message": "필터"
+  },
+  "filterNone": {
+    "message": "필터 없음"
+  },
+  "filterIgnoreContains": {
+    "message": "값이 포함될 때만"
+  },
+  "filterIgnoreNotContains": {
+    "message": "값이 없을 때만"
+  },
+  "filterIgnoreRegex": {
+    "message": "정규식(regex)으로 매치될 때만"
+  },
+  "filterValuePlaceholder": {
+    "message": "비교할 값"
+  },
+  "filterValuesPlaceholder": {
+    "message": "값을 입력하고 Enter"
+  },
+  "filterUseRegex": {
+    "message": "정규식 사용"
+  },
+  "advanced": {
+    "message": "고급"
+  },
   "notificationTitle": {
     "message": "값이 변경되었습니다."
   },
@@ -223,5 +259,77 @@
   },
   "languageSystem": {
     "message": "시스템 기본값 (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "문제 해결"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "알림이 뜨지 않는다면"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: 시스템 설정 > 알림 > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: 설정 > 알림 > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "이상한 알림이 뜬다면"
+  },
+  "helpUnexpectedIntro": {
+    "message": "예전에 허용한 사이트가 계속 알림을 보낼 수 있습니다."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Chrome 사이트 알림 권한 열기:"
+  },
+  "helpUnexpectedAction": {
+    "message": "해당 사이트를 차단하거나 허용 목록에서 삭제하세요."
+  },
+  "openSource": {
+    "message": "공식 문서 열기"
+  },
+  "sourceApple": {
+    "message": "Apple 지원"
+  },
+  "sourceMicrosoft": {
+    "message": "Microsoft 지원"
+  },
+  "sourceGoogleChrome": {
+    "message": "Google Chrome 도움말"
+  },
+  "helpOpenMacGuide": {
+    "message": "macOS 가이드 열기"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Windows 가이드 열기"
+  },
+  "notificationFailureReselect": {
+    "message": "다시선택 필요"
+  },
+  "notificationFailureUnknown": {
+    "message": "알 수 없는 오류"
+  },
+  "candidateMenuTitle": {
+    "message": "다음 중 정확한 값을 선택하세요. 선택자가 달라도 같은 값일 수 있습니다."
+  },
+  "back": {
+    "message": "뒤로"
+  },
+  "selectorLabel": {
+    "message": "선택자"
+  },
+  "manualSelector": {
+    "message": "선택자 직접 수정"
+  },
+  "manualSelectorHint": {
+    "message": "직접 붙여 넣어주세요."
+  },
+  "manualSelectorInvalid": {
+    "message": "셀렉터 형식이 올바르지 않습니다."
+  },
+  "manualSelectorNotFound": {
+    "message": "해당 셀렉터로 요소를 찾지 못했습니다."
+  },
+  "manualSelectorUpdated": {
+    "message": "셀렉터로 찾은 값이 반영되었습니다."
   }
 }

@@ -81,7 +81,7 @@
     "message": "Monatlich Tag {day} {time}"
   },
   "notice": {
-    "message": "Bei Login-Seiten bitte angemeldet bleiben. Seiten mit Cloudflare oder Bot-Schutz erfordern ggf. eine manuelle Verifizierung."
+    "message": "Bei Login-Seiten bitte angemeldet bleiben. Seiten mit Cloudflare oder Bot-Schutz erfordern ggf. eine manuelle Verifizierung. Sehr kurze, wiederholte Prüfintervalle können dazu führen, dass die Seite deine IP/dein Konto drosselt oder sperrt; dieses Risiko liegt bei dir."
   },
   "aboutTitle": {
     "message": "Info"
@@ -129,7 +129,7 @@
     "message": "Sa"
   },
   "hint": {
-    "message": "Element mit der Maus markieren und klicken. ESC zum Abbrechen"
+    "message": "Klicken und aus der Liste wählen. ESC bricht ab"
   },
   "noValue": {
     "message": "(kein Wert)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "System (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "Fehlerbehebung"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "Wenn Benachrichtigungen nicht erscheinen"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: Systemeinstellungen > Mitteilungen > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: Einstellungen > Benachrichtigungen > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "Wenn unerwartete Benachrichtigungen erscheinen"
+  },
+  "helpUnexpectedIntro": {
+    "message": "Frühere erlaubte Websites können weiterhin Benachrichtigungen senden."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Öffnen Sie die Website-Benachrichtigungsberechtigungen in Chrome:"
+  },
+  "helpUnexpectedAction": {
+    "message": "Blockieren Sie die Website oder entfernen Sie sie aus der Zulassungsliste."
+  },
+  "openSource": {
+    "message": "Offizielle Quelle öffnen"
+  },
+  "sourceApple": {
+    "message": "Apple Support"
+  },
+  "sourceMicrosoft": {
+    "message": "Microsoft Support"
+  },
+  "sourceGoogleChrome": {
+    "message": "Google Chrome-Hilfe"
+  },
+  "helpOpenMacGuide": {
+    "message": "macOS-Anleitung öffnen"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Windows-Anleitung öffnen"
+  },
+  "save": {
+    "message": "Speichern"
+  },
+  "editSchedule": {
+    "message": "Zeitplan bearbeiten"
+  },
+  "editScheduleTitle": {
+    "message": "Zeitplan bearbeiten"
+  },
+  "filterLabel": {
+    "message": "Filter"
+  },
+  "filterNone": {
+    "message": "Kein Filter"
+  },
+  "filterIgnoreContains": {
+    "message": "Nur wenn der Wert enthält"
+  },
+  "filterIgnoreNotContains": {
+    "message": "Nur wenn der Wert fehlt"
+  },
+  "filterIgnoreRegex": {
+    "message": "Nur wenn regex übereinstimmt"
+  },
+  "filterValuePlaceholder": {
+    "message": "Vergleichswert"
+  },
+  "filterValuesPlaceholder": {
+    "message": "Wert eingeben und Enter drücken"
+  },
+  "filterUseRegex": {
+    "message": "Regex verwenden"
+  },
+  "advanced": {
+    "message": "Erweitert"
+  },
+  "notificationFailureReselect": {
+    "message": "Ziel neu auswählen"
+  },
+  "notificationFailureUnknown": {
+    "message": "Unbekannter Fehler"
+  },
+  "candidateMenuTitle": {
+    "message": "Wähle unten den exakten Wert aus. Unterschiedliche Selektoren können denselben Wert haben."
+  },
+  "back": {
+    "message": "Zurück"
+  },
+  "selectorLabel": {
+    "message": "Selektor"
+  },
+  "manualSelector": {
+    "message": "Selektor manuell bearbeiten"
+  },
+  "manualSelectorHint": {
+    "message": "Füge hier einen Selektor ein."
+  },
+  "manualSelectorInvalid": {
+    "message": "Die Selektor-Syntax ist ungültig."
+  },
+  "manualSelectorNotFound": {
+    "message": "Kein Element passt zu diesem Selektor."
+  },
+  "manualSelectorUpdated": {
+    "message": "Vorschau mit diesem Selektor aktualisiert."
   }
 }

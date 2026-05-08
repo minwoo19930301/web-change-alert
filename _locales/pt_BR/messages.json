@@ -81,7 +81,7 @@
     "message": "Mensal dia {day} {time}"
   },
   "notice": {
-    "message": "Para sites com login, mantenha a sessão ativa. Sites com Cloudflare/antibot podem exigir verificação manual."
+    "message": "Para sites com login, mantenha a sessão ativa. Sites com Cloudflare/antibot podem exigir verificação manual. Verificações repetidas em intervalos muito curtos podem fazer o site limitar ou bloquear seu IP/conta; esse risco é de sua responsabilidade."
   },
   "aboutTitle": {
     "message": "Sobre"
@@ -129,7 +129,7 @@
     "message": "Sáb"
   },
   "hint": {
-    "message": "Passe o mouse e clique no elemento alvo. ESC para cancelar"
+    "message": "Clique e escolha na lista. ESC cancela"
   },
   "noValue": {
     "message": "(sem valor)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "Sistema (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "Solução de problemas"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "Se as notificações não aparecerem"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: Ajustes do Sistema > Notificações > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: Configurações > Notificações > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "Se aparecerem notificações inesperadas"
+  },
+  "helpUnexpectedIntro": {
+    "message": "Sites permitidos anteriormente podem continuar enviando notificações."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Abra as permissões de notificações de sites no Chrome:"
+  },
+  "helpUnexpectedAction": {
+    "message": "Bloqueie o site ou remova-o da lista de permitidos."
+  },
+  "openSource": {
+    "message": "Abrir fonte oficial"
+  },
+  "sourceApple": {
+    "message": "Suporte da Apple"
+  },
+  "sourceMicrosoft": {
+    "message": "Suporte da Microsoft"
+  },
+  "sourceGoogleChrome": {
+    "message": "Ajuda do Google Chrome"
+  },
+  "helpOpenMacGuide": {
+    "message": "Abrir guia do macOS"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Abrir guia do Windows"
+  },
+  "save": {
+    "message": "Salvar"
+  },
+  "editSchedule": {
+    "message": "Editar programação"
+  },
+  "editScheduleTitle": {
+    "message": "Editar programação"
+  },
+  "filterLabel": {
+    "message": "Filtro"
+  },
+  "filterNone": {
+    "message": "Sem filtro"
+  },
+  "filterIgnoreContains": {
+    "message": "Somente quando o valor contém"
+  },
+  "filterIgnoreNotContains": {
+    "message": "Somente quando o valor estiver ausente"
+  },
+  "filterIgnoreRegex": {
+    "message": "Somente quando a regex corresponder"
+  },
+  "filterValuePlaceholder": {
+    "message": "Valor para comparar"
+  },
+  "filterValuesPlaceholder": {
+    "message": "Digite um valor e pressione Enter"
+  },
+  "filterUseRegex": {
+    "message": "Usar regex"
+  },
+  "advanced": {
+    "message": "Avançado"
+  },
+  "notificationFailureReselect": {
+    "message": "Selecionar alvo novamente"
+  },
+  "notificationFailureUnknown": {
+    "message": "Erro desconhecido"
+  },
+  "candidateMenuTitle": {
+    "message": "Escolha o valor exato abaixo. Seletores diferentes podem ter o mesmo valor."
+  },
+  "back": {
+    "message": "Voltar"
+  },
+  "selectorLabel": {
+    "message": "Seletor"
+  },
+  "manualSelector": {
+    "message": "Editar seletor manualmente"
+  },
+  "manualSelectorHint": {
+    "message": "Cole um seletor aqui."
+  },
+  "manualSelectorInvalid": {
+    "message": "A sintaxe do seletor é inválida."
+  },
+  "manualSelectorNotFound": {
+    "message": "Nenhum elemento corresponde a este seletor."
+  },
+  "manualSelectorUpdated": {
+    "message": "Prévia atualizada com este seletor."
   }
 }

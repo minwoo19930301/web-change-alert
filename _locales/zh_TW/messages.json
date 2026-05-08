@@ -81,7 +81,7 @@
     "message": "每月 {day}日 {time}"
   },
   "notice": {
-    "message": "需要登入的網站請保持登入狀態。具有 Cloudflare 或反爬驗證的網站可能需要先手動完成驗證。"
+    "message": "需要登入的網站請保持登入狀態。具有 Cloudflare 或反爬驗證的網站可能需要先手動完成驗證。過短週期的重複檢查可能導致該網站限制或封鎖你的 IP／帳號；相關風險由你自行承擔。"
   },
   "aboutTitle": {
     "message": "關於"
@@ -129,7 +129,7 @@
     "message": "六"
   },
   "hint": {
-    "message": "將滑鼠移到目標元素並點擊。按 ESC 取消"
+    "message": "點擊後從列表選擇。ESC 取消"
   },
   "noValue": {
     "message": "(無值)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "系統預設 (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "疑難排解"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "如果通知沒有出現"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS：系統設定 > 通知 > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows：設定 > 通知 > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "如果出現異常通知"
+  },
+  "helpUnexpectedIntro": {
+    "message": "先前允許的網站可能仍會持續傳送通知。"
+  },
+  "helpUnexpectedChromePath": {
+    "message": "開啟 Chrome 的網站通知權限："
+  },
+  "helpUnexpectedAction": {
+    "message": "封鎖該網站，或將其從允許清單中移除。"
+  },
+  "openSource": {
+    "message": "開啟官方來源"
+  },
+  "sourceApple": {
+    "message": "Apple 支援"
+  },
+  "sourceMicrosoft": {
+    "message": "Microsoft 支援"
+  },
+  "sourceGoogleChrome": {
+    "message": "Google Chrome 說明"
+  },
+  "helpOpenMacGuide": {
+    "message": "開啟 macOS 指南"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "開啟 Windows 指南"
+  },
+  "save": {
+    "message": "儲存"
+  },
+  "editSchedule": {
+    "message": "修改週期"
+  },
+  "editScheduleTitle": {
+    "message": "修改週期"
+  },
+  "filterLabel": {
+    "message": "篩選條件"
+  },
+  "filterNone": {
+    "message": "無篩選"
+  },
+  "filterIgnoreContains": {
+    "message": "僅當值包含時"
+  },
+  "filterIgnoreNotContains": {
+    "message": "僅當值不存在時"
+  },
+  "filterIgnoreRegex": {
+    "message": "僅當正規式(regex)符合時"
+  },
+  "filterValuePlaceholder": {
+    "message": "要比較的值"
+  },
+  "filterValuesPlaceholder": {
+    "message": "輸入值並按 Enter"
+  },
+  "filterUseRegex": {
+    "message": "使用正規表示式"
+  },
+  "advanced": {
+    "message": "進階"
+  },
+  "notificationFailureReselect": {
+    "message": "重新選擇目標"
+  },
+  "notificationFailureUnknown": {
+    "message": "未知錯誤"
+  },
+  "candidateMenuTitle": {
+    "message": "請在下方選擇準確的值。不同選擇器也可能對應相同的值。"
+  },
+  "back": {
+    "message": "返回"
+  },
+  "selectorLabel": {
+    "message": "選擇器"
+  },
+  "manualSelector": {
+    "message": "直接編輯選擇器"
+  },
+  "manualSelectorHint": {
+    "message": "請在這裡貼上選擇器。"
+  },
+  "manualSelectorInvalid": {
+    "message": "選擇器格式無效。"
+  },
+  "manualSelectorNotFound": {
+    "message": "找不到符合此選擇器的元素。"
+  },
+  "manualSelectorUpdated": {
+    "message": "已依此選擇器更新預覽。"
   }
 }

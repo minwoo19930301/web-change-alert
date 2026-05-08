@@ -81,7 +81,7 @@
     "message": "毎月 {day}日 {time}"
   },
   "notice": {
-    "message": "ログインが必要なサイトはログイン状態を維持してください。Cloudflare などの bot 対策サイトは手動認証が必要な場合があります。"
+    "message": "ログインが必要なサイトはログイン状態を維持してください。Cloudflare などの bot 対策サイトは手動認証が必要な場合があります。短すぎる間隔で繰り返し確認すると、サイト側で IP やアカウントが制限・ブロックされる場合があり、そのリスクは利用者の責任です。"
   },
   "aboutTitle": {
     "message": "情報"
@@ -129,7 +129,7 @@
     "message": "土"
   },
   "hint": {
-    "message": "要素にカーソルを合わせてクリックしてください。ESC でキャンセル"
+    "message": "クリックして一覧から選択。ESCでキャンセル"
   },
   "noValue": {
     "message": "(値なし)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "システム既定 (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "トラブルシューティング"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "通知が表示されない場合"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: システム設定 > 通知 > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: 設定 > 通知 > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "意図しない通知が表示される場合"
+  },
+  "helpUnexpectedIntro": {
+    "message": "以前に許可したサイトが引き続き通知を送ることがあります。"
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Chrome のサイト通知権限を開く:"
+  },
+  "helpUnexpectedAction": {
+    "message": "サイトをブロックするか、許可リストから削除してください。"
+  },
+  "openSource": {
+    "message": "公式ソースを開く"
+  },
+  "sourceApple": {
+    "message": "Appleサポート"
+  },
+  "sourceMicrosoft": {
+    "message": "Microsoft サポート"
+  },
+  "sourceGoogleChrome": {
+    "message": "Google Chrome ヘルプ"
+  },
+  "helpOpenMacGuide": {
+    "message": "macOS ガイドを開く"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Windows ガイドを開く"
+  },
+  "save": {
+    "message": "保存"
+  },
+  "editSchedule": {
+    "message": "周期を編集"
+  },
+  "editScheduleTitle": {
+    "message": "周期を編集"
+  },
+  "filterLabel": {
+    "message": "フィルター"
+  },
+  "filterNone": {
+    "message": "フィルターなし"
+  },
+  "filterIgnoreContains": {
+    "message": "値が含まれる場合のみ"
+  },
+  "filterIgnoreNotContains": {
+    "message": "値がない場合のみ"
+  },
+  "filterIgnoreRegex": {
+    "message": "正規表現(regex)に一致する場合のみ"
+  },
+  "filterValuePlaceholder": {
+    "message": "比較する値"
+  },
+  "filterValuesPlaceholder": {
+    "message": "値を入力して Enter"
+  },
+  "filterUseRegex": {
+    "message": "正規表現を使用"
+  },
+  "advanced": {
+    "message": "詳細"
+  },
+  "notificationFailureReselect": {
+    "message": "対象を再選択"
+  },
+  "notificationFailureUnknown": {
+    "message": "不明なエラー"
+  },
+  "candidateMenuTitle": {
+    "message": "下から正確な値を選択してください。セレクターが違っても同じ値の場合があります。"
+  },
+  "back": {
+    "message": "戻る"
+  },
+  "selectorLabel": {
+    "message": "セレクター"
+  },
+  "manualSelector": {
+    "message": "セレクターを直接編集"
+  },
+  "manualSelectorHint": {
+    "message": "セレクターをここに貼り付けてください。"
+  },
+  "manualSelectorInvalid": {
+    "message": "セレクターの形式が正しくありません。"
+  },
+  "manualSelectorNotFound": {
+    "message": "このセレクターに一致する要素がありません。"
+  },
+  "manualSelectorUpdated": {
+    "message": "このセレクターの値でプレビューを更新しました。"
   }
 }

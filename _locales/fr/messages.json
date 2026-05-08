@@ -81,7 +81,7 @@
     "message": "Mensuel jour {day} {time}"
   },
   "notice": {
-    "message": "Pour les sites nécessitant une connexion, gardez la session active. Les sites protégés par Cloudflare/anti-bot peuvent nécessiter une vérification manuelle."
+    "message": "Pour les sites nécessitant une connexion, gardez la session active. Les sites protégés par Cloudflare/anti-bot peuvent nécessiter une vérification manuelle. Des vérifications répétées à intervalles très courts peuvent amener le site à limiter ou bloquer votre IP/compte; vous assumez ce risque."
   },
   "aboutTitle": {
     "message": "À propos"
@@ -129,7 +129,7 @@
     "message": "Sam"
   },
   "hint": {
-    "message": "Survolez puis cliquez l’élément cible. ESC pour annuler"
+    "message": "Cliquez puis choisissez dans la liste. ESC annule"
   },
   "noValue": {
     "message": "(aucune valeur)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "Système (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "Dépannage"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "Si les notifications n’apparaissent pas"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: Réglages Système > Notifications > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: Paramètres > Notifications > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "Si des notifications inattendues apparaissent"
+  },
+  "helpUnexpectedIntro": {
+    "message": "Les anciens sites autorisés peuvent continuer à envoyer des notifications."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Ouvrir les autorisations de notification des sites dans Chrome :"
+  },
+  "helpUnexpectedAction": {
+    "message": "Bloquez le site ou supprimez-le de la liste des sites autorisés."
+  },
+  "openSource": {
+    "message": "Ouvrir la source officielle"
+  },
+  "sourceApple": {
+    "message": "Assistance Apple"
+  },
+  "sourceMicrosoft": {
+    "message": "Support Microsoft"
+  },
+  "sourceGoogleChrome": {
+    "message": "Aide Google Chrome"
+  },
+  "helpOpenMacGuide": {
+    "message": "Ouvrir le guide macOS"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Ouvrir le guide Windows"
+  },
+  "save": {
+    "message": "Enregistrer"
+  },
+  "editSchedule": {
+    "message": "Modifier la fréquence"
+  },
+  "editScheduleTitle": {
+    "message": "Modifier la fréquence"
+  },
+  "filterLabel": {
+    "message": "Filtre"
+  },
+  "filterNone": {
+    "message": "Aucun filtre"
+  },
+  "filterIgnoreContains": {
+    "message": "Seulement si la valeur contient"
+  },
+  "filterIgnoreNotContains": {
+    "message": "Seulement si la valeur est absente"
+  },
+  "filterIgnoreRegex": {
+    "message": "Seulement si la regex correspond"
+  },
+  "filterValuePlaceholder": {
+    "message": "Valeur à comparer"
+  },
+  "filterValuesPlaceholder": {
+    "message": "Saisissez une valeur puis Entrée"
+  },
+  "filterUseRegex": {
+    "message": "Utiliser regex"
+  },
+  "advanced": {
+    "message": "Avancé"
+  },
+  "notificationFailureReselect": {
+    "message": "Resélectionner la cible"
+  },
+  "notificationFailureUnknown": {
+    "message": "Erreur inconnue"
+  },
+  "candidateMenuTitle": {
+    "message": "Choisissez la valeur exacte ci-dessous. Des sélecteurs différents peuvent avoir la même valeur."
+  },
+  "back": {
+    "message": "Retour"
+  },
+  "selectorLabel": {
+    "message": "Sélecteur"
+  },
+  "manualSelector": {
+    "message": "Modifier le sélecteur manuellement"
+  },
+  "manualSelectorHint": {
+    "message": "Collez un sélecteur ici."
+  },
+  "manualSelectorInvalid": {
+    "message": "La syntaxe du sélecteur est invalide."
+  },
+  "manualSelectorNotFound": {
+    "message": "Aucun élément ne correspond à ce sélecteur."
+  },
+  "manualSelectorUpdated": {
+    "message": "Aperçu mis à jour avec ce sélecteur."
   }
 }

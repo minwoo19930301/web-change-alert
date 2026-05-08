@@ -16,7 +16,12 @@ try {
 const localizer = globalThis.WebChangeLocalizer || null;
 
 function fallbackTranslate(key, vars = {}) {
-  let template = chrome.i18n.getMessage(key) || key;
+  let template = "";
+  try {
+    template = chrome.i18n?.getMessage?.(key) || key;
+  } catch {
+    template = key;
+  }
   for (const [name, value] of Object.entries(vars)) {
     template = template.replace(new RegExp(`\\{${name}\\}`, "g"), String(value));
   }
@@ -68,10 +73,15 @@ chrome.alarms.onAlarm.addListener((alarm) => {
 });
 
 chrome.notifications.onClicked.addListener((notificationId) => {
-  const monitorId = parseMonitorIdFromNotification(notificationId);
-  if (!monitorId) return;
-  openMonitorUrl(monitorId);
-  chrome.notifications.clear(notificationId);
+  handleNotificationClick(notificationId).catch((error) => {
+    console.warn("notification click failed", error);
+  });
+});
+
+chrome.notifications.onButtonClicked.addListener((notificationId) => {
+  handleNotificationClick(notificationId).catch((error) => {
+    console.warn("notification button failed", error);
+  });
 });
 
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -334,6 +344,7 @@ async function runCheck(monitorId, force = false) {
     monitor.lastError = error?.message || String(error);
     monitor.lastCheckedAt = Date.now();
     monitor.lastDebug = { ok: false, error: monitor.lastError, meta: null, ts: monitor.lastCheckedAt };
+    await notifyFailure(monitor, monitor.lastError);
     await setMonitors(monitors);
     debugLog("check failed", monitor.id, monitor.lastError);
     return;
@@ -358,6 +369,27 @@ async function runCheck(monitorId, force = false) {
   debugLog("check result", monitor.id, monitor.lastError || "ok", result?.meta || {});
 
   if (treatAsValueResult) {
+    const filterResult = evaluateValueFilter(newValue, monitor.filter);
+    if (filterResult.error) {
+      monitor.lastError = filterResult.error;
+      if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
+        scheduleMonitor(monitor);
+      }
+      await notifyFailure(monitor, monitor.lastError);
+      await setMonitors(monitors);
+      return;
+    }
+    if (filterResult.ignored) {
+      monitor.lastDebug = {
+        ...monitor.lastDebug,
+        ignoredByFilter: true
+      };
+      if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
+        scheduleMonitor(monitor);
+      }
+      await setMonitors(monitors);
+      return;
+    }
     monitor.previousCheckedAt = prevCheckedAt;
     monitor.previousCheckedValue = prevCheckedValue;
     if (prevNormalized !== newValue) {
@@ -369,6 +401,8 @@ async function runCheck(monitorId, force = false) {
     } else {
       monitor.lastValue = newValue;
     }
+  } else if (monitor.lastError) {
+    await notifyFailure(monitor, monitor.lastError);
   }
 
   await setMonitors(monitors);
@@ -389,6 +423,7 @@ async function runBatch(url, monitors) {
       monitor.lastError = error?.message || String(error);
       monitor.lastCheckedAt = now;
       monitor.lastDebug = { ok: false, error: monitor.lastError, meta: null, ts: now };
+      await notifyFailure(monitor, monitor.lastError);
     }
     debugLog("batch failed", url, error?.message || String(error));
     return;
@@ -416,6 +451,25 @@ async function runBatch(url, monitors) {
     debugLog("batch result", monitor.id, monitor.lastError || "ok", result?.meta || {});
 
     if (treatAsValueResult) {
+      const filterResult = evaluateValueFilter(newValue, monitor.filter);
+      if (filterResult.error) {
+        monitor.lastError = filterResult.error;
+        if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
+          scheduleMonitor(monitor);
+        }
+        await notifyFailure(monitor, monitor.lastError);
+        continue;
+      }
+      if (filterResult.ignored) {
+        monitor.lastDebug = {
+          ...monitor.lastDebug,
+          ignoredByFilter: true
+        };
+        if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
+          scheduleMonitor(monitor);
+        }
+        continue;
+      }
       monitor.previousCheckedAt = prevCheckedAt;
       monitor.previousCheckedValue = prevCheckedValue;
       if (prevNormalized !== newValue) {
@@ -429,10 +483,57 @@ async function runBatch(url, monitors) {
       }
     }
 
+    if (!treatAsValueResult && monitor.lastError) {
+      await notifyFailure(monitor, monitor.lastError);
+    }
+
     if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
       scheduleMonitor(monitor);
     }
   }
+}
+
+function evaluateValueFilter(value, filter) {
+  if (!filter || filter.mode === "none") return { ignored: false, error: null };
+  const values = normalizeFilterValues(filter);
+  if (!values.length) return { ignored: false, error: null };
+
+  if (filter.mode === "ignore_regex" || filter.match === "regex") {
+    let matched = false;
+    for (const pattern of values) {
+      try {
+        if (new RegExp(pattern).test(String(value || ""))) {
+          matched = true;
+          break;
+        }
+      } catch (error) {
+        return { ignored: false, error: `invalid_filter_regex: ${error?.message || String(error)}` };
+      }
+    }
+    if (filter.mode === "ignore_regex") return { ignored: !matched, error: null };
+    if (filter.mode === "ignore_contains") return { ignored: !matched, error: null };
+    if (filter.mode === "ignore_not_contains") return { ignored: matched, error: null };
+    return { ignored: false, error: null };
+  }
+
+  const matched = values.some((needle) => String(value || "").includes(needle));
+  if (filter.mode === "ignore_contains") {
+    return { ignored: !matched, error: null };
+  }
+  if (filter.mode === "ignore_not_contains") {
+    return { ignored: matched, error: null };
+  }
+  return { ignored: false, error: null };
+}
+
+function normalizeFilterValues(filter) {
+  if (Array.isArray(filter?.values)) {
+    return filter.values.map((item) => String(item || "").trim()).filter(Boolean);
+  }
+  if (typeof filter?.value === "string") {
+    return filter.value.split(/\r?\n/).map((item) => item.trim()).filter(Boolean);
+  }
+  return [];
 }
 
 async function fetchValueViaHiddenTab(url, selector, extract) {
@@ -595,6 +696,23 @@ async function extractValuesFromPage(requests, timeoutMs) {
     return `${before} ${after}`.replace(/\s+/g, " ").trim();
   };
 
+  const getOwnText = (element) => {
+    if (!element) return "";
+    let value = "";
+    for (const node of Array.from(element.childNodes || [])) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        value += ` ${node.textContent || ""}`;
+      }
+    }
+    return value.replace(/\s+/g, " ").trim();
+  };
+
+  const getTextToken = (element, index) => {
+    const text = String(element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+    const tokens = text.match(/[0-9]{1,2}|[0-9]{1,3}(?:,[0-9]{3})+|[A-Za-z]+|[가-힣]+/g) || [];
+    return tokens[Number(index || 0)] || "";
+  };
+
   const baseMeta = {
     readyState: document.readyState,
     visibility: document.visibilityState,
@@ -641,6 +759,10 @@ async function extractValuesFromPage(requests, timeoutMs) {
             if (attrNode) value = attrNode.getAttribute(extract.attr) ?? "";
           } catch {}
         }
+      } else if (extract?.type === "ownText") {
+        value = getOwnText(element);
+      } else if (extract?.type === "textToken") {
+        value = getTextToken(element, extract.index);
       } else {
         value = element.innerText || "";
         if (!value && element.shadowRoot) {
@@ -650,7 +772,7 @@ async function extractValuesFromPage(requests, timeoutMs) {
         if (!value) value = getPseudoText(element);
       }
 
-      if (!value && extract?.type !== "text" && extract?.type !== "image") {
+      if (!value && extract?.type !== "text" && extract?.type !== "image" && extract?.type !== "ownText" && extract?.type !== "textToken") {
         value = element.innerText || "";
         if (!value && element.shadowRoot) {
           value = element.shadowRoot.textContent || "";
@@ -773,6 +895,23 @@ async function extractValueFromPage(selector, extract, timeoutMs) {
       return `${before} ${after}`.replace(/\s+/g, " ").trim();
     };
 
+    const getOwnText = (element) => {
+      if (!element) return "";
+      let value = "";
+      for (const node of Array.from(element.childNodes || [])) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          value += ` ${node.textContent || ""}`;
+        }
+      }
+      return value.replace(/\s+/g, " ").trim();
+    };
+
+    const getTextToken = (element, index) => {
+      const text = String(element.innerText || element.textContent || "").replace(/\s+/g, " ").trim();
+      const tokens = text.match(/[0-9]{1,2}|[0-9]{1,3}(?:,[0-9]{3})+|[A-Za-z]+|[가-힣]+/g) || [];
+      return tokens[Number(index || 0)] || "";
+    };
+
     const baseMeta = {
       readyState: document.readyState,
       visibility: document.visibilityState,
@@ -810,6 +949,10 @@ async function extractValueFromPage(selector, extract, timeoutMs) {
           if (attrNode) value = attrNode.getAttribute(extract.attr) ?? "";
         } catch {}
       }
+    } else if (extract?.type === "ownText") {
+      value = getOwnText(element);
+    } else if (extract?.type === "textToken") {
+      value = getTextToken(element, extract.index);
     } else {
       value = element.innerText || "";
       if (!value && element.shadowRoot) {
@@ -819,7 +962,7 @@ async function extractValueFromPage(selector, extract, timeoutMs) {
       if (!value) value = getPseudoText(element);
     }
 
-    if (!value && extract?.type !== "text" && extract?.type !== "image") {
+    if (!value && extract?.type !== "text" && extract?.type !== "image" && extract?.type !== "ownText" && extract?.type !== "textToken") {
       value = element.innerText || "";
       if (!value && element.shadowRoot) {
         value = element.shadowRoot.textContent || "";
@@ -838,14 +981,14 @@ async function extractValueFromPage(selector, extract, timeoutMs) {
 async function notifyChange(monitor, value) {
   const translator = await getTranslator();
   const tr = translator?.t || fallbackTranslate;
-  const title = tr("notificationTitle");
+  const title = truncate((monitor.title || monitor.url || "Web Change Alert").replace(/\s+/g, " "), 60);
   const prev = normalizeValue(monitor.previousValue || tr("notificationPrevEmpty"));
   const next = normalizeValue(value || tr("notificationValueEmpty"));
   const imageUrl = resolveImageUrl(next, monitor?.url);
   const isImageMonitor = monitor?.extract?.type === "image" || Boolean(imageUrl);
   const message = isImageMonitor
-    ? tr("notificationImageChanged")
-    : `${tr("notificationPrevious")}: ${truncate(formatNotificationValue(prev, false, tr, monitor?.url), 30)} -> ${tr("notificationCurrent")}: ${truncate(formatNotificationValue(next, false, tr, monitor?.url), 30)}`.replace(/\s+/g, " ");
+    ? `${formatNotificationValue(prev, true, tr, monitor?.url)} -> ${formatNotificationValue(next, true, tr, monitor?.url)}`
+    : `${truncate(formatNotificationValue(prev, false, tr, monitor?.url), 30)} -> ${truncate(formatNotificationValue(next, false, tr, monitor?.url), 30)}`.replace(/\s+/g, " ");
   const notificationId = `monitor_${monitor.id}_${Date.now()}`;
 
   const payload = {
@@ -853,13 +996,30 @@ async function notifyChange(monitor, value) {
     iconUrl: chrome.runtime.getURL("icons/icon128.png"),
     title,
     message,
-    contextMessage: truncate((monitor.title || monitor.url || "").replace(/\s+/g, " "), 45),
     requireInteraction: false
   };
   if (imageUrl) {
     payload.imageUrl = imageUrl;
   }
   chrome.notifications.create(notificationId, payload);
+}
+
+async function notifyFailure(monitor, errorMessage) {
+  const translator = await getTranslator();
+  const tr = translator?.t || fallbackTranslate;
+  const title = truncate((monitor.title || monitor.url || "Web Change Alert").replace(/\s+/g, " "), 60);
+  const reason = normalizeValue(errorMessage || tr("notificationFailureUnknown"));
+  const message = `${tr("notificationFailureReselect")}: ${truncate(reason, 42)}`.replace(/\s+/g, " ");
+  const notificationId = `monitor_fail_${monitor.id}_${Date.now()}`;
+
+  chrome.notifications.create(notificationId, {
+    type: "basic",
+    iconUrl: chrome.runtime.getURL("icons/icon128.png"),
+    title,
+    message,
+    buttons: [{ title: tr("reselect") }],
+    requireInteraction: false
+  });
 }
 
 function formatNotificationValue(value, preferImage, tr = fallbackTranslate, baseUrl = "") {
@@ -904,9 +1064,24 @@ function resolveImageUrl(value, baseUrl) {
   }
 }
 
-function parseMonitorIdFromNotification(notificationId) {
-  const match = /^monitor_([^_]+)/.exec(notificationId || "");
-  return match ? match[1] : null;
+function parseNotificationTarget(notificationId) {
+  const text = String(notificationId || "");
+  const fail = /^monitor_fail_(.+)_\d+$/.exec(text);
+  if (fail) return { kind: "failure", monitorId: fail[1] };
+  const change = /^monitor_(.+)_\d+$/.exec(text);
+  if (change) return { kind: "change", monitorId: change[1] };
+  return { kind: "", monitorId: "" };
+}
+
+async function handleNotificationClick(notificationId) {
+  const target = parseNotificationTarget(notificationId);
+  if (!target.monitorId) return;
+  if (target.kind === "failure") {
+    await openMonitorReselect(target.monitorId);
+  } else {
+    await openMonitorUrl(target.monitorId);
+  }
+  chrome.notifications.clear(notificationId);
 }
 
 async function openMonitorUrl(monitorId) {
@@ -917,14 +1092,28 @@ async function openMonitorUrl(monitorId) {
   }
 }
 
+async function openMonitorReselect(monitorId) {
+  const monitors = await getMonitors();
+  const monitor = monitors.find((item) => item.id === monitorId);
+  if (!monitor?.url) return;
+  await startPickerFlow(monitor.url, null, buildRequestId(), "update", monitor.id);
+}
+
 function truncate(value, maxLength) {
   if (!value) return "";
   return value.length > maxLength ? value.slice(0, maxLength - 1) + "…" : value;
 }
 
+function buildRequestId() {
+  if (crypto?.randomUUID) return crypto.randomUUID();
+  return `${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
+}
+
 async function startPickerFlow(url, tabId, requestId, mode = "create", monitorId = null) {
   const targetUrl = await resolvePickerUrl(url, tabId);
   if (!targetUrl) throw new Error("url_required");
+  const pickerMode = mode === "update" && monitorId ? "update" : "create";
+  const pickerMonitorId = pickerMode === "update" ? monitorId : null;
 
   const existingTab = tabId ? await getTab(tabId).catch(() => null) : null;
   const useExisting =
@@ -947,8 +1136,8 @@ async function startPickerFlow(url, tabId, requestId, mode = "create", monitorId
       requestId,
       tabId: pickTabId,
       closeOnDone,
-      mode,
-      monitorId
+      mode: pickerMode,
+      monitorId: pickerMonitorId
     }
   });
 
@@ -980,6 +1169,8 @@ async function updateMonitorFields(id, updates) {
     "previousCheckedAt",
     "lastError",
     "lastDebug",
+    "filter",
+    "schedule",
     "url"
   ];
   for (const key of allowed) {
@@ -989,6 +1180,12 @@ async function updateMonitorFields(id, updates) {
   }
 
   await setMonitors(monitors);
+  if ("schedule" in updates) {
+    await chrome.alarms.clear(LISTEN_PREFIX + monitor.id);
+    if (monitor.schedule?.enabled) {
+      scheduleMonitor(monitor);
+    }
+  }
 }
 
 async function handlePickerCancelled(message) {

@@ -81,7 +81,7 @@
     "message": "Ogni mese giorno {day} {time}"
   },
   "notice": {
-    "message": "Per siti con login, mantieni la sessione attiva. Siti con Cloudflare o anti-bot potrebbero richiedere verifica manuale."
+    "message": "Per siti con login, mantieni la sessione attiva. Siti con Cloudflare o anti-bot potrebbero richiedere verifica manuale. Controlli ripetuti con intervalli troppo brevi possono far limitare o bloccare il tuo IP/account dal sito; questo rischio è sotto la tua responsabilità."
   },
   "aboutTitle": {
     "message": "Informazioni"
@@ -129,7 +129,7 @@
     "message": "Sab"
   },
   "hint": {
-    "message": "Passa il mouse e clicca l'elemento target. ESC per annullare"
+    "message": "Fai clic e scegli dalla lista. ESC annulla"
   },
   "noValue": {
     "message": "(nessun valore)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "Sistema (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "Risoluzione dei problemi"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "Se le notifiche non vengono visualizzate"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: Impostazioni di Sistema > Notifiche > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: Impostazioni > Notifiche > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "Se compaiono notifiche impreviste"
+  },
+  "helpUnexpectedIntro": {
+    "message": "I siti autorizzati in passato possono continuare a inviare notifiche."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Apri le autorizzazioni alle notifiche dei siti in Chrome:"
+  },
+  "helpUnexpectedAction": {
+    "message": "Blocca il sito o rimuovilo dall’elenco consentito."
+  },
+  "openSource": {
+    "message": "Apri la fonte ufficiale"
+  },
+  "sourceApple": {
+    "message": "Supporto Apple"
+  },
+  "sourceMicrosoft": {
+    "message": "Supporto Microsoft"
+  },
+  "sourceGoogleChrome": {
+    "message": "Guida di Google Chrome"
+  },
+  "helpOpenMacGuide": {
+    "message": "Apri guida macOS"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Apri guida Windows"
+  },
+  "save": {
+    "message": "Salva"
+  },
+  "editSchedule": {
+    "message": "Modifica pianificazione"
+  },
+  "editScheduleTitle": {
+    "message": "Modifica pianificazione"
+  },
+  "filterLabel": {
+    "message": "Filtro"
+  },
+  "filterNone": {
+    "message": "Nessun filtro"
+  },
+  "filterIgnoreContains": {
+    "message": "Solo quando il valore contiene"
+  },
+  "filterIgnoreNotContains": {
+    "message": "Solo quando il valore è assente"
+  },
+  "filterIgnoreRegex": {
+    "message": "Solo quando la regex corrisponde"
+  },
+  "filterValuePlaceholder": {
+    "message": "Valore da confrontare"
+  },
+  "filterValuesPlaceholder": {
+    "message": "Digita un valore e premi Invio"
+  },
+  "filterUseRegex": {
+    "message": "Usa regex"
+  },
+  "advanced": {
+    "message": "Avanzate"
+  },
+  "notificationFailureReselect": {
+    "message": "Seleziona di nuovo il target"
+  },
+  "notificationFailureUnknown": {
+    "message": "Errore sconosciuto"
+  },
+  "candidateMenuTitle": {
+    "message": "Scegli il valore esatto qui sotto. Selettori diversi possono avere lo stesso valore."
+  },
+  "back": {
+    "message": "Indietro"
+  },
+  "selectorLabel": {
+    "message": "Selettore"
+  },
+  "manualSelector": {
+    "message": "Modifica selettore manualmente"
+  },
+  "manualSelectorHint": {
+    "message": "Incolla qui un selettore."
+  },
+  "manualSelectorInvalid": {
+    "message": "La sintassi del selettore non è valida."
+  },
+  "manualSelectorNotFound": {
+    "message": "Nessun elemento corrisponde a questo selettore."
+  },
+  "manualSelectorUpdated": {
+    "message": "Anteprima aggiornata con questo selettore."
   }
 }

@@ -81,7 +81,7 @@
     "message": "Mensual día {day} {time}"
   },
   "notice": {
-    "message": "Para sitios que requieren inicio de sesión, mantén la sesión activa. Sitios con Cloudflare o anti-bot pueden requerir verificación manual."
+    "message": "Para sitios que requieren inicio de sesión, mantén la sesión activa. Sitios con Cloudflare o anti-bot pueden requerir verificación manual. Las comprobaciones repetidas con intervalos muy cortos pueden hacer que el sitio limite o bloquee tu IP/cuenta; ese riesgo es tu responsabilidad."
   },
   "aboutTitle": {
     "message": "Acerca de"
@@ -129,7 +129,7 @@
     "message": "Sáb"
   },
   "hint": {
-    "message": "Pasa el cursor y haz clic en el elemento objetivo. ESC para cancelar"
+    "message": "Haz clic y elige en la lista. ESC cancela"
   },
   "noValue": {
     "message": "(sin valor)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "Sistema (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "Solución de problemas"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "Si no aparecen las notificaciones"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: Configuración del Sistema > Notificaciones > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: Configuración > Notificaciones > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "Si aparecen notificaciones inesperadas"
+  },
+  "helpUnexpectedIntro": {
+    "message": "Los sitios permitidos anteriormente pueden seguir enviando notificaciones."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Abrir permisos de notificaciones de sitios en Chrome:"
+  },
+  "helpUnexpectedAction": {
+    "message": "Bloquea el sitio o elimínalo de la lista de permitidos."
+  },
+  "openSource": {
+    "message": "Abrir fuente oficial"
+  },
+  "sourceApple": {
+    "message": "Soporte de Apple"
+  },
+  "sourceMicrosoft": {
+    "message": "Soporte de Microsoft"
+  },
+  "sourceGoogleChrome": {
+    "message": "Ayuda de Google Chrome"
+  },
+  "helpOpenMacGuide": {
+    "message": "Abrir guía de macOS"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Abrir guía de Windows"
+  },
+  "save": {
+    "message": "Guardar"
+  },
+  "editSchedule": {
+    "message": "Editar programación"
+  },
+  "editScheduleTitle": {
+    "message": "Editar programación"
+  },
+  "filterLabel": {
+    "message": "Filtro"
+  },
+  "filterNone": {
+    "message": "Sin filtro"
+  },
+  "filterIgnoreContains": {
+    "message": "Solo cuando el valor contiene"
+  },
+  "filterIgnoreNotContains": {
+    "message": "Solo cuando el valor no está"
+  },
+  "filterIgnoreRegex": {
+    "message": "Solo cuando coincide la regex"
+  },
+  "filterValuePlaceholder": {
+    "message": "Valor para comparar"
+  },
+  "filterValuesPlaceholder": {
+    "message": "Escribe un valor y pulsa Enter"
+  },
+  "filterUseRegex": {
+    "message": "Usar regex"
+  },
+  "advanced": {
+    "message": "Avanzado"
+  },
+  "notificationFailureReselect": {
+    "message": "Volver a seleccionar objetivo"
+  },
+  "notificationFailureUnknown": {
+    "message": "Error desconocido"
+  },
+  "candidateMenuTitle": {
+    "message": "Elige el valor exacto abajo. Distintos selectores pueden tener el mismo valor."
+  },
+  "back": {
+    "message": "Atrás"
+  },
+  "selectorLabel": {
+    "message": "Selector"
+  },
+  "manualSelector": {
+    "message": "Editar selector manualmente"
+  },
+  "manualSelectorHint": {
+    "message": "Pega un selector aquí."
+  },
+  "manualSelectorInvalid": {
+    "message": "La sintaxis del selector no es válida."
+  },
+  "manualSelectorNotFound": {
+    "message": "No hay ningún elemento con este selector."
+  },
+  "manualSelectorUpdated": {
+    "message": "La vista previa se actualizó con este selector."
   }
 }

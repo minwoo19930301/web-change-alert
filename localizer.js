@@ -65,9 +65,34 @@
   }
 
   function getUiLanguage() {
-    const ui = chrome.i18n?.getUILanguage?.() || "";
+    const ui = safeGetUiLanguage();
     const normalized = normalizeLanguage(ui);
     return normalized === "auto" ? DEFAULT_LANGUAGE : normalized;
+  }
+
+  function safeGetUiLanguage() {
+    try {
+      return globalThis.chrome?.i18n?.getUILanguage?.() || "";
+    } catch {
+      return "";
+    }
+  }
+
+  function safeGetMessage(key) {
+    try {
+      return globalThis.chrome?.i18n?.getMessage?.(key) || "";
+    } catch {
+      return "";
+    }
+  }
+
+  function safeGetRuntimeUrl(path) {
+    try {
+      if (!globalThis.chrome?.runtime?.id) return "";
+      return globalThis.chrome?.runtime?.getURL?.(path) || "";
+    } catch {
+      return "";
+    }
   }
 
   function getLocaleFolder(language) {
@@ -76,21 +101,26 @@
   }
 
   async function loadMessages(language) {
-    const normalized = normalizeLanguage(language);
-    if (normalized === "auto") return null;
-    if (messageCache.has(normalized)) {
-      return messageCache.get(normalized);
-    }
-
-    const folder = getLocaleFolder(normalized);
-    const url = chrome.runtime.getURL(`_locales/${folder}/messages.json`);
     try {
+      const normalized = normalizeLanguage(language);
+      if (normalized === "auto") return null;
+      if (messageCache.has(normalized)) {
+        return messageCache.get(normalized);
+      }
+
+      const folder = getLocaleFolder(normalized);
+      const url = safeGetRuntimeUrl(`_locales/${folder}/messages.json`);
+      if (!url) {
+        messageCache.set(normalized, null);
+        return null;
+      }
       const response = await fetch(url);
       if (!response.ok) throw new Error(`load_failed_${response.status}`);
       const json = await response.json();
       messageCache.set(normalized, json);
       return json;
     } catch {
+      const normalized = normalizeLanguage(language);
       messageCache.set(normalized, null);
       return null;
     }
@@ -99,35 +129,46 @@
   function buildChromeTranslator() {
     return {
       t(key, vars = {}) {
-        const template = chrome.i18n.getMessage(key) || key;
+        const template = safeGetMessage(key) || key;
         return formatTemplate(template, vars);
       }
     };
   }
 
   async function createTranslator(preferredLanguage = "auto") {
-    const preferred = normalizeLanguage(preferredLanguage || "auto");
-    const effective = preferred === "auto" ? getUiLanguage() : preferred;
+    try {
+      const preferred = normalizeLanguage(preferredLanguage || "auto");
+      const effective = preferred === "auto" ? getUiLanguage() : preferred;
 
-    if (preferred === "auto") {
+      if (preferred === "auto") {
+        return {
+          preferred,
+          effective,
+          isRtl: RTL_LANGUAGES.has(effective),
+          ...buildChromeTranslator()
+        };
+      }
+
+      const messages = await loadMessages(effective);
       return {
         preferred,
         effective,
         isRtl: RTL_LANGUAGES.has(effective),
-        ...buildChromeTranslator()
+        t(key, vars = {}) {
+          const template = messages?.[key]?.message || safeGetMessage(key) || key;
+          return formatTemplate(template, vars);
+        }
+      };
+    } catch {
+      return {
+        preferred: "auto",
+        effective: DEFAULT_LANGUAGE,
+        isRtl: false,
+        t(key, vars = {}) {
+          return formatTemplate(safeGetMessage(key) || key, vars);
+        }
       };
     }
-
-    const messages = await loadMessages(effective);
-    return {
-      preferred,
-      effective,
-      isRtl: RTL_LANGUAGES.has(effective),
-      t(key, vars = {}) {
-        const template = messages?.[key]?.message || chrome.i18n.getMessage(key) || key;
-        return formatTemplate(template, vars);
-      }
-    };
   }
 
   async function getSettingsLanguage() {
@@ -144,13 +185,15 @@
   async function setSettingsLanguage(language) {
     const normalized = normalizeLanguage(language || "auto");
     const nextLanguage = normalized === "auto" ? "auto" : normalized;
-    const data = await chrome.storage.local.get([SETTINGS_KEY]);
-    const nextSettings = {
-      ...(data?.[SETTINGS_KEY] || {}),
-      language: nextLanguage,
-      languageChosen: true
-    };
-    await chrome.storage.local.set({ [SETTINGS_KEY]: nextSettings });
+    try {
+      const data = await chrome.storage.local.get([SETTINGS_KEY]);
+      const nextSettings = {
+        ...(data?.[SETTINGS_KEY] || {}),
+        language: nextLanguage,
+        languageChosen: true
+      };
+      await chrome.storage.local.set({ [SETTINGS_KEY]: nextSettings });
+    } catch {}
     return nextLanguage;
   }
 

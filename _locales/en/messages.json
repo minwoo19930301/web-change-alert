@@ -81,7 +81,7 @@
     "message": "Monthly day {day} {time}"
   },
   "notice": {
-    "message": "For login-required sites, keep your session signed in. Sites protected by Cloudflare or anti-bot checks may require manual verification to work."
+    "message": "For login-required sites, keep your session signed in. Sites protected by Cloudflare or anti-bot checks may require manual verification to work. Very short repeated checks can cause the site to rate-limit or block your IP/account; you are responsible for that risk."
   },
   "aboutTitle": {
     "message": "About"
@@ -129,7 +129,7 @@
     "message": "Sat"
   },
   "hint": {
-    "message": "Hover and click the target element. Press ESC to cancel"
+    "message": "Click, then choose from the list. ESC cancels"
   },
   "noValue": {
     "message": "(no value)"
@@ -203,6 +203,42 @@
   "registerFailed": {
     "message": "Register failed"
   },
+  "save": {
+    "message": "Save"
+  },
+  "editSchedule": {
+    "message": "Edit schedule"
+  },
+  "editScheduleTitle": {
+    "message": "Edit schedule"
+  },
+  "filterLabel": {
+    "message": "Filter"
+  },
+  "filterNone": {
+    "message": "No filter"
+  },
+  "filterIgnoreContains": {
+    "message": "Only when value contains"
+  },
+  "filterIgnoreNotContains": {
+    "message": "Only when value is absent"
+  },
+  "filterIgnoreRegex": {
+    "message": "Only when regex matches"
+  },
+  "filterValuePlaceholder": {
+    "message": "Value to compare"
+  },
+  "filterValuesPlaceholder": {
+    "message": "Type a value and press Enter"
+  },
+  "filterUseRegex": {
+    "message": "Use regex"
+  },
+  "advanced": {
+    "message": "Advanced"
+  },
   "notificationTitle": {
     "message": "Value changed"
   },
@@ -223,5 +259,77 @@
   },
   "languageSystem": {
     "message": "System (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "Troubleshooting"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "If notifications do not appear"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: System Settings > Notifications > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: Settings > Notifications > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "If unexpected notifications appear"
+  },
+  "helpUnexpectedIntro": {
+    "message": "Old allowed sites can continue sending notifications."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "Open Chrome notification site permissions:"
+  },
+  "helpUnexpectedAction": {
+    "message": "Block the site or remove it from the allowed list."
+  },
+  "openSource": {
+    "message": "Open official source"
+  },
+  "sourceApple": {
+    "message": "Apple Support"
+  },
+  "sourceMicrosoft": {
+    "message": "Microsoft Support"
+  },
+  "sourceGoogleChrome": {
+    "message": "Google Chrome Help"
+  },
+  "helpOpenMacGuide": {
+    "message": "Open macOS guide"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "Open Windows guide"
+  },
+  "notificationFailureReselect": {
+    "message": "Reselect target"
+  },
+  "notificationFailureUnknown": {
+    "message": "Unknown error"
+  },
+  "candidateMenuTitle": {
+    "message": "Choose the exact value below. Different selectors can have the same value."
+  },
+  "back": {
+    "message": "Back"
+  },
+  "selectorLabel": {
+    "message": "Selector"
+  },
+  "manualSelector": {
+    "message": "Edit selector manually"
+  },
+  "manualSelectorHint": {
+    "message": "Paste a selector here."
+  },
+  "manualSelectorInvalid": {
+    "message": "Selector syntax is invalid."
+  },
+  "manualSelectorNotFound": {
+    "message": "No element matches this selector."
+  },
+  "manualSelectorUpdated": {
+    "message": "Preview updated from this selector."
   }
 }

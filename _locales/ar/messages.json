@@ -81,7 +81,7 @@
     "message": "شهريًا يوم {day} {time}"
   },
   "notice": {
-    "message": "للمواقع التي تتطلب تسجيل دخول، حافظ على الجلسة فعالة. المواقع المحمية بـ Cloudflare أو أنظمة مكافحة الروبوت قد تحتاج تحققًا يدويًا."
+    "message": "للمواقع التي تتطلب تسجيل دخول، حافظ على الجلسة فعالة. المواقع المحمية بـ Cloudflare أو أنظمة مكافحة الروبوت قد تحتاج تحققًا يدويًا. قد تؤدي عمليات الفحص المتكررة بفواصل قصيرة جدًا إلى تقييد الموقع لعنوان IP أو الحساب، وتتحمل أنت مسؤولية هذا الخطر."
   },
   "aboutTitle": {
     "message": "حول"
@@ -129,7 +129,7 @@
     "message": "السبت"
   },
   "hint": {
-    "message": "حرّك المؤشر فوق العنصر المطلوب ثم انقر. اضغط ESC للإلغاء"
+    "message": "انقر واختر من القائمة. ESC للإلغاء"
   },
   "noValue": {
     "message": "(لا توجد قيمة)"
@@ -223,5 +223,113 @@
   },
   "languageSystem": {
     "message": "افتراضي النظام (Chrome)"
+  },
+  "troubleshootingTitle": {
+    "message": "استكشاف الأخطاء وإصلاحها"
+  },
+  "helpNotificationsMissingTitle": {
+    "message": "إذا لم تظهر الإشعارات"
+  },
+  "helpNotificationsMissingMac": {
+    "message": "macOS: إعدادات النظام > الإشعارات > Google Chrome Helper"
+  },
+  "helpNotificationsMissingWindows": {
+    "message": "Windows: الإعدادات > الإشعارات > Google Chrome"
+  },
+  "helpUnexpectedTitle": {
+    "message": "إذا ظهرت إشعارات غير متوقعة"
+  },
+  "helpUnexpectedIntro": {
+    "message": "قد تستمر المواقع المسموح بها سابقًا في إرسال الإشعارات."
+  },
+  "helpUnexpectedChromePath": {
+    "message": "افتح أذونات إشعارات المواقع في Chrome:"
+  },
+  "helpUnexpectedAction": {
+    "message": "احظر الموقع أو أزله من قائمة المواقع المسموح بها."
+  },
+  "openSource": {
+    "message": "فتح المصدر الرسمي"
+  },
+  "sourceApple": {
+    "message": "دعم Apple"
+  },
+  "sourceMicrosoft": {
+    "message": "دعم Microsoft"
+  },
+  "sourceGoogleChrome": {
+    "message": "مساعدة Google Chrome"
+  },
+  "helpOpenMacGuide": {
+    "message": "فتح دليل macOS"
+  },
+  "helpOpenWindowsGuide": {
+    "message": "فتح دليل Windows"
+  },
+  "save": {
+    "message": "حفظ"
+  },
+  "editSchedule": {
+    "message": "تعديل الجدولة"
+  },
+  "editScheduleTitle": {
+    "message": "تعديل الجدولة"
+  },
+  "filterLabel": {
+    "message": "فلتر"
+  },
+  "filterNone": {
+    "message": "بلا فلتر"
+  },
+  "filterIgnoreContains": {
+    "message": "فقط عندما تحتوي القيمة على"
+  },
+  "filterIgnoreNotContains": {
+    "message": "فقط عندما تكون القيمة غير موجودة"
+  },
+  "filterIgnoreRegex": {
+    "message": "فقط عندما يطابق regex"
+  },
+  "filterValuePlaceholder": {
+    "message": "القيمة للمقارنة"
+  },
+  "filterValuesPlaceholder": {
+    "message": "اكتب قيمة واضغط Enter"
+  },
+  "filterUseRegex": {
+    "message": "استخدام التعبير النمطي"
+  },
+  "advanced": {
+    "message": "متقدم"
+  },
+  "notificationFailureReselect": {
+    "message": "أعد اختيار الهدف"
+  },
+  "notificationFailureUnknown": {
+    "message": "خطأ غير معروف"
+  },
+  "candidateMenuTitle": {
+    "message": "اختر القيمة الدقيقة أدناه. قد تختلف المحددات مع أن القيمة نفسها."
+  },
+  "back": {
+    "message": "رجوع"
+  },
+  "selectorLabel": {
+    "message": "المحدد"
+  },
+  "manualSelector": {
+    "message": "تعديل المحدد يدويًا"
+  },
+  "manualSelectorHint": {
+    "message": "الصق محددًا هنا."
+  },
+  "manualSelectorInvalid": {
+    "message": "صيغة المحدد غير صالحة."
+  },
+  "manualSelectorNotFound": {
+    "message": "لا يوجد عنصر يطابق هذا المحدد."
+  },
+  "manualSelectorUpdated": {
+    "message": "تم تحديث المعاينة من هذا المحدد."
   }
 }
