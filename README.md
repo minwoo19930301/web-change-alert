@@ -7,7 +7,11 @@ Chrome Web Store: [Web Change Alert](https://chromewebstore.google.com/detail/jc
 ## Features
 
 - Select text, images, SVG, canvas, or attributes directly from a page
+- Choose from nearby/nested target candidates when several values overlap
 - Schedule automatic checks by interval, daily, weekly, or monthly time
+- Add optional filters so alerts fire only when text contains, disappears, or matches a pattern
+- Copy an Agent AI prompt for Codex, Claude Code, OpenClaw, Antigravity, and similar browser-controlling agents
+- Save site title and favicon for easier monitor scanning
 - Run a monitor manually at any time
 - Re-select the target quickly when collection fails
 - Track multiple sites at once
