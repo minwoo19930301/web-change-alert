@@ -2,12 +2,13 @@ Chrome Web Store listing text
 Copy each language block into the matching Chrome Web Store language field.
 
 ============================================================
-Key features에 추가할 줄만
+Key features에 추가할 릴리즈 노트만
 ============================================================
 
-이미 스토어 설명이 언어별로 다르면, 전체 설명을 갈아엎지 말고 아래 줄만 각 언어의 Key features / 주요 기능 / 主な機能 영역에 추가하세요.
+이미 스토어 설명이 언어별로 다르면, 전체 설명을 갈아엎지 말고 아래 블록만 각 언어의 Key features / 주요 기능 / 主な機能 영역 앞에 추가하세요.
 
 영어 - en (기본 언어)
+May 8, 2026 (v1.5):
 • More precise target selection, including link href and input value
 • Candidate picker for overlapping, nested, or nearby values
 • Optional alert filters (contains / disappears / pattern match)
@@ -15,6 +16,7 @@ Key features에 추가할 줄만
 • Site title and favicon saved in the popup
 
 한국어 - ko
+2026년 5월 8일 (v1.5):
 • 링크 href와 입력값까지 포함한 더 정밀한 대상 선택
 • 겹치거나 중첩된 값, 주변 후보 중 정확한 값 선택
 • 선택 알림 필터 (포함됨 / 사라짐 / 패턴 매치)
@@ -22,6 +24,7 @@ Key features에 추가할 줄만
 • 팝업에 사이트 제목과 favicon 저장
 
 일본어 - ja
+2026年5月8日 (v1.5):
 • リンク href と入力値を含む、より正確な対象選択
 • 重なった値、ネストされた値、近くの候補から正確な値を選択
 • 任意の通知フィルター（含む / 消える / パターン一致）
@@ -29,6 +32,7 @@ Key features에 추가할 줄만
 • ポップアップにサイトタイトルと favicon を保存
 
 중국어(대만) - zh-TW
+2026年5月8日 (v1.5)：
 • 包含連結 href 和輸入值的更精準目標選取
 • 從重疊、巢狀或附近候選值中選取準確內容
 • 可選提醒篩選（包含 / 消失 / 符合模式）
@@ -36,6 +40,7 @@ Key features에 추가할 줄만
 • 在彈窗中儲存網站標題和 favicon
 
 중국어(중국) - zh-CN
+2026年5月8日 (v1.5)：
 • 包含链接 href 和输入值的更精准目标选择
 • 从重叠、嵌套或附近候选值中选择准确内容
 • 可选提醒过滤（包含 / 消失 / 匹配模式）
@@ -43,6 +48,7 @@ Key features에 추가할 줄만
 • 在弹窗中保存网站标题和 favicon
 
 포르투갈어(브라질) - pt-BR
+8 de maio de 2026 (v1.5):
 • Seleção de alvo mais precisa, incluindo href de link e valor de input
 • Lista de candidatos para valores sobrepostos, aninhados ou próximos
 • Filtros opcionais de alerta (contém / desaparece / corresponde a padrão)
@@ -50,6 +56,7 @@ Key features에 추가할 줄만
 • Salva título e favicon do site no popup
 
 프랑스어 - fr
+8 mai 2026 (v1.5) :
 • Sélection de cible plus précise, avec href de lien et valeur de champ
 • Sélecteur de candidats pour valeurs superposées, imbriquées ou proches
 • Filtres d’alerte facultatifs (contient / disparaît / correspond à un motif)
@@ -57,6 +64,7 @@ Key features에 추가할 줄만
 • Enregistre le titre du site et le favicon dans le popup
 
 독일어 - de
+8. Mai 2026 (v1.5):
 • Genauere Zielauswahl, einschließlich Link-href und Eingabewert
 • Kandidatenauswahl für überlappende, verschachtelte oder nahe Werte
 • Optionale Alarmfilter (enthält / verschwindet / Muster stimmt überein)
@@ -64,6 +72,7 @@ Key features에 추가할 줄만
 • Speichert Seitentitel und favicon im Popup
 
 러시아어 - ru
+8 мая 2026 г. (v1.5):
 • Более точный выбор цели, включая href ссылки и значение input
 • Выбор кандидатов для перекрывающихся, вложенных или соседних значений
 • Дополнительные фильтры уведомлений (содержит / исчезло / совпало с шаблоном)
@@ -71,6 +80,7 @@ Key features에 추가할 줄만
 • Сохраняет заголовок сайта и favicon в popup
 
 스페인어 - es
+8 de mayo de 2026 (v1.5):
 • Selección de objetivo más precisa, incluyendo href de enlace y valor de input
 • Selector de candidatos para valores superpuestos, anidados o cercanos
 • Filtros opcionales de alerta (contiene / desaparece / coincide con patrón)
@@ -78,6 +88,7 @@ Key features에 추가할 줄만
 • Guarda título y favicon del sitio en el popup
 
 아랍어 - ar
+8 مايو 2026 (v1.5):
 • اختيار أكثر دقة للهدف، بما في ذلك href للرابط وقيمة input
 • اختيار من مرشحات قريبة أو متداخلة أو متراكبة
 • فلاتر تنبيه اختيارية (يحتوي / يختفي / يطابق نمطًا)
@@ -85,6 +96,7 @@ Key features에 추가할 줄만
 • حفظ عنوان الموقع وfavicon داخل النافذة
 
 이탈리아어 - it
+8 maggio 2026 (v1.5):
 • Selezione del target più precisa, inclusi href link e valore input
 • Selettore candidati per valori sovrapposti, annidati o vicini
 • Filtri opzionali di avviso (contiene / scompare / corrisponde a schema)
