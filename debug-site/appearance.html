@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Appearance Alert Test</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --accent: #2f7d32;
+        --border: #dfe5e8;
+        --text: #1f1f1f;
+      }
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+        background: #f6f8fa;
+        color: var(--text);
+      }
+      main {
+        width: min(760px, calc(100vw - 32px));
+        margin: 40px auto;
+        display: grid;
+        gap: 18px;
+      }
+      h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+      .panel {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #fff;
+        padding: 18px;
+        display: grid;
+        gap: 14px;
+      }
+      .target-wrap {
+        min-height: 96px;
+        display: grid;
+        align-items: center;
+      }
+      #alert-target {
+        width: fit-content;
+        border: 2px solid var(--accent);
+        border-radius: 8px;
+        background: #e6f4ea;
+        color: #1b5e20;
+        padding: 16px 18px;
+        font-size: 22px;
+        font-weight: 800;
+      }
+      .placeholder {
+        width: fit-content;
+        border: 2px dashed #b7c0c7;
+        border-radius: 8px;
+        color: #6b7280;
+        padding: 16px 18px;
+      }
+      .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      button {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--text);
+        cursor: pointer;
+        padding: 10px 12px;
+        font-weight: 700;
+      }
+      button.primary {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      .status {
+        color: #5f6368;
+        font-size: 13px;
+      }
+      .samples {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 12px;
+      }
+      .sample {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px;
+        display: grid;
+        gap: 8px;
+        align-content: start;
+      }
+      .text__price--sale {
+        color: #c5221f;
+        font-size: 22px;
+        font-weight: 800;
+      }
+      .text__price {
+        color: #5f6368;
+        margin-right: 2px;
+      }
+      .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .badge-row span {
+        border-radius: 999px;
+        background: #edf4ff;
+        color: #174ea6;
+        padding: 5px 8px;
+        font-size: 13px;
+        font-weight: 700;
+      }
+      .media-sample {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .media-sample img {
+        width: 72px;
+        height: 72px;
+        border-radius: 8px;
+        object-fit: cover;
+        border: 1px solid var(--border);
+      }
+      .media-copy {
+        display: grid;
+        gap: 4px;
+      }
+      .media-title {
+        font-weight: 800;
+      }
+      .media-price {
+        color: #188038;
+        font-weight: 800;
+      }
+      code {
+        background: #eef1f4;
+        border-radius: 6px;
+        padding: 2px 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>생김/없어짐 알림 테스트</h1>
+      <section class="panel">
+        <div class="target-wrap" id="targetWrap"></div>
+        <div class="controls">
+          <button class="primary" id="showBtn" type="button">생기게 하기</button>
+          <button id="hideBtn" type="button">없애기</button>
+          <button id="toggleBtn" type="button">토글</button>
+          <button id="changeBtn" type="button">값 변경</button>
+          <button id="resetBtn" type="button">초기화</button>
+        </div>
+        <div class="status" id="status"></div>
+      </section>
+      <section class="panel">
+        <div>선택자로 <code>#alert-target</code>를 등록한 뒤 버튼으로 요소를 없애거나 다시 만들면 됩니다.</div>
+      </section>
+      <section class="panel">
+        <h2 style="margin:0;font-size:18px;">선택 후보 테스트</h2>
+        <div class="samples">
+          <div class="sample">
+            <div>가격 span/del</div>
+            <span class="text__price--sale"><del class="text__price" data-sample-price="17500">17,500</del>원</span>
+          </div>
+          <div class="sample">
+            <div>작은 span들</div>
+            <div class="badge-row">
+              <span data-value="FAST">FAST</span>
+              <span data-value="LIMITED">LIMITED</span>
+              <span data-value="TODAY">TODAY</span>
+            </div>
+          </div>
+          <div class="sample media-sample">
+            <img
+              alt="샘플 이미지"
+              src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Crect width='160' height='160' fill='%23e6f4ea'/%3E%3Ccircle cx='80' cy='70' r='34' fill='%232f7d32'/%3E%3Cpath d='M36 132h88L98 96 76 118 62 104z' fill='%231b5e20'/%3E%3C/svg%3E"
+            />
+            <div class="media-copy">
+              <span class="media-title">이미지 옆 텍스트</span>
+              <span class="media-price">24,900원</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const stateKey = "wcaAppearanceTestState";
+      const targetWrap = document.getElementById("targetWrap");
+      const status = document.getElementById("status");
+      const defaultState = { visible: true, value: "READY", count: 1 };
+
+      function loadState() {
+        try {
+          return { ...defaultState, ...JSON.parse(localStorage.getItem(stateKey) || "{}") };
+        } catch {
+          return { ...defaultState };
+        }
+      }
+
+      function saveState(state) {
+        localStorage.setItem(stateKey, JSON.stringify(state));
+      }
+
+      function render() {
+        const state = loadState();
+        targetWrap.innerHTML = "";
+        if (state.visible) {
+          const target = document.createElement("div");
+          target.id = "alert-target";
+          target.textContent = state.value;
+          targetWrap.appendChild(target);
+        } else {
+          const placeholder = document.createElement("div");
+          placeholder.className = "placeholder";
+          placeholder.textContent = "#alert-target 없음";
+          targetWrap.appendChild(placeholder);
+        }
+        status.textContent = `현재 상태: ${state.visible ? "생김" : "없어짐"} / 값: ${state.value}`;
+      }
+
+      function update(mutator) {
+        const next = loadState();
+        mutator(next);
+        saveState(next);
+        render();
+      }
+
+      document.getElementById("showBtn").addEventListener("click", () => update((state) => {
+        state.visible = true;
+      }));
+      document.getElementById("hideBtn").addEventListener("click", () => update((state) => {
+        state.visible = false;
+      }));
+      document.getElementById("toggleBtn").addEventListener("click", () => update((state) => {
+        state.visible = !state.visible;
+      }));
+      document.getElementById("changeBtn").addEventListener("click", () => update((state) => {
+        state.count += 1;
+        state.value = `VALUE ${state.count}`;
+      }));
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        saveState({ ...defaultState });
+        render();
+      });
+
+      render();
+    </script>
+  </body>
+</html>
