@@ -2,6 +2,96 @@ Chrome Web Store listing text
 Copy each language block into the matching Chrome Web Store language field.
 
 ============================================================
+Key features에 추가할 줄만
+============================================================
+
+이미 스토어 설명이 언어별로 다르면, 전체 설명을 갈아엎지 말고 아래 줄만 각 언어의 Key features / 주요 기능 / 主な機能 영역에 추가하세요.
+
+영어 - en (기본 언어)
+• More precise target selection, including link href and input value
+• Candidate picker for overlapping, nested, or nearby values
+• Optional alert filters (contains / disappears / pattern match)
+• Agent AI setup prompt for Codex, Claude Code, OpenClaw, Antigravity, and similar browser-controlling agents
+• Site title and favicon saved in the popup
+
+한국어 - ko
+• 링크 href와 입력값까지 포함한 더 정밀한 대상 선택
+• 겹치거나 중첩된 값, 주변 후보 중 정확한 값 선택
+• 선택 알림 필터 (포함됨 / 사라짐 / 패턴 매치)
+• Codex, Claude Code, OpenClaw, Antigravity 같은 브라우저 조작 Agent AI용 설정 프롬프트
+• 팝업에 사이트 제목과 favicon 저장
+
+일본어 - ja
+• リンク href と入力値を含む、より正確な対象選択
+• 重なった値、ネストされた値、近くの候補から正確な値を選択
+• 任意の通知フィルター（含む / 消える / パターン一致）
+• Codex、Claude Code、OpenClaw、Antigravity などブラウザー操作 Agent AI 用の設定プロンプト
+• ポップアップにサイトタイトルと favicon を保存
+
+중국어(대만) - zh-TW
+• 包含連結 href 和輸入值的更精準目標選取
+• 從重疊、巢狀或附近候選值中選取準確內容
+• 可選提醒篩選（包含 / 消失 / 符合模式）
+• 為 Codex、Claude Code、OpenClaw、Antigravity 等可控制瀏覽器的 Agent AI 提供設定提示詞
+• 在彈窗中儲存網站標題和 favicon
+
+중국어(중국) - zh-CN
+• 包含链接 href 和输入值的更精准目标选择
+• 从重叠、嵌套或附近候选值中选择准确内容
+• 可选提醒过滤（包含 / 消失 / 匹配模式）
+• 为 Codex、Claude Code、OpenClaw、Antigravity 等可控制浏览器的 Agent AI 提供设置提示词
+• 在弹窗中保存网站标题和 favicon
+
+포르투갈어(브라질) - pt-BR
+• Seleção de alvo mais precisa, incluindo href de link e valor de input
+• Lista de candidatos para valores sobrepostos, aninhados ou próximos
+• Filtros opcionais de alerta (contém / desaparece / corresponde a padrão)
+• Prompt de configuração para Agent AI como Codex, Claude Code, OpenClaw, Antigravity e similares
+• Salva título e favicon do site no popup
+
+프랑스어 - fr
+• Sélection de cible plus précise, avec href de lien et valeur de champ
+• Sélecteur de candidats pour valeurs superposées, imbriquées ou proches
+• Filtres d’alerte facultatifs (contient / disparaît / correspond à un motif)
+• Prompt de configuration pour Agent AI comme Codex, Claude Code, OpenClaw, Antigravity et similaires
+• Enregistre le titre du site et le favicon dans le popup
+
+독일어 - de
+• Genauere Zielauswahl, einschließlich Link-href und Eingabewert
+• Kandidatenauswahl für überlappende, verschachtelte oder nahe Werte
+• Optionale Alarmfilter (enthält / verschwindet / Muster stimmt überein)
+• Einrichtungs-Prompt für Agent AI wie Codex, Claude Code, OpenClaw, Antigravity und ähnliche Tools
+• Speichert Seitentitel und favicon im Popup
+
+러시아어 - ru
+• Более точный выбор цели, включая href ссылки и значение input
+• Выбор кандидатов для перекрывающихся, вложенных или соседних значений
+• Дополнительные фильтры уведомлений (содержит / исчезло / совпало с шаблоном)
+• Prompt настройки для Agent AI, таких как Codex, Claude Code, OpenClaw, Antigravity и похожих инструментов
+• Сохраняет заголовок сайта и favicon в popup
+
+스페인어 - es
+• Selección de objetivo más precisa, incluyendo href de enlace y valor de input
+• Selector de candidatos para valores superpuestos, anidados o cercanos
+• Filtros opcionales de alerta (contiene / desaparece / coincide con patrón)
+• Prompt de configuración para Agent AI como Codex, Claude Code, OpenClaw, Antigravity y similares
+• Guarda título y favicon del sitio en el popup
+
+아랍어 - ar
+• اختيار أكثر دقة للهدف، بما في ذلك href للرابط وقيمة input
+• اختيار من مرشحات قريبة أو متداخلة أو متراكبة
+• فلاتر تنبيه اختيارية (يحتوي / يختفي / يطابق نمطًا)
+• موجه إعداد لـ Agent AI مثل Codex وClaude Code وOpenClaw وAntigravity والأدوات المشابهة
+• حفظ عنوان الموقع وfavicon داخل النافذة
+
+이탈리아어 - it
+• Selezione del target più precisa, inclusi href link e valore input
+• Selettore candidati per valori sovrapposti, annidati o vicini
+• Filtri opzionali di avviso (contiene / scompare / corrisponde a schema)
+• Prompt di configurazione per Agent AI come Codex, Claude Code, OpenClaw, Antigravity e simili
+• Salva titolo e favicon del sito nel popup
+
+============================================================
 영어 - en (기본 언어)
 ============================================================
 
