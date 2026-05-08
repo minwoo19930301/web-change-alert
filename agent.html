@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Web Change Alert Agent</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f8f7;
+        --surface: #ffffff;
+        --text: #1f2328;
+        --muted: #656d76;
+        --line: #d8dee4;
+        --green: #2e7d32;
+        --green-dark: #236428;
+        --green-soft: #e7f4ea;
+        --danger: #b42318;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+      }
+
+      .page {
+        width: min(880px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0;
+      }
+
+      header {
+        margin-bottom: 20px;
+      }
+
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .mark {
+        display: inline-grid;
+        width: 38px;
+        height: 38px;
+        place-items: center;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: var(--surface);
+        color: var(--green);
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 26px;
+        line-height: 1.2;
+      }
+
+      p {
+        margin: 10px 0 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        background: var(--surface);
+        box-shadow: 0 18px 40px rgba(31, 35, 40, 0.08);
+        padding: 22px;
+      }
+
+      .hidden {
+        display: none !important;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 14px 18px;
+        align-items: start;
+      }
+
+      .label {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+
+      .value {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        font-size: 15px;
+        line-height: 1.5;
+      }
+
+      .mono {
+        padding: 10px 12px;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        background: #f6f8fa;
+        font-family:
+          ui-monospace,
+          SFMono-Regular,
+          SFMono,
+          Menlo,
+          Consolas,
+          monospace;
+        white-space: pre-wrap;
+      }
+
+      .status {
+        margin-top: 18px;
+        min-height: 22px;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .status.error {
+        color: var(--danger);
+      }
+
+      .status.success {
+        color: var(--green-dark);
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+
+      button {
+        min-height: 44px;
+        border: 0;
+        border-radius: 8px;
+        padding: 0 18px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+
+      .primary {
+        background: var(--green);
+        color: #fff;
+      }
+
+      .primary:hover:not(:disabled) {
+        background: var(--green-dark);
+      }
+
+      .secondary {
+        border: 1px solid var(--line);
+        background: #f6f8fa;
+        color: var(--text);
+      }
+
+      .missing {
+        display: inline-flex;
+        margin-top: 8px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: var(--green-soft);
+        color: var(--green-dark);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      @media (max-width: 640px) {
+        .page {
+          width: min(100% - 20px, 880px);
+          padding: 18px 0;
+        }
+
+        .panel {
+          padding: 18px;
+        }
+
+        .grid {
+          grid-template-columns: 1fr;
+          gap: 6px;
+        }
+
+        button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header>
+        <div class="brand">
+          <span class="mark" aria-hidden="true">✦</span>
+          <h1 data-i18n="agentPageTitle"></h1>
+        </div>
+        <p data-i18n="agentPageIntro"></p>
+      </header>
+
+      <section id="emptyState" class="panel hidden">
+        <p id="emptyMessage"></p>
+      </section>
+
+      <section id="payloadState" class="panel hidden">
+        <div class="grid">
+          <div class="label" data-i18n="agentFieldUrl"></div>
+          <div id="urlValue" class="value"></div>
+
+          <div class="label" data-i18n="selectorLabel"></div>
+          <div id="selectorValue" class="value mono"></div>
+
+          <div class="label" data-i18n="agentFieldExtract"></div>
+          <div id="extractValue" class="value"></div>
+
+          <div class="label" data-i18n="scheduleLabel"></div>
+          <div id="scheduleValue" class="value"></div>
+
+          <div class="label" data-i18n="filterLabel"></div>
+          <div id="filterValue" class="value"></div>
+
+          <div class="label" data-i18n="valueLabel"></div>
+          <div>
+            <div id="previewValue" class="value mono"></div>
+            <div id="missingBadge" class="missing hidden" data-i18n="agentPreviewMissing"></div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="registerBtn" class="primary" type="button" data-i18n="agentRegister"></button>
+          <button id="openSiteBtn" class="secondary" type="button" data-i18n="agentOpenSite"></button>
+        </div>
+        <div id="status" class="status"></div>
+      </section>
+    </main>
+
+    <script src="localizer.js"></script>
+    <script src="agent.js"></script>
+  </body>
+</html>

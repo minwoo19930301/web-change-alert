@@ -331,5 +331,80 @@
   },
   "manualSelectorUpdated": {
     "message": "Vorschau mit diesem Selektor aktualisiert."
+  },
+  "agentButton": {
+    "message": "Agent AI"
+  },
+  "agentTitle": {
+    "message": "Agent AI"
+  },
+  "agentIntro": {
+    "message": "Kopiere den Prompt für eine Agent-KI. Sie kann die Website prüfen, einen Selektor wählen und die Befehlsseite mit einem Monitor-Payload öffnen."
+  },
+  "agentWarning": {
+    "message": "Verwende Codex, Claude Code, OpenClaw, Antigravity oder eine andere Agent-KI, die deinen lokalen Browser steuern kann. Normale Web-Chats von GPT, Claude oder Gemini können in dieser Erweiterung keine Alarme registrieren."
+  },
+  "agentExtensionIdLabel": {
+    "message": "Erweiterungs-ID"
+  },
+  "agentCommandPageLabel": {
+    "message": "Befehlsseite"
+  },
+  "agentCopyPrompt": {
+    "message": "Agent-Prompt kopieren"
+  },
+  "agentOpenCommandPage": {
+    "message": "Befehlsseite öffnen"
+  },
+  "agentCopyDone": {
+    "message": "Prompt kopiert."
+  },
+  "agentCopyFailed": {
+    "message": "Prompt konnte nicht kopiert werden."
+  },
+  "agentPageTitle": {
+    "message": "Web Change Alert Agent"
+  },
+  "agentPageIntro": {
+    "message": "Diese Seite zeigt eine Vorschau der Monitor-Anfrage einer Agent-KI, bevor sie in der Erweiterung registriert wird."
+  },
+  "agentPayloadMissing": {
+    "message": "Kein Agent-Payload vorhanden. Öffne diese Seite mit #payload=BASE64URL_JSON."
+  },
+  "agentPayloadInvalid": {
+    "message": "Der Agent-Payload ist ungültig. Bitte den Agenten, die Befehls-URL neu zu erstellen."
+  },
+  "agentFieldUrl": {
+    "message": "URL"
+  },
+  "agentFieldExtract": {
+    "message": "Extraktion"
+  },
+  "agentPreviewMissing": {
+    "message": "Element ist aktuell nicht vorhanden. Es kann später beim Erscheinen trotzdem alarmieren."
+  },
+  "agentPreviewing": {
+    "message": "Ausgewählten Wert prüfen..."
+  },
+  "agentPreviewFailed": {
+    "message": "Vorschau fehlgeschlagen"
+  },
+  "agentRegister": {
+    "message": "Registrieren"
+  },
+  "agentRegistering": {
+    "message": "Registriere..."
+  },
+  "agentRegisterDone": {
+    "message": "Registriert."
+  },
+  "agentRegisterFailed": {
+    "message": "Registrierung fehlgeschlagen"
+  },
+  "agentOpenSite": {
+    "message": "Website öffnen"
+  },
+  "agentPromptTemplate": {
+    "message": "Du bist eine Agent-KI, die einen echten lokalen Browser und Chrome-Erweiterungsseiten steuern kann, z. B. Codex, Claude Code, OpenClaw oder Antigravity. Verwende keinen normalen webbasierten GPT/Claude/Gemini-Chat für diese Aufgabe, weil er den Browser des Benutzers nicht steuern und den Alarm nicht registrieren kann.\n\nZiel: Einen Web Change Alert Monitor registrieren.\n\nSchritte:\n1. Öffne die Zielwebsite im Browser des Benutzers. Behalte die angemeldete Sitzung bei, falls Login nötig ist.\n2. Prüfe die Seite und finde den kleinsten zuverlässigen CSS-Selektor für den gewünschten Wert. Bevorzuge stabile IDs, Klassen und data-Attribute. Nimm keine Picker-UI, Dropdowns, Hinweise oder temporären Overlays der Erweiterung in den Wert auf.\n3. Wähle extract: {\"type\":\"text\"} für sichtbaren Text, {\"type\":\"image\"} für eine Bild-URL, {\"type\":\"value\"} für Formularwerte oder {\"type\":\"attr\",\"attr\":\"href\"} für ein Attribut.\n4. Wähle schedule: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} oder {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. Nutze filter nur für text/value-Monitore: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]} oder {\"mode\":\"only_regex\",\"values\":[\"...\"]}.\n6. Erstelle JSON wie dieses: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. JSON per UTF-8 JSON.stringify erstellen, base64url codieren und diese URL öffnen: {commandPageUrl}#payload=ENCODED_JSON\n8. Die aktuelle extension id ist {extensionId}. Keine andere extension id hardcoden. Verwende die obige Befehlsseiten-URL.\n9. Auf der Befehlsseite die Vorschau prüfen und Registrieren klicken."
   }
 }

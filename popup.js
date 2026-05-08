@@ -29,6 +29,15 @@ const aboutOverlay = document.getElementById("aboutOverlay");
 const aboutBack = document.getElementById("aboutBack");
 const aboutCloseIcon = document.getElementById("aboutCloseIcon");
 const aboutClose = document.getElementById("aboutClose");
+const agentBtn = document.getElementById("agentBtn");
+const agentOverlay = document.getElementById("agentOverlay");
+const agentBack = document.getElementById("agentBack");
+const agentCloseIcon = document.getElementById("agentCloseIcon");
+const agentExtensionId = document.getElementById("agentExtensionId");
+const agentCommandPage = document.getElementById("agentCommandPage");
+const copyAgentPrompt = document.getElementById("copyAgentPrompt");
+const openAgentCommand = document.getElementById("openAgentCommand");
+const agentStatus = document.getElementById("agentStatus");
 const noticeText = document.getElementById("noticeText");
 const aboutAppName = document.getElementById("aboutAppName");
 const aboutVersion = document.getElementById("aboutVersion");
@@ -203,6 +212,26 @@ function bindEvents() {
   aboutBtn.addEventListener("click", () => {
     aboutOverlay.classList.remove("hidden");
   });
+  agentBtn?.addEventListener("click", () => {
+    openAgentPanel();
+  });
+  agentOverlay?.addEventListener("click", (event) => {
+    if (event.target === agentOverlay) {
+      closeAgentPanel();
+    }
+  });
+  agentBack?.addEventListener("click", () => {
+    closeAgentPanel();
+  });
+  agentCloseIcon?.addEventListener("click", () => {
+    closeAgentPanel();
+  });
+  copyAgentPrompt?.addEventListener("click", async () => {
+    await copyAgentGuide();
+  });
+  openAgentCommand?.addEventListener("click", () => {
+    chrome.tabs.create({ url: getAgentCommandPageUrl() });
+  });
 
   aboutOverlay.addEventListener("click", (event) => {
     if (event.target === aboutOverlay) {
@@ -295,6 +324,11 @@ function applyDocumentDirection() {
 function applyStaticTexts() {
   document.title = t("documentTitle");
   if (langBtn) langBtn.title = t("languageButton");
+  if (agentBtn) {
+    const agentLabel = t("agentButton");
+    agentBtn.title = agentLabel;
+    agentBtn.setAttribute("aria-label", agentLabel);
+  }
   aboutBtn.title = t("aboutButton");
 
   const i18nNodes = document.querySelectorAll("[data-i18n]");
@@ -313,6 +347,8 @@ function applyStaticTexts() {
   }
 
   noticeText.textContent = t("notice");
+  if (agentExtensionId) agentExtensionId.textContent = chrome.runtime.id;
+  if (agentCommandPage) agentCommandPage.textContent = getAgentCommandPageUrl();
   aboutAppName.textContent = t("extensionName") || MANIFEST_NAME;
   aboutVersion.textContent = APP_VERSION;
   aboutAuthor.textContent = AUTHOR_NAME;
@@ -1097,6 +1133,58 @@ function closeConfirm() {
 
 function closeAbout() {
   aboutOverlay.classList.add("hidden");
+}
+
+function openAgentPanel() {
+  if (agentExtensionId) agentExtensionId.textContent = chrome.runtime.id;
+  if (agentCommandPage) agentCommandPage.textContent = getAgentCommandPageUrl();
+  if (agentStatus) agentStatus.textContent = "";
+  agentOverlay.classList.remove("hidden");
+}
+
+function closeAgentPanel() {
+  agentOverlay.classList.add("hidden");
+}
+
+function getAgentCommandPageUrl() {
+  return chrome.runtime.getURL("agent.html");
+}
+
+async function copyAgentGuide() {
+  const prompt = buildAgentGuidePrompt();
+  const copied = await copyText(prompt);
+  if (agentStatus) {
+    agentStatus.textContent = copied ? t("agentCopyDone") : t("agentCopyFailed");
+  }
+}
+
+function buildAgentGuidePrompt() {
+  return t("agentPromptTemplate", {
+    extensionId: chrome.runtime.id,
+    commandPageUrl: getAgentCommandPageUrl()
+  });
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const ok = document.execCommand("copy");
+      textarea.remove();
+      return ok;
+    } catch {
+      return false;
+    }
+  }
 }
 
 function openScheduleEditor(monitor) {

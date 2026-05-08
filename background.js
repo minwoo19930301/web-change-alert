@@ -120,6 +120,20 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     return true;
   }
 
+  if (message?.type === "agentPreviewMonitor") {
+    previewAgentMonitor(message.spec || message.payload || message.monitor || message)
+      .then((result) => sendResponse({ ok: true, ...result }))
+      .catch((error) => sendResponse({ ok: false, error: error?.message || String(error) }));
+    return true;
+  }
+
+  if (message?.type === "agentRegisterMonitor") {
+    registerAgentMonitor(message.spec || message.payload || message.monitor || message)
+      .then((result) => sendResponse({ ok: true, ...result }))
+      .catch((error) => sendResponse({ ok: false, error: error?.message || String(error) }));
+    return true;
+  }
+
   if (message?.type === "runMonitorNow") {
     runCheck(message.id, true)
       .then(() => sendResponse({ ok: true }))
@@ -228,6 +242,170 @@ async function saveMonitor(monitor) {
   await setMonitors(monitors);
   scheduleMonitor(monitor);
   enqueueCheck(monitor.id);
+}
+
+async function previewAgentMonitor(input) {
+  const spec = normalizeAgentMonitorSpec(input);
+  const result = await fetchValueViaHiddenTab(spec.url, spec.selector, spec.extract);
+  const isMissing = !result?.ok && result?.error === "not_found";
+  if (!result?.ok && !isMissing) {
+    throw new Error(result?.error || "preview_failed");
+  }
+
+  const value = normalizeValue(result?.ok ? result.value || "" : "");
+  const title = spec.title || result?.meta?.title || buildTitleFromUrl(spec.url);
+  return {
+    spec,
+    title,
+    value,
+    missing: isMissing,
+    meta: result?.meta || null
+  };
+}
+
+async function registerAgentMonitor(input) {
+  const preview = await previewAgentMonitor(input);
+  const monitor = buildAgentMonitor(preview.spec, preview.value, preview.title);
+  await saveMonitor(monitor);
+  return { monitor, value: preview.value, missing: preview.missing };
+}
+
+function normalizeAgentMonitorSpec(input) {
+  const raw = input && typeof input === "object" ? input : {};
+  const payload = raw.payload && typeof raw.payload === "object" ? raw.payload : raw;
+  const url = String(payload.url || "").trim();
+  const selector = String(payload.selector || "").trim();
+  if (!isUsableUrl(url)) throw new Error("invalid_url");
+  if (!selector) throw new Error("selector_required");
+
+  const extract = normalizeAgentExtract(payload.extract);
+  return {
+    url,
+    selector,
+    title: String(payload.title || "").trim() || buildTitleFromUrl(url),
+    extract,
+    displayStyle: payload.displayStyle || null,
+    schedule: normalizeAgentSchedule(payload.schedule),
+    filter: extract.type === "image" ? null : normalizeAgentFilter(payload.filter)
+  };
+}
+
+function normalizeAgentExtract(extract) {
+  const raw = typeof extract === "string" ? { type: extract } : extract && typeof extract === "object" ? extract : {};
+  const type = String(raw.type || "text").trim();
+  const allowed = new Set(["text", "image", "value", "attr", "ownText", "textToken"]);
+  const normalized = { type: allowed.has(type) ? type : "text" };
+  if (normalized.type === "attr") {
+    const attr = String(raw.attr || raw.name || "").trim();
+    if (!attr) return { type: "text" };
+    normalized.attr = attr;
+  }
+  if (normalized.type === "textToken") {
+    normalized.index = Math.max(0, Number(raw.index || 0));
+  }
+  return normalized;
+}
+
+function normalizeAgentSchedule(schedule) {
+  const raw = schedule && typeof schedule === "object" ? schedule : {};
+  const type = String(raw.type || "interval").trim();
+  const enabled = raw.enabled !== false;
+
+  if (type === "daily") {
+    return {
+      enabled,
+      type,
+      hour: clampInteger(raw.hour, 0, 23, 9),
+      minute: clampInteger(raw.minute, 0, 59, 0)
+    };
+  }
+
+  if (type === "weekly") {
+    return {
+      enabled,
+      type,
+      weekday: clampInteger(raw.weekday, 0, 6, 0),
+      hour: clampInteger(raw.hour, 0, 23, 9),
+      minute: clampInteger(raw.minute, 0, 59, 0)
+    };
+  }
+
+  if (type === "monthly") {
+    return {
+      enabled,
+      type,
+      day: clampInteger(raw.day, 1, 28, 1),
+      hour: clampInteger(raw.hour, 0, 23, 9),
+      minute: clampInteger(raw.minute, 0, 59, 0)
+    };
+  }
+
+  const value = Number(raw.minutes || raw.value || 10);
+  const unit = String(raw.unit || "minutes").trim();
+  const minutes = unit === "hours" ? value * 60 : unit === "days" ? value * 1440 : value;
+  return {
+    enabled,
+    type: "interval",
+    minutes: Math.max(1, Math.round(Number.isFinite(minutes) ? minutes : 10))
+  };
+}
+
+function normalizeAgentFilter(filter) {
+  if (!filter || typeof filter !== "object") return null;
+  const rawMode = String(filter.mode || "none").trim();
+  const modeMap = {
+    none: "none",
+    only_contains: "ignore_contains",
+    contains: "ignore_contains",
+    ignore_contains: "ignore_contains",
+    only_missing: "ignore_not_contains",
+    only_absent: "ignore_not_contains",
+    not_contains: "ignore_not_contains",
+    ignore_not_contains: "ignore_not_contains",
+    only_regex: "ignore_regex",
+    regex: "ignore_regex",
+    ignore_regex: "ignore_regex"
+  };
+  const mode = modeMap[rawMode] || "none";
+  const values = normalizeAgentFilterValues(filter);
+  if (mode === "none" || !values.length) return null;
+  return { mode, values };
+}
+
+function normalizeAgentFilterValues(filter) {
+  const rawValues = Array.isArray(filter.values) ? filter.values : filter.value !== undefined ? [filter.value] : [];
+  return rawValues
+    .flatMap((item) => String(item || "").split(/\r?\n/))
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function buildAgentMonitor(spec, value, title) {
+  const now = Date.now();
+  return {
+    id: buildRequestId(),
+    url: spec.url,
+    title: title || spec.title || buildTitleFromUrl(spec.url),
+    selector: spec.selector,
+    extract: spec.extract,
+    displayStyle: spec.displayStyle || null,
+    lastValue: value || "",
+    previousValue: "",
+    previousChangedAt: null,
+    lastChangedAt: now,
+    lastCheckedAt: now,
+    createdAt: now,
+    lastError: null,
+    lastDebug: null,
+    schedule: spec.schedule,
+    filter: spec.filter
+  };
+}
+
+function clampInteger(value, min, max, fallback) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return fallback;
+  return Math.min(max, Math.max(min, Math.round(number)));
 }
 
 async function deleteMonitors(ids) {
@@ -1239,6 +1417,15 @@ function isUsableUrl(url) {
 function normalizeUrl(url) {
   try {
     return new URL(url).toString();
+  } catch {
+    return url;
+  }
+}
+
+function buildTitleFromUrl(url) {
+  if (!url) return "";
+  try {
+    return new URL(url).hostname;
   } catch {
     return url;
   }

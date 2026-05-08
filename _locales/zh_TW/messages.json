@@ -331,5 +331,80 @@
   },
   "manualSelectorUpdated": {
     "message": "已依此選擇器更新預覽。"
+  },
+  "agentButton": {
+    "message": "Agent AI"
+  },
+  "agentTitle": {
+    "message": "Agent AI"
+  },
+  "agentIntro": {
+    "message": "複製要貼給 Agent AI 的提示詞。Agent 會檢查網站、選擇選擇器、設定週期和篩選器，然後開啟註冊頁面。"
+  },
+  "agentWarning": {
+    "message": "只能使用 Codex、Claude Code、OpenClaw、Antigravity 等可控制本機瀏覽器的 Agent AI。一般網頁 GPT、Claude、Gemini 聊天無法在此擴充功能中註冊提醒。"
+  },
+  "agentExtensionIdLabel": {
+    "message": "擴充功能 ID"
+  },
+  "agentCommandPageLabel": {
+    "message": "註冊頁面"
+  },
+  "agentCopyPrompt": {
+    "message": "複製 Agent 提示詞"
+  },
+  "agentOpenCommandPage": {
+    "message": "開啟註冊頁面"
+  },
+  "agentCopyDone": {
+    "message": "提示詞已複製。"
+  },
+  "agentCopyFailed": {
+    "message": "無法複製提示詞。"
+  },
+  "agentPageTitle": {
+    "message": "Web Change Alert Agent"
+  },
+  "agentPageIntro": {
+    "message": "在註冊到擴充功能前，預覽 Agent AI 產生的監控請求。"
+  },
+  "agentPayloadMissing": {
+    "message": "未提供 Agent payload。請用 #payload=BASE64URL_JSON 開啟此頁面。"
+  },
+  "agentPayloadInvalid": {
+    "message": "Agent payload 無效。請讓 Agent 重新產生註冊 URL。"
+  },
+  "agentFieldUrl": {
+    "message": "URL"
+  },
+  "agentFieldExtract": {
+    "message": "擷取方式"
+  },
+  "agentPreviewMissing": {
+    "message": "目前找不到元素。稍後出現時仍可提醒。"
+  },
+  "agentPreviewing": {
+    "message": "正在檢查選取值..."
+  },
+  "agentPreviewFailed": {
+    "message": "預覽失敗"
+  },
+  "agentRegister": {
+    "message": "註冊"
+  },
+  "agentRegistering": {
+    "message": "註冊中..."
+  },
+  "agentRegisterDone": {
+    "message": "已註冊。"
+  },
+  "agentRegisterFailed": {
+    "message": "註冊失敗"
+  },
+  "agentOpenSite": {
+    "message": "開啟網站"
+  },
+  "agentPromptTemplate": {
+    "message": "你是可以控制真實本機瀏覽器和 Chrome 擴充功能頁面的 Agent AI，例如 Codex、Claude Code、OpenClaw 或 Antigravity。一般網頁版 GPT/Claude/Gemini 聊天無法控制使用者瀏覽器或註冊提醒，請不要用於此任務。\n\n目標：註冊一個 Web Change Alert 監控。\n\n步驟：\n1. 在使用者的瀏覽器中開啟目標網站。需要登入的網站請保持目前登入狀態。\n2. 檢查頁面，找出對應要求值的最小且穩定 CSS 選擇器。優先使用穩定的 id、class、data 屬性。不要把擴充功能 picker UI、下拉選單、提示或暫時遮罩包含進值中。\n3. 選擇擷取方式：可見文字用 {\"type\":\"text\"}，圖片 URL 用 {\"type\":\"image\"}，表單值用 {\"type\":\"value\"}，屬性用 {\"type\":\"attr\",\"attr\":\"href\"}。\n4. 選擇週期：{\"type\":\"interval\",\"minutes\":10}、{\"type\":\"daily\",\"hour\":9,\"minute\":0}、{\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} 或 {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}。\n5. 篩選器只用於 text/value 監控：{\"mode\":\"none\",\"values\":[]}、{\"mode\":\"only_contains\",\"values\":[\"...\"]}、{\"mode\":\"only_missing\",\"values\":[\"...\"]} 或 {\"mode\":\"only_regex\",\"values\":[\"...\"]}。\n6. 建立類似這樣的 JSON：{\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}。\n7. 將 JSON 以 UTF-8 JSON.stringify 後做 base64url 編碼，然後開啟這個 URL：{commandPageUrl}#payload=ENCODED_JSON\n8. 目前擴充功能 ID 是 {extensionId}。不要硬編碼其他 extension id，請使用上方命令頁面 URL。\n9. 在命令頁面確認預覽並按下註冊。"
   }
 }

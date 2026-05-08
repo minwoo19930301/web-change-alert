@@ -331,5 +331,80 @@
   },
   "manualSelectorUpdated": {
     "message": "このセレクターの値でプレビューを更新しました。"
+  },
+  "agentButton": {
+    "message": "Agent AI"
+  },
+  "agentTitle": {
+    "message": "Agent AI"
+  },
+  "agentIntro": {
+    "message": "Agent AI に貼り付けるプロンプトをコピーします。Agent がサイトを確認し、セレクター、周期、フィルターを決めて登録ページを開きます。"
+  },
+  "agentWarning": {
+    "message": "Codex、Claude Code、OpenClaw、Antigravity などローカルブラウザーを操作できる Agent AI のみ使用できます。通常の Web GPT、Claude、Gemini チャットではこの拡張機能にアラームを登録できません。"
+  },
+  "agentExtensionIdLabel": {
+    "message": "拡張機能 ID"
+  },
+  "agentCommandPageLabel": {
+    "message": "登録ページ"
+  },
+  "agentCopyPrompt": {
+    "message": "Agent プロンプトをコピー"
+  },
+  "agentOpenCommandPage": {
+    "message": "登録ページを開く"
+  },
+  "agentCopyDone": {
+    "message": "プロンプトをコピーしました。"
+  },
+  "agentCopyFailed": {
+    "message": "プロンプトをコピーできませんでした。"
+  },
+  "agentPageTitle": {
+    "message": "Web Change Alert Agent"
+  },
+  "agentPageIntro": {
+    "message": "Agent AI が作成したモニター要求を、拡張機能に登録する前にプレビューします。"
+  },
+  "agentPayloadMissing": {
+    "message": "Agent payload がありません。#payload=BASE64URL_JSON 付きでこのページを開いてください。"
+  },
+  "agentPayloadInvalid": {
+    "message": "Agent payload が無効です。Agent に登録 URL を作り直すよう依頼してください。"
+  },
+  "agentFieldUrl": {
+    "message": "URL"
+  },
+  "agentFieldExtract": {
+    "message": "抽出"
+  },
+  "agentPreviewMissing": {
+    "message": "現在この要素は見つかりません。後で表示されたときに通知できます。"
+  },
+  "agentPreviewing": {
+    "message": "選択値を確認中..."
+  },
+  "agentPreviewFailed": {
+    "message": "プレビュー失敗"
+  },
+  "agentRegister": {
+    "message": "登録"
+  },
+  "agentRegistering": {
+    "message": "登録中..."
+  },
+  "agentRegisterDone": {
+    "message": "登録しました。"
+  },
+  "agentRegisterFailed": {
+    "message": "登録失敗"
+  },
+  "agentOpenSite": {
+    "message": "サイトを開く"
+  },
+  "agentPromptTemplate": {
+    "message": "あなたは Codex、Claude Code、OpenClaw、Antigravity のように、実際のローカルブラウザーと Chrome 拡張機能ページを操作できる Agent AI です。通常の Web 版 GPT/Claude/Gemini チャットはユーザーのブラウザーや拡張機能を操作してアラーム登録できないため、この作業には使わないでください。\n\n目的: Web Change Alert のモニターを登録します。\n\n手順:\n1. ユーザーのブラウザーで対象サイトを開きます。ログインが必要な場合はログイン状態を維持します。\n2. ページを確認し、対象値に対して最小で安定した CSS セレクターを探します。安定した id、class、data 属性を優先し、拡張機能の picker UI、ドロップダウン、ヒント、一時オーバーレイを値に含めないでください。\n3. 抽出方法を選びます: 表示テキストは {\"type\":\"text\"}、画像 URL は {\"type\":\"image\"}、フォーム値は {\"type\":\"value\"}、属性は {\"type\":\"attr\",\"attr\":\"href\"}。\n4. スケジュールを選びます: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0}, {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}。\n5. フィルターは text/value モニターだけに使います: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]}, {\"mode\":\"only_regex\",\"values\":[\"...\"]}。\n6. 次のような JSON を作ります: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}。\n7. JSON を UTF-8 で JSON.stringify し、base64url エンコードして、この URL を開きます: {commandPageUrl}#payload=ENCODED_JSON\n8. 現在の拡張機能 ID は {extensionId} です。他の extension id をハードコードせず、上のコマンドページ URL を使ってください。\n9. コマンドページでプレビューを確認し、登録をクリックします。"
   }
 }

@@ -331,5 +331,80 @@
   },
   "manualSelectorUpdated": {
     "message": "Preview updated from this selector."
+  },
+  "agentButton": {
+    "message": "Agent AI"
+  },
+  "agentTitle": {
+    "message": "Agent AI"
+  },
+  "agentIntro": {
+    "message": "Copy the prompt for an Agent AI. It can inspect the site, choose a selector, and open the command page with a monitor payload."
+  },
+  "agentWarning": {
+    "message": "Use Codex, Claude Code, OpenClaw, Antigravity, or another Agent AI that can control your local browser. Normal web GPT, Claude, or Gemini chats cannot register alarms in this extension."
+  },
+  "agentExtensionIdLabel": {
+    "message": "Extension ID"
+  },
+  "agentCommandPageLabel": {
+    "message": "Command page"
+  },
+  "agentCopyPrompt": {
+    "message": "Copy agent prompt"
+  },
+  "agentOpenCommandPage": {
+    "message": "Open command page"
+  },
+  "agentCopyDone": {
+    "message": "Prompt copied."
+  },
+  "agentCopyFailed": {
+    "message": "Could not copy the prompt."
+  },
+  "agentPageTitle": {
+    "message": "Web Change Alert Agent"
+  },
+  "agentPageIntro": {
+    "message": "This page previews a monitor request made by an Agent AI before registering it in the extension."
+  },
+  "agentPayloadMissing": {
+    "message": "No agent payload was provided. Open this page with #payload=BASE64URL_JSON."
+  },
+  "agentPayloadInvalid": {
+    "message": "The agent payload is invalid. Ask the agent to rebuild the command URL."
+  },
+  "agentFieldUrl": {
+    "message": "URL"
+  },
+  "agentFieldExtract": {
+    "message": "Extract"
+  },
+  "agentPreviewMissing": {
+    "message": "Element not found now. It can still alert when it appears later."
+  },
+  "agentPreviewing": {
+    "message": "Checking the selected value..."
+  },
+  "agentPreviewFailed": {
+    "message": "Preview failed"
+  },
+  "agentRegister": {
+    "message": "Register"
+  },
+  "agentRegistering": {
+    "message": "Registering..."
+  },
+  "agentRegisterDone": {
+    "message": "Registered."
+  },
+  "agentRegisterFailed": {
+    "message": "Register failed"
+  },
+  "agentOpenSite": {
+    "message": "Open site"
+  },
+  "agentPromptTemplate": {
+    "message": "You are an Agent AI that can control a real local browser and Chrome extension pages, such as Codex, Claude Code, OpenClaw, or Antigravity. Do not use a normal web-only GPT/Claude/Gemini chat for this task because it cannot control the user's browser or register the alarm.\n\nGoal: register a Web Change Alert monitor.\n\nSteps:\n1. Open the target website in the user's browser. Keep the user's signed-in session if the site requires login.\n2. Inspect the page and find the smallest reliable CSS selector for the requested value. Prefer stable ids, classes, and data attributes. Do not include extension picker UI, dropdowns, hints, or temporary overlays in the selected value.\n3. Choose extract: {\"type\":\"text\"} for visible text, {\"type\":\"image\"} for an image URL, {\"type\":\"value\"} for form values, or {\"type\":\"attr\",\"attr\":\"href\"} for an attribute.\n4. Choose schedule: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0}, or {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. Choose filter only for text/value monitors: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]}, or {\"mode\":\"only_regex\",\"values\":[\"...\"]}.\n6. Build JSON like this: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. UTF-8 JSON.stringify the JSON, base64url encode it, then open this URL: {commandPageUrl}#payload=ENCODED_JSON\n8. The current extension id is {extensionId}. Do not hardcode another extension id. Use the command page URL above.\n9. On the command page, check the preview and click Register."
   }
 }

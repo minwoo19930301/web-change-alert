@@ -331,5 +331,80 @@
   },
   "manualSelectorUpdated": {
     "message": "셀렉터로 찾은 값이 반영되었습니다."
+  },
+  "agentButton": {
+    "message": "Agent AI"
+  },
+  "agentTitle": {
+    "message": "Agent AI"
+  },
+  "agentIntro": {
+    "message": "Agent AI에게 붙여 넣을 프롬프트를 복사하세요. Agent가 사이트를 직접 확인해 선택자를 찾고 주기/필터를 정한 뒤 등록 페이지를 엽니다."
+  },
+  "agentWarning": {
+    "message": "Codex, Claude Code, OpenClaw, Antigravity처럼 로컬 브라우저를 조작할 수 있는 Agent AI만 사용할 수 있습니다. 일반 웹 GPT, Claude, Gemini 채팅은 이 확장 프로그램에 알람을 등록할 수 없습니다."
+  },
+  "agentExtensionIdLabel": {
+    "message": "확장 프로그램 ID"
+  },
+  "agentCommandPageLabel": {
+    "message": "등록 페이지"
+  },
+  "agentCopyPrompt": {
+    "message": "Agent 프롬프트 복사"
+  },
+  "agentOpenCommandPage": {
+    "message": "등록 페이지 열기"
+  },
+  "agentCopyDone": {
+    "message": "프롬프트를 복사했습니다."
+  },
+  "agentCopyFailed": {
+    "message": "프롬프트를 복사하지 못했습니다."
+  },
+  "agentPageTitle": {
+    "message": "Web Change Alert Agent"
+  },
+  "agentPageIntro": {
+    "message": "Agent AI가 만든 모니터 요청을 확장 프로그램에 등록하기 전에 미리 확인합니다."
+  },
+  "agentPayloadMissing": {
+    "message": "Agent payload가 없습니다. #payload=BASE64URL_JSON 형태로 이 페이지를 열어야 합니다."
+  },
+  "agentPayloadInvalid": {
+    "message": "Agent payload가 올바르지 않습니다. Agent에게 등록 URL을 다시 만들라고 하세요."
+  },
+  "agentFieldUrl": {
+    "message": "URL"
+  },
+  "agentFieldExtract": {
+    "message": "추출 방식"
+  },
+  "agentPreviewMissing": {
+    "message": "현재 요소를 찾지 못했습니다. 나중에 생기면 알림을 받을 수 있습니다."
+  },
+  "agentPreviewing": {
+    "message": "선택된 값을 확인하는 중..."
+  },
+  "agentPreviewFailed": {
+    "message": "미리보기 실패"
+  },
+  "agentRegister": {
+    "message": "등록"
+  },
+  "agentRegistering": {
+    "message": "등록 중..."
+  },
+  "agentRegisterDone": {
+    "message": "등록되었습니다."
+  },
+  "agentRegisterFailed": {
+    "message": "등록 실패"
+  },
+  "agentOpenSite": {
+    "message": "사이트 열기"
+  },
+  "agentPromptTemplate": {
+    "message": "너는 Codex, Claude Code, OpenClaw, Antigravity처럼 실제 로컬 브라우저와 Chrome 확장 프로그램 페이지를 조작할 수 있는 Agent AI입니다. 일반 웹 GPT/Claude/Gemini 채팅은 사용자의 브라우저나 확장 프로그램을 조작해 알람을 등록할 수 없으므로 이 작업에 쓰지 마세요.\n\n목표: Web Change Alert 모니터를 등록합니다.\n\n절차:\n1. 사용자의 브라우저에서 대상 사이트를 엽니다. 로그인이 필요한 사이트라면 현재 로그인 세션을 유지하세요.\n2. 페이지를 직접 확인하고 요청한 값에 맞는 가장 작고 안정적인 CSS 선택자를 찾습니다. 안정적인 id, class, data attribute를 우선 사용하세요. 확장 프로그램의 picker UI, 드롭다운, 힌트, 임시 오버레이는 값에 포함하지 마세요.\n3. 추출 방식을 고릅니다: 보이는 텍스트는 {\"type\":\"text\"}, 이미지 URL은 {\"type\":\"image\"}, 폼 값은 {\"type\":\"value\"}, 속성은 {\"type\":\"attr\",\"attr\":\"href\"}.\n4. 주기를 고릅니다: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0}, {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. 필터는 텍스트/값 모니터에만 사용합니다: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]}, {\"mode\":\"only_regex\",\"values\":[\"...\"]}.\n6. 다음 형태의 JSON을 만듭니다: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. JSON을 UTF-8로 JSON.stringify 한 뒤 base64url 인코딩하고 이 URL을 엽니다: {commandPageUrl}#payload=ENCODED_JSON\n8. 현재 확장 프로그램 ID는 {extensionId}입니다. 다른 extension id를 하드코딩하지 말고 위 등록 페이지 URL을 사용하세요.\n9. 등록 페이지에서 미리보기를 확인하고 등록을 누르세요."
   }
 }

@@ -48,6 +48,11 @@
         justify-content: center;
         padding: 0;
       }
+      .icon-btn svg {
+        width: 16px;
+        height: 16px;
+        display: block;
+      }
       .popover {
         position: absolute;
         top: 34px;
@@ -656,6 +661,68 @@
       .about-close {
         width: 100%;
       }
+      .agent-dialog {
+        width: 360px;
+        max-height: min(540px, calc(100vh - 24px));
+        overflow-y: auto;
+        background: #fff;
+        border-radius: 12px;
+        padding: 10px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        display: grid;
+        gap: 10px;
+      }
+      .agent-copy {
+        display: grid;
+        gap: 8px;
+      }
+      .agent-copy p {
+        margin: 0;
+        font-size: 11px;
+        line-height: 1.5;
+        color: #3c4043;
+      }
+      .agent-warning {
+        background: #fff7e6;
+        border: 1px solid #f5d38b;
+        border-radius: 10px;
+        padding: 8px;
+        font-size: 11px;
+        line-height: 1.45;
+        color: #7a4d00;
+      }
+      .agent-meta {
+        display: grid;
+        gap: 6px;
+      }
+      .agent-meta-row {
+        display: grid;
+        gap: 3px;
+        font-size: 11px;
+      }
+      .agent-meta-label {
+        color: #5f6368;
+      }
+      .agent-code {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        background: #f8f9fa;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 7px;
+        font-size: 10px;
+        line-height: 1.45;
+        word-break: break-all;
+      }
+      .agent-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .agent-status {
+        min-height: 14px;
+        font-size: 11px;
+        color: #5f6368;
+      }
       .language-options {
         margin-top: 8px;
         display: grid;
@@ -667,6 +734,12 @@
     <div class="topbar">
       <div class="topbar-right">
         <button id="langBtn" class="icon-btn" type="button" title="Language">🌐</button>
+        <button id="agentBtn" class="icon-btn" type="button" title="Agent">
+          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4.5" y="4.5" width="15" height="15" rx="3"></rect>
+            <path d="M12 7.5l1.2 3.3 3.3 1.2-3.3 1.2L12 16.5l-1.2-3.3L7.5 12l3.3-1.2L12 7.5z"></path>
+          </svg>
+        </button>
         <button id="aboutBtn" class="icon-btn" type="button" title="About">i</button>
       </div>
       <div id="langMenu" class="popover hidden">
@@ -739,6 +812,35 @@
         <div class="about-section-title" data-i18n="troubleshootingTitle"></div>
         <div id="helpGuides" class="help-guides"></div>
         <button id="aboutClose" type="button" class="secondary about-close" data-i18n="close"></button>
+      </div>
+    </div>
+
+    <div id="agentOverlay" class="confirm-overlay hidden">
+      <div class="agent-dialog">
+        <div class="modal-header">
+          <button id="agentBack" class="modal-icon" type="button" data-i18n-title="back" aria-label="Back">‹</button>
+          <div class="confirm-title" data-i18n="agentTitle"></div>
+          <button id="agentCloseIcon" class="modal-icon" type="button" data-i18n-title="close" aria-label="Close">×</button>
+        </div>
+        <div class="agent-copy">
+          <p data-i18n="agentIntro"></p>
+          <div class="agent-warning" data-i18n="agentWarning"></div>
+          <div class="agent-meta">
+            <div class="agent-meta-row">
+              <span class="agent-meta-label" data-i18n="agentExtensionIdLabel"></span>
+              <div id="agentExtensionId" class="agent-code"></div>
+            </div>
+            <div class="agent-meta-row">
+              <span class="agent-meta-label" data-i18n="agentCommandPageLabel"></span>
+              <div id="agentCommandPage" class="agent-code"></div>
+            </div>
+          </div>
+          <div class="agent-actions">
+            <button id="copyAgentPrompt" type="button" class="primary" data-i18n="agentCopyPrompt"></button>
+            <button id="openAgentCommand" type="button" class="secondary" data-i18n="agentOpenCommandPage"></button>
+          </div>
+          <div id="agentStatus" class="agent-status"></div>
+        </div>
       </div>
     </div>
 

@@ -331,5 +331,80 @@
   },
   "manualSelectorUpdated": {
     "message": "Prévia atualizada com este seletor."
+  },
+  "agentButton": {
+    "message": "Agent AI"
+  },
+  "agentTitle": {
+    "message": "Agent AI"
+  },
+  "agentIntro": {
+    "message": "Copie o prompt para uma IA agente. Ela pode inspecionar o site, escolher um seletor e abrir a página de comando com o monitor."
+  },
+  "agentWarning": {
+    "message": "Use Codex, Claude Code, OpenClaw, Antigravity ou outra IA agente que consiga controlar seu navegador local. Chats web comuns do GPT, Claude ou Gemini não conseguem registrar alertas nesta extensão."
+  },
+  "agentExtensionIdLabel": {
+    "message": "ID da extensão"
+  },
+  "agentCommandPageLabel": {
+    "message": "Página de comando"
+  },
+  "agentCopyPrompt": {
+    "message": "Copiar prompt do agente"
+  },
+  "agentOpenCommandPage": {
+    "message": "Abrir página de comando"
+  },
+  "agentCopyDone": {
+    "message": "Prompt copiado."
+  },
+  "agentCopyFailed": {
+    "message": "Não foi possível copiar o prompt."
+  },
+  "agentPageTitle": {
+    "message": "Web Change Alert Agent"
+  },
+  "agentPageIntro": {
+    "message": "Esta página pré-visualiza uma solicitação criada por uma IA agente antes de registrá-la na extensão."
+  },
+  "agentPayloadMissing": {
+    "message": "Nenhum payload do agente foi fornecido. Abra esta página com #payload=BASE64URL_JSON."
+  },
+  "agentPayloadInvalid": {
+    "message": "O payload do agente é inválido. Peça ao agente para recriar a URL de comando."
+  },
+  "agentFieldUrl": {
+    "message": "URL"
+  },
+  "agentFieldExtract": {
+    "message": "Extração"
+  },
+  "agentPreviewMissing": {
+    "message": "O elemento não existe agora. Ele ainda pode alertar quando aparecer depois."
+  },
+  "agentPreviewing": {
+    "message": "Verificando o valor selecionado..."
+  },
+  "agentPreviewFailed": {
+    "message": "Falha na prévia"
+  },
+  "agentRegister": {
+    "message": "Registrar"
+  },
+  "agentRegistering": {
+    "message": "Registrando..."
+  },
+  "agentRegisterDone": {
+    "message": "Registrado."
+  },
+  "agentRegisterFailed": {
+    "message": "Falha ao registrar"
+  },
+  "agentOpenSite": {
+    "message": "Abrir site"
+  },
+  "agentPromptTemplate": {
+    "message": "Você é uma IA agente que consegue controlar um navegador local real e páginas de extensões do Chrome, como Codex, Claude Code, OpenClaw ou Antigravity. Não use um chat web comum do GPT/Claude/Gemini para esta tarefa, porque ele não consegue controlar o navegador do usuário nem registrar o alerta.\n\nObjetivo: registrar um monitor do Web Change Alert.\n\nPassos:\n1. Abra o site de destino no navegador do usuário. Mantenha a sessão conectada se o site exigir login.\n2. Inspecione a página e encontre o menor seletor CSS confiável para o valor pedido. Prefira ids, classes e atributos data estáveis. Não inclua UI do picker, menus, dicas ou overlays temporários da extensão no valor.\n3. Escolha extract: {\"type\":\"text\"} para texto visível, {\"type\":\"image\"} para URL de imagem, {\"type\":\"value\"} para valores de formulário ou {\"type\":\"attr\",\"attr\":\"href\"} para atributo.\n4. Escolha schedule: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} ou {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. Use filter somente para monitores text/value: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]} ou {\"mode\":\"only_regex\",\"values\":[\"...\"]}.\n6. Monte um JSON assim: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. Faça JSON.stringify em UTF-8, codifique em base64url e abra esta URL: {commandPageUrl}#payload=ENCODED_JSON\n8. O extension id atual é {extensionId}. Não fixe outro extension id no código. Use a URL da página de comando acima.\n9. Na página de comando, confira a prévia e clique em Registrar."
   }
 }
