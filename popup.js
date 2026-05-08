@@ -13,8 +13,12 @@ const startPickerBtn = document.getElementById("startPicker");
 
 const confirmOverlay = document.getElementById("confirmOverlay");
 const confirmTarget = document.getElementById("confirmTarget");
+const confirmBack = document.getElementById("confirmBack");
+const confirmClose = document.getElementById("confirmClose");
 const confirmCancel = document.getElementById("confirmCancel");
 const confirmDelete = document.getElementById("confirmDelete");
+const editorOverlay = document.getElementById("editorOverlay");
+const editorDialog = document.getElementById("editorDialog");
 
 const langBtn = document.getElementById("langBtn");
 const langMenu = document.getElementById("langMenu");
@@ -22,11 +26,44 @@ const langOptionsWrap = document.getElementById("langOptions");
 
 const aboutBtn = document.getElementById("aboutBtn");
 const aboutOverlay = document.getElementById("aboutOverlay");
+const aboutBack = document.getElementById("aboutBack");
+const aboutCloseIcon = document.getElementById("aboutCloseIcon");
 const aboutClose = document.getElementById("aboutClose");
 const noticeText = document.getElementById("noticeText");
 const aboutAppName = document.getElementById("aboutAppName");
 const aboutVersion = document.getElementById("aboutVersion");
 const aboutAuthor = document.getElementById("aboutAuthor");
+const helpGuides = document.getElementById("helpGuides");
+
+const HELP_GUIDES = [
+  {
+    titleKey: "helpNotificationsMissingTitle",
+    pathKeys: ["helpNotificationsMissingMac", "helpNotificationsMissingWindows"],
+    inlineLinks: [
+      {
+        labelKey: "helpOpenMacGuide",
+        text: "support.proctorexam.com/.../Enable-Notifications-on-Google-Chrome-Mac",
+        url: "https://support.proctorexam.com/hc/en-us/articles/36135749973645-Enable-Notifications-on-Google-Chrome-Mac"
+      },
+      {
+        labelKey: "helpOpenWindowsGuide",
+        text: "support.proctorexam.com/.../Enable-Notifications-on-Google-Chrome-Windows",
+        url: "https://support.proctorexam.com/hc/en-us/articles/36135772325645-Enable-Notifications-on-Google-Chrome-Windows"
+      }
+    ]
+  },
+  {
+    titleKey: "helpUnexpectedTitle",
+    bodyKeys: ["helpUnexpectedIntro", "helpUnexpectedAction"],
+    inlineLinks: [
+      {
+        labelKey: "helpUnexpectedChromePath",
+        text: "chrome://settings/content/notifications",
+        url: "chrome://settings/content/notifications"
+      }
+    ]
+  }
+];
 
 const fallbackLanguageOptions = [
   { code: "auto", label: "System (Chrome)" },
@@ -50,15 +87,31 @@ let currentMonitors = [];
 let currentLanguagePreference = "auto";
 let translator = {
   t(key, vars = {}) {
-    let template = chrome.i18n.getMessage(key) || key;
+    let template = safeGetMessage(key) || key;
     for (const [name, value] of Object.entries(vars)) {
       template = template.replace(new RegExp(`\\{${name}\\}`, "g"), String(value));
     }
     return template;
   },
-  effective: normalizeUiLocaleTag(chrome.i18n.getUILanguage?.() || "en"),
+  effective: normalizeUiLocaleTag(safeGetUiLanguage() || "en"),
   isRtl: false
 };
+
+function safeGetMessage(key) {
+  try {
+    return chrome.i18n?.getMessage?.(key) || "";
+  } catch {
+    return "";
+  }
+}
+
+function safeGetUiLanguage() {
+  try {
+    return chrome.i18n?.getUILanguage?.() || "";
+  } catch {
+    return "";
+  }
+}
 
 bindEvents();
 init();
@@ -71,10 +124,22 @@ function bindEvents() {
   confirmCancel.addEventListener("click", () => {
     closeConfirm();
   });
+  confirmBack?.addEventListener("click", () => {
+    closeConfirm();
+  });
+  confirmClose?.addEventListener("click", () => {
+    closeConfirm();
+  });
 
   confirmOverlay.addEventListener("click", (event) => {
     if (event.target === confirmOverlay) {
       closeConfirm();
+    }
+  });
+
+  editorOverlay.addEventListener("click", (event) => {
+    if (event.target === editorOverlay) {
+      closeEditor();
     }
   });
 
@@ -103,7 +168,9 @@ function bindEvents() {
       type: "startPicker",
       url,
       requestId: buildRequestId(),
-      tabId: activeTab?.id
+      tabId: activeTab?.id,
+      mode: "create",
+      monitorId: null
     });
 
     if (!response?.ok) {
@@ -139,12 +206,18 @@ function bindEvents() {
 
   aboutOverlay.addEventListener("click", (event) => {
     if (event.target === aboutOverlay) {
-      aboutOverlay.classList.add("hidden");
+      closeAbout();
     }
   });
 
   aboutClose.addEventListener("click", () => {
-    aboutOverlay.classList.add("hidden");
+    closeAbout();
+  });
+  aboutBack?.addEventListener("click", () => {
+    closeAbout();
+  });
+  aboutCloseIcon?.addEventListener("click", () => {
+    closeAbout();
   });
 
   document.addEventListener("click", (event) => {
@@ -215,7 +288,7 @@ function renderLanguageOptions() {
 
 function applyDocumentDirection() {
   const isRtl = Boolean(translator?.isRtl);
-  document.documentElement.lang = normalizeUiLocaleTag(translator?.effective || chrome.i18n.getUILanguage?.() || "en");
+  document.documentElement.lang = normalizeUiLocaleTag(translator?.effective || safeGetUiLanguage() || "en");
   document.documentElement.dir = isRtl ? "rtl" : "ltr";
 }
 
@@ -230,11 +303,82 @@ function applyStaticTexts() {
     if (!key) continue;
     node.textContent = t(key);
   }
+  const i18nTitleNodes = document.querySelectorAll("[data-i18n-title]");
+  for (const node of i18nTitleNodes) {
+    const key = node.getAttribute("data-i18n-title");
+    if (!key) continue;
+    const text = t(key);
+    node.title = text;
+    node.setAttribute("aria-label", text);
+  }
 
   noticeText.textContent = t("notice");
   aboutAppName.textContent = t("extensionName") || MANIFEST_NAME;
   aboutVersion.textContent = APP_VERSION;
   aboutAuthor.textContent = AUTHOR_NAME;
+  renderHelpGuides();
+}
+
+function renderHelpGuides() {
+  if (!helpGuides) return;
+  helpGuides.innerHTML = "";
+
+  for (const guide of HELP_GUIDES) {
+    const card = document.createElement("section");
+    card.className = "help-card";
+
+    const title = document.createElement("div");
+    title.className = "help-card-title";
+    title.textContent = t(guide.titleKey);
+    card.appendChild(title);
+
+    const copy = document.createElement("div");
+    copy.className = "help-card-copy";
+    for (const key of guide.bodyKeys || []) {
+      const line = document.createElement("div");
+      line.textContent = t(key);
+      copy.appendChild(line);
+    }
+    if (Array.isArray(guide.pathKeys) && guide.pathKeys.length) {
+      const pathList = document.createElement("div");
+      pathList.className = "help-paths";
+      for (const key of guide.pathKeys) {
+        const path = document.createElement("div");
+        path.className = "help-path";
+        path.textContent = t(key);
+        pathList.appendChild(path);
+      }
+      copy.appendChild(pathList);
+    }
+    if (Array.isArray(guide.inlineLinks) && guide.inlineLinks.length) {
+      for (const linkInfo of guide.inlineLinks) {
+        const row = document.createElement("div");
+        row.className = "help-inline-link-row";
+
+        const label = document.createElement("div");
+        label.textContent = t(linkInfo.labelKey);
+        row.appendChild(label);
+
+        const link = document.createElement("a");
+        link.className = "help-inline-link";
+        link.href = linkInfo.url;
+        link.textContent = linkInfo.text;
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          openGuideUrl(linkInfo.url);
+        });
+        row.appendChild(link);
+        copy.appendChild(row);
+      }
+    }
+    card.appendChild(copy);
+    helpGuides.appendChild(card);
+  }
+}
+
+function openGuideUrl(url) {
+  if (!url) return;
+  chrome.tabs.create({ url });
 }
 
 function render(monitors) {
@@ -268,6 +412,13 @@ function render(monitors) {
     left.className = "header-left";
     left.appendChild(alarmToggleEl);
     left.appendChild(tag);
+    const filterText = formatFilter(monitor.filter);
+    if (filterText) {
+      const filterTag = document.createElement("span");
+      filterTag.className = "tag";
+      filterTag.textContent = filterText;
+      left.appendChild(filterTag);
+    }
 
     if (monitor.lastError) {
       const errorLink = document.createElement("span");
@@ -300,6 +451,63 @@ function render(monitors) {
     const actions = document.createElement("div");
     actions.className = "header-actions";
 
+    const scheduleBtn = document.createElement("button");
+    scheduleBtn.className = "icon-action-btn";
+    scheduleBtn.type = "button";
+    scheduleBtn.title = t("editSchedule");
+    scheduleBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 7v5l3 2"></path>
+      </svg>
+    `;
+    scheduleBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      openScheduleEditor(monitor);
+    });
+
+    const filterBtn = document.createElement("button");
+    filterBtn.className = "icon-action-btn";
+    filterBtn.type = "button";
+    filterBtn.title = t("filterLabel");
+    filterBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 5h16l-6 7v5l-4 2v-7z"></path>
+      </svg>
+    `;
+    filterBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      openFilterEditor(monitor);
+    });
+
+    const reselectBtn = document.createElement("button");
+    reselectBtn.className = "icon-action-btn";
+    reselectBtn.type = "button";
+    reselectBtn.title = t("reselect");
+    reselectBtn.innerHTML = `
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M12 2v4"></path>
+        <path d="M12 18v4"></path>
+        <path d="M2 12h4"></path>
+        <path d="M18 12h4"></path>
+      </svg>
+    `;
+    reselectBtn.addEventListener("click", async (event) => {
+      event.stopPropagation();
+      const response = await chrome.runtime.sendMessage({
+        type: "startPicker",
+        url: monitor.url,
+        requestId: buildRequestId(),
+        tabId: activeTab?.id,
+        mode: "update",
+        monitorId: monitor.id
+      });
+      if (response?.ok) {
+        window.close();
+      }
+    });
+
     const runBtn = document.createElement("button");
     runBtn.className = "run-btn";
     runBtn.type = "button";
@@ -322,6 +530,11 @@ function render(monitors) {
     });
 
     header.appendChild(left);
+    actions.appendChild(scheduleBtn);
+    if (!isImageMonitor(monitor)) {
+      actions.appendChild(filterBtn);
+    }
+    actions.appendChild(reselectBtn);
     actions.appendChild(runBtn);
     actions.appendChild(deleteBtn);
     header.appendChild(actions);
@@ -346,6 +559,353 @@ function render(monitors) {
 
     listEl.appendChild(card);
   }
+}
+
+function buildModalHeader(titleText, onBack, onClose) {
+  const header = document.createElement("div");
+  header.className = "modal-header";
+
+  const back = document.createElement("button");
+  back.className = "modal-icon";
+  back.type = "button";
+  back.textContent = "‹";
+  back.title = t("back");
+  back.setAttribute("aria-label", t("back"));
+  back.addEventListener("click", onBack);
+
+  const title = document.createElement("div");
+  title.className = "schedule-inline-title";
+  title.textContent = titleText;
+
+  const close = document.createElement("button");
+  close.className = "modal-icon";
+  close.type = "button";
+  close.textContent = "×";
+  close.title = t("close");
+  close.setAttribute("aria-label", t("close"));
+  close.addEventListener("click", onClose);
+
+  header.appendChild(back);
+  header.appendChild(title);
+  header.appendChild(close);
+  return header;
+}
+
+function buildInlineScheduleEditor(monitor) {
+  const panel = document.createElement("div");
+  panel.className = "schedule-inline";
+
+  const header = buildModalHeader(t("editScheduleTitle"), closeScheduleEditor, closeScheduleEditor);
+
+  const form = document.createElement("div");
+  form.className = "schedule-form";
+
+  const row = document.createElement("div");
+  row.className = "schedule-row";
+
+  const typeSelect = buildSelect([
+    ["interval", t("scheduleInterval")],
+    ["daily", t("scheduleDaily")],
+    ["weekly", t("scheduleWeekly")],
+    ["monthly", t("scheduleMonthly")]
+  ]);
+  const intervalValue = document.createElement("input");
+  intervalValue.type = "number";
+  intervalValue.min = "1";
+  intervalValue.value = "10";
+  const intervalUnit = buildSelect([
+    ["minutes", t("minute")],
+    ["hours", t("hour")],
+    ["days", t("day")]
+  ]);
+
+  row.appendChild(typeSelect);
+  row.appendChild(intervalValue);
+  row.appendChild(intervalUnit);
+
+  const dailyTime = document.createElement("input");
+  dailyTime.type = "time";
+  dailyTime.value = "09:00";
+
+  const weeklyFields = document.createElement("div");
+  weeklyFields.className = "schedule-two";
+  const weeklyDay = buildSelect([0, 1, 2, 3, 4, 5, 6].map((day) => [String(day), t(`weekday${day}`)]));
+  const weeklyTime = document.createElement("input");
+  weeklyTime.type = "time";
+  weeklyTime.value = "09:00";
+  weeklyFields.appendChild(weeklyDay);
+  weeklyFields.appendChild(weeklyTime);
+
+  const monthlyFields = document.createElement("div");
+  monthlyFields.className = "schedule-two";
+  const monthlyDay = document.createElement("input");
+  monthlyDay.type = "number";
+  monthlyDay.min = "1";
+  monthlyDay.max = "28";
+  monthlyDay.value = "1";
+  const monthlyTime = document.createElement("input");
+  monthlyTime.type = "time";
+  monthlyTime.value = "09:00";
+  monthlyFields.appendChild(monthlyDay);
+  monthlyFields.appendChild(monthlyTime);
+
+  form.appendChild(row);
+  form.appendChild(dailyTime);
+  form.appendChild(weeklyFields);
+  form.appendChild(monthlyFields);
+
+  const actions = document.createElement("div");
+  actions.className = "schedule-inline-actions";
+  const cancel = document.createElement("button");
+  cancel.className = "secondary";
+  cancel.type = "button";
+  cancel.textContent = t("cancel");
+  const save = document.createElement("button");
+  save.className = "primary";
+  save.type = "button";
+  save.textContent = t("save");
+  actions.appendChild(cancel);
+  actions.appendChild(save);
+
+  panel.appendChild(header);
+  panel.appendChild(form);
+  panel.appendChild(actions);
+
+  const controls = {
+    typeSelect,
+    row,
+    intervalValue,
+    intervalUnit,
+    dailyTime,
+    weeklyFields,
+    weeklyDay,
+    weeklyTime,
+    monthlyFields,
+    monthlyDay,
+    monthlyTime
+  };
+  fillInlineScheduleEditor(controls, monitor?.schedule || { enabled: true, type: "interval", minutes: 10 });
+
+  typeSelect.addEventListener("change", () => updateInlineScheduleFields(controls));
+  cancel.addEventListener("click", () => closeScheduleEditor());
+  save.addEventListener("click", async () => {
+    const schedule = buildScheduleFromControls(controls, monitor?.schedule?.enabled !== false);
+    const response = await chrome.runtime.sendMessage({
+      type: "updateMonitorFields",
+      id: monitor.id,
+      updates: { schedule }
+    });
+    if (response?.ok) {
+      closeEditor();
+      init();
+    }
+  });
+
+  return panel;
+}
+
+function buildInlineFilterEditor(monitor) {
+  const panel = document.createElement("div");
+  panel.className = "schedule-inline filter-inline";
+
+  const header = buildModalHeader(t("filterLabel"), closeFilterEditor, closeFilterEditor);
+
+  const form = document.createElement("div");
+  form.className = "filter-form";
+
+  const modeSelect = buildSelect([
+    ["none", t("filterNone")],
+    ["ignore_contains", t("filterIgnoreContains")],
+    ["ignore_not_contains", t("filterIgnoreNotContains")],
+    ["ignore_regex", t("filterIgnoreRegex")]
+  ]);
+
+  const tokenWrap = document.createElement("div");
+  tokenWrap.className = "filter-token-input";
+  const input = document.createElement("input");
+  input.className = "filter-token-field";
+  input.type = "text";
+  input.autocomplete = "off";
+  input.placeholder = t("filterValuesPlaceholder");
+  tokenWrap.appendChild(input);
+
+  const values = getFilterValues(monitor.filter);
+  let composingValue = false;
+
+  form.appendChild(modeSelect);
+  form.appendChild(tokenWrap);
+
+  const actions = document.createElement("div");
+  actions.className = "schedule-inline-actions";
+  const cancel = document.createElement("button");
+  cancel.className = "secondary";
+  cancel.type = "button";
+  cancel.textContent = t("cancel");
+  const save = document.createElement("button");
+  save.className = "primary";
+  save.type = "button";
+  save.textContent = t("save");
+  actions.appendChild(cancel);
+  actions.appendChild(save);
+
+  panel.appendChild(header);
+  panel.appendChild(form);
+  panel.appendChild(actions);
+
+  modeSelect.value = normalizeFilterMode(monitor.filter);
+
+  function renderTokens() {
+    tokenWrap.querySelectorAll(".filter-token").forEach((node) => node.remove());
+    for (const value of values) {
+      const token = document.createElement("span");
+      token.className = "filter-token";
+      token.dataset.value = value;
+
+      const text = document.createElement("span");
+      text.className = "filter-token-text";
+      text.textContent = value;
+      token.appendChild(text);
+
+      const remove = document.createElement("button");
+      remove.className = "filter-token-remove";
+      remove.type = "button";
+      remove.textContent = "x";
+      remove.title = t("delete");
+      remove.addEventListener("click", () => {
+        const index = values.indexOf(value);
+        if (index >= 0) values.splice(index, 1);
+        renderTokens();
+        input.focus();
+      });
+      token.appendChild(remove);
+      tokenWrap.insertBefore(token, input);
+    }
+  }
+
+  function addValue(rawValue) {
+    const value = String(rawValue || "").trim();
+    if (!value) return;
+    if (!values.includes(value)) values.push(value);
+    input.value = "";
+    renderTokens();
+  }
+
+  function updateVisibility() {
+    tokenWrap.classList.toggle("schedule-hidden", modeSelect.value === "none");
+  }
+
+  tokenWrap.addEventListener("click", () => input.focus());
+  input.addEventListener("keydown", (event) => {
+    if (event.isComposing || composingValue) return;
+    if (event.key === "Enter" || event.key === ",") {
+      event.preventDefault();
+      addValue(input.value);
+      return;
+    }
+    if (event.key === "Backspace" && !input.value && values.length) {
+      values.pop();
+      renderTokens();
+    }
+  });
+  input.addEventListener("blur", () => addValue(input.value));
+  input.addEventListener("compositionstart", () => {
+    composingValue = true;
+  });
+  input.addEventListener("compositionend", () => {
+    composingValue = false;
+  });
+  input.addEventListener("keyup", (event) => {
+    if (event.key !== "Enter" || event.isComposing || composingValue) return;
+    event.preventDefault();
+    addValue(input.value);
+  });
+  modeSelect.addEventListener("change", updateVisibility);
+  cancel.addEventListener("click", () => closeFilterEditor());
+  save.addEventListener("click", async () => {
+    addValue(input.value);
+    const filter = buildFilterFromControls(modeSelect.value, values);
+    const response = await chrome.runtime.sendMessage({
+      type: "updateMonitorFields",
+      id: monitor.id,
+      updates: { filter }
+    });
+    if (response?.ok) {
+      closeEditor();
+      init();
+    }
+  });
+
+  renderTokens();
+  updateVisibility();
+  return panel;
+}
+
+function buildSelect(options) {
+  const select = document.createElement("select");
+  for (const [value, label] of options) {
+    const option = document.createElement("option");
+    option.value = value;
+    option.textContent = label;
+    select.appendChild(option);
+  }
+  return select;
+}
+
+function fillInlineScheduleEditor(controls, schedule) {
+  const normalized = schedule || { enabled: true, type: "interval", minutes: 10 };
+  controls.typeSelect.value = normalized.type || "interval";
+
+  if (normalized.type === "interval") {
+    const decomposed = decomposeInterval(normalized.minutes || 10);
+    controls.intervalValue.value = String(decomposed.value);
+    controls.intervalUnit.value = decomposed.unit;
+  }
+  if (normalized.type === "daily") {
+    controls.dailyTime.value = `${pad(normalized.hour)}:${pad(normalized.minute)}`;
+  }
+  if (normalized.type === "weekly") {
+    controls.weeklyDay.value = String(normalized.weekday ?? 0);
+    controls.weeklyTime.value = `${pad(normalized.hour)}:${pad(normalized.minute)}`;
+  }
+  if (normalized.type === "monthly") {
+    controls.monthlyDay.value = String(Math.min(28, Math.max(1, Number(normalized.day || 1))));
+    controls.monthlyTime.value = `${pad(normalized.hour)}:${pad(normalized.minute)}`;
+  }
+
+  updateInlineScheduleFields(controls);
+}
+
+function updateInlineScheduleFields(controls) {
+  const type = controls.typeSelect.value || "interval";
+  controls.row.classList.toggle("single", type !== "interval");
+  controls.dailyTime.classList.toggle("schedule-hidden", type !== "daily");
+  controls.weeklyFields.classList.toggle("schedule-hidden", type !== "weekly");
+  controls.monthlyFields.classList.toggle("schedule-hidden", type !== "monthly");
+}
+
+function buildScheduleFromControls(controls, enabled) {
+  const type = controls.typeSelect.value || "interval";
+  if (type === "interval") {
+    const value = Math.max(1, Number(controls.intervalValue.value || 1));
+    const unit = controls.intervalUnit.value || "minutes";
+    const minutes = unit === "hours" ? value * 60 : unit === "days" ? value * 1440 : value;
+    return { enabled, type, minutes };
+  }
+  if (type === "daily") {
+    const [hour, minute] = parseTime(controls.dailyTime.value);
+    return { enabled, type, hour, minute };
+  }
+  if (type === "weekly") {
+    const [hour, minute] = parseTime(controls.weeklyTime.value);
+    const weekday = Number(controls.weeklyDay.value || 0);
+    return { enabled, type, weekday, hour, minute };
+  }
+  if (type === "monthly") {
+    const [hour, minute] = parseTime(controls.monthlyTime.value);
+    const day = Math.min(28, Math.max(1, Number(controls.monthlyDay.value || 1)));
+    return { enabled, type, day, hour, minute };
+  }
+  return { enabled, type: "interval", minutes: 10 };
 }
 
 function buildToggle(checked, onChange) {
@@ -492,6 +1052,10 @@ function isImageValue(monitor, value) {
   return Boolean(resolveImageUrl(value, monitor?.url));
 }
 
+function isImageMonitor(monitor) {
+  return monitor?.extract?.type === "image";
+}
+
 function resolveImageUrl(value, baseUrl) {
   if (!value) return "";
   const raw = String(value || "").trim();
@@ -531,6 +1095,49 @@ function closeConfirm() {
   confirmOverlay.classList.add("hidden");
 }
 
+function closeAbout() {
+  aboutOverlay.classList.add("hidden");
+}
+
+function openScheduleEditor(monitor) {
+  if (!monitor) return;
+  editorDialog.innerHTML = "";
+  editorDialog.appendChild(buildInlineScheduleEditor(monitor));
+  editorOverlay.classList.remove("hidden");
+}
+
+function closeScheduleEditor() {
+  closeEditor();
+}
+
+function openFilterEditor(monitor) {
+  if (isImageMonitor(monitor)) return;
+  editorDialog.innerHTML = "";
+  editorDialog.appendChild(buildInlineFilterEditor(monitor));
+  editorOverlay.classList.remove("hidden");
+}
+
+function closeFilterEditor() {
+  closeEditor();
+}
+
+function closeEditor() {
+  editorOverlay.classList.add("hidden");
+  editorDialog.innerHTML = "";
+}
+
+function decomposeInterval(minutes) {
+  const total = Math.max(1, Number(minutes || 10));
+  if (total % 1440 === 0) return { value: total / 1440, unit: "days" };
+  if (total % 60 === 0) return { value: total / 60, unit: "hours" };
+  return { value: total, unit: "minutes" };
+}
+
+function parseTime(value) {
+  const [hour, minute] = String(value || "09:00").split(":");
+  return [Number(hour || 0), Number(minute || 0)];
+}
+
 function formatSchedule(schedule) {
   if (!schedule?.enabled) return t("alarmOff");
   if (schedule.type === "interval") {
@@ -548,6 +1155,51 @@ function formatSchedule(schedule) {
     return t("monthlyTime", { day: schedule.day, time: `${pad(schedule.hour)}:${pad(schedule.minute)}` });
   }
   return t("alarm");
+}
+
+function formatFilter(filter) {
+  const values = getFilterValues(filter);
+  if (!filter || filter.mode === "none" || !values.length) return "";
+  const valueText = values.join(", ");
+  if (filter.mode === "ignore_regex" || filter.match === "regex") {
+    return `${t("filterIgnoreRegex")}: ${valueText}`;
+  }
+  if (filter.mode === "ignore_contains") {
+    return `${t("filterIgnoreContains")}: ${valueText}`;
+  }
+  if (filter.mode === "ignore_not_contains") {
+    return `${t("filterIgnoreNotContains")}: ${valueText}`;
+  }
+  return "";
+}
+
+function getFilterValues(filter) {
+  if (Array.isArray(filter?.values)) {
+    return filter.values.map((item) => String(item || "").trim()).filter(Boolean);
+  }
+  if (typeof filter?.value === "string") {
+    return filter.value.split(/\r?\n/).map((item) => item.trim()).filter(Boolean);
+  }
+  return [];
+}
+
+function normalizeFilterMode(filter) {
+  if (!filter || filter.mode === "none") return "none";
+  if (filter.mode === "ignore_regex" || filter.match === "regex") return "ignore_regex";
+  if (filter.mode === "ignore_not_contains") return "ignore_not_contains";
+  if (filter.mode === "ignore_contains") return "ignore_contains";
+  return "none";
+}
+
+function buildFilterFromControls(mode, values) {
+  const normalizedValues = Array.from(new Set(
+    (values || []).map((item) => String(item || "").trim()).filter(Boolean)
+  ));
+  if (mode === "none" || !normalizedValues.length) return null;
+  return {
+    mode,
+    values: normalizedValues
+  };
 }
 
 function applyScheduleColor(tag, schedule) {
@@ -576,7 +1228,7 @@ function pad(value) {
 }
 
 function formatDate(ts) {
-  return new Date(ts).toLocaleString(translator?.effective || normalizeUiLocaleTag(chrome.i18n.getUILanguage?.() || "en"));
+  return new Date(ts).toLocaleString(translator?.effective || normalizeUiLocaleTag(safeGetUiLanguage() || "en"));
 }
 
 function normalizeValue(value) {
@@ -627,10 +1279,10 @@ async function createTranslator(language) {
   }
   return {
     preferred: language || "auto",
-    effective: normalizeUiLocaleTag(chrome.i18n.getUILanguage?.() || "en"),
+    effective: normalizeUiLocaleTag(safeGetUiLanguage() || "en"),
     isRtl: false,
     t(key, vars = {}) {
-      let template = chrome.i18n.getMessage(key) || key;
+      let template = safeGetMessage(key) || key;
       for (const [name, value] of Object.entries(vars)) {
         template = template.replace(new RegExp(`\\{${name}\\}`, "g"), String(value));
       }

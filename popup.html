@@ -210,19 +210,30 @@
         padding: 4px;
         box-sizing: border-box;
       }
+      .icon-action-btn,
       .delete-btn {
         width: 24px;
         height: 24px;
         border-radius: 6px;
         border: 1px solid #e0e0e0;
         background: #fff;
-        color: #d93025;
         cursor: pointer;
-        font-size: 14px;
         padding: 0;
         display: inline-flex;
         align-items: center;
         justify-content: center;
+      }
+      .icon-action-btn {
+        color: #3c4043;
+      }
+      .icon-action-btn svg {
+        width: 14px;
+        height: 14px;
+        stroke: currentColor;
+      }
+      .delete-btn {
+        color: #d93025;
+        font-size: 14px;
       }
       .run-btn {
         height: 24px;
@@ -368,6 +379,17 @@
         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         text-align: center;
       }
+      .editor-dialog {
+        width: 360px;
+        max-height: min(520px, calc(100vh - 24px));
+        overflow: auto;
+        background: #fff;
+        border-radius: 12px;
+        padding: 12px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        display: grid;
+        gap: 10px;
+      }
       .confirm-title {
         font-size: 12px;
         font-weight: 600;
@@ -384,6 +406,123 @@
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
+      }
+      .schedule-form {
+        display: grid;
+        gap: 8px;
+      }
+      .schedule-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 72px 76px;
+        gap: 8px;
+      }
+      .schedule-row.single {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .schedule-row.single > :nth-child(2),
+      .schedule-row.single > :nth-child(3) {
+        display: none;
+      }
+      .schedule-two {
+        display: grid;
+        grid-template-columns: 96px minmax(0, 1fr);
+        gap: 8px;
+      }
+      .schedule-hidden {
+        display: none;
+      }
+      .schedule-inline {
+        border-top: 1px solid var(--border);
+        padding-top: 8px;
+        display: grid;
+        gap: 8px;
+      }
+      .editor-dialog .schedule-inline {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .modal-header {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr) 28px;
+        align-items: center;
+        gap: 8px;
+      }
+      .modal-icon {
+        width: 28px;
+        height: 28px;
+        border: 0;
+        border-radius: 999px;
+        background: #f1f3f4;
+        color: #202124;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        font-size: 18px;
+        line-height: 1;
+      }
+      .schedule-inline-title {
+        font-size: 12px;
+        font-weight: 600;
+        color: #202124;
+        text-align: center;
+      }
+      .schedule-inline-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .filter-form {
+        display: grid;
+        gap: 8px;
+      }
+      .filter-token-input {
+        min-height: 34px;
+        border: 1px solid #dfe1e5;
+        border-radius: 8px;
+        padding: 5px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 5px;
+        background: #fff;
+      }
+      .filter-token {
+        max-width: 100%;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent-text);
+        padding: 3px 6px;
+        font-size: 11px;
+      }
+      .filter-token-text {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .filter-token-remove {
+        width: 14px;
+        height: 14px;
+        border: 0;
+        border-radius: 999px;
+        background: rgba(27, 94, 32, 0.12);
+        color: var(--accent-text);
+        cursor: pointer;
+        padding: 0;
+        font-size: 10px;
+        line-height: 1;
+      }
+      .filter-token-field {
+        min-width: 110px;
+        flex: 1;
+        border: 0;
+        outline: 0;
+        font-size: 12px;
+        padding: 4px;
       }
       .header-row {
         display: flex;
@@ -418,7 +557,9 @@
         border-top: 1px solid var(--border);
       }
       .about-dialog {
-        width: 260px;
+        width: 340px;
+        max-height: min(520px, calc(100vh - 24px));
+        overflow-y: auto;
         background: #fff;
         border-radius: 12px;
         padding: 10px;
@@ -443,6 +584,61 @@
         color: #1f1f1f;
         font-weight: 600;
         text-align: right;
+        word-break: break-all;
+      }
+      .about-section-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: #1f1f1f;
+        margin-top: 4px;
+      }
+      .help-guides {
+        display: grid;
+        gap: 10px;
+      }
+      .help-card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 10px;
+        background: #f8fafb;
+        display: grid;
+        gap: 8px;
+      }
+      .help-card-title {
+        font-size: 12px;
+        font-weight: 700;
+        color: #1f1f1f;
+      }
+      .help-card-copy {
+        font-size: 11px;
+        line-height: 1.5;
+        color: #3c4043;
+        display: grid;
+        gap: 4px;
+      }
+      .help-paths {
+        display: grid;
+        gap: 6px;
+      }
+      .help-path {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 6px 8px;
+        font-size: 10px;
+        line-height: 1.45;
+        word-break: break-word;
+      }
+      .help-inline-link-row {
+        display: grid;
+        gap: 4px;
+      }
+      .help-inline-link {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 10px;
+        color: var(--link);
+        text-decoration: underline;
         word-break: break-all;
       }
       .coffee-btn {
@@ -501,7 +697,11 @@
 
     <div id="confirmOverlay" class="confirm-overlay hidden">
       <div class="confirm-dialog">
-        <div id="confirmTitle" class="confirm-title" data-i18n="confirmDeleteTitle"></div>
+        <div class="modal-header">
+          <button id="confirmBack" class="modal-icon" type="button" data-i18n-title="back" aria-label="Back">‹</button>
+          <div id="confirmTitle" class="confirm-title" data-i18n="confirmDeleteTitle"></div>
+          <button id="confirmClose" class="modal-icon" type="button" data-i18n-title="close" aria-label="Close">×</button>
+        </div>
         <div id="confirmTarget" class="confirm-sub"></div>
         <div class="confirm-actions">
           <button id="confirmCancel" class="secondary" data-i18n="cancel"></button>
@@ -510,9 +710,17 @@
       </div>
     </div>
 
+    <div id="editorOverlay" class="confirm-overlay hidden">
+      <div id="editorDialog" class="editor-dialog"></div>
+    </div>
+
     <div id="aboutOverlay" class="confirm-overlay hidden">
       <div class="about-dialog">
-        <div class="confirm-title" data-i18n="aboutTitle"></div>
+        <div class="modal-header">
+          <button id="aboutBack" class="modal-icon" type="button" data-i18n-title="back" aria-label="Back">‹</button>
+          <div class="confirm-title" data-i18n="aboutTitle"></div>
+          <button id="aboutCloseIcon" class="modal-icon" type="button" data-i18n-title="close" aria-label="Close">×</button>
+        </div>
         <div class="about-grid">
           <div class="about-row">
             <span class="about-label" data-i18n="aboutAppNameLabel"></span>
@@ -528,6 +736,8 @@
           </div>
         </div>
         <a id="coffeeLink" class="coffee-btn" href="https://buymeacoffee.com/rlaalsdn456456" target="_blank" rel="noreferrer" data-i18n="buyCoffee"></a>
+        <div class="about-section-title" data-i18n="troubleshootingTitle"></div>
+        <div id="helpGuides" class="help-guides"></div>
         <button id="aboutClose" type="button" class="secondary about-close" data-i18n="close"></button>
       </div>
     </div>
