@@ -681,9 +681,9 @@
         width: 100%;
       }
       .agent-dialog {
-        width: 360px;
-        max-height: min(540px, calc(100vh - 24px));
-        overflow-y: auto;
+        width: min(340px, calc(100vw - 24px));
+        max-height: min(510px, calc(100vh - 24px));
+        overflow: auto;
         background: #fff;
         border-radius: 12px;
         padding: 10px;
@@ -701,29 +701,52 @@
         line-height: 1.5;
         color: #3c4043;
       }
+      .agent-lead {
+        font-size: 14px !important;
+        font-weight: 800;
+        color: #202124 !important;
+      }
+      .agent-detail {
+        font-size: 11px;
+        color: #5f6368;
+      }
+      .agent-copy-btn {
+        width: 100%;
+      }
       .agent-warning {
         background: #fff7e6;
         border: 1px solid #f5d38b;
         border-radius: 10px;
-        padding: 8px;
-        font-size: 11px;
+        padding: 7px 8px;
+        font-size: 10px;
         line-height: 1.45;
         color: #7a4d00;
       }
+      .agent-supported {
+        color: #0b57d0;
+        font-weight: 700;
+      }
+      .agent-unsupported {
+        color: #d93025;
+        font-weight: 700;
+      }
       .agent-prompt {
         width: 100%;
-        min-height: 260px;
-        max-height: 360px;
-        resize: vertical;
+        height: 190px;
+        margin: 0;
         overflow: auto;
         border: 1px solid var(--border);
         border-radius: 10px;
         background: #f8f9fa;
         padding: 10px;
+        box-sizing: border-box;
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 10px;
-        line-height: 1.55;
+        line-height: 1.5;
         color: #202124;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+        user-select: text;
       }
       .agent-status {
         min-height: 14px;
@@ -840,9 +863,16 @@
           <button id="agentCloseIcon" class="modal-icon" type="button" data-i18n-title="close" aria-label="Close">×</button>
         </div>
         <div class="agent-copy">
-          <p data-i18n="agentIntro"></p>
-          <div class="agent-warning" data-i18n="agentWarning"></div>
-          <textarea id="agentPrompt" class="agent-prompt" readonly spellcheck="false"></textarea>
+          <p class="agent-lead" data-i18n="agentIntroLead"></p>
+          <p class="agent-detail" data-i18n="agentIntroDetail"></p>
+          <button id="copyAgentPrompt" type="button" class="primary agent-copy-btn" data-i18n="agentCopyPrompt"></button>
+          <div class="agent-warning">
+            <span class="agent-supported" data-i18n="agentSupportedAgents"></span>
+            <span data-i18n="agentWarningCan"></span>
+            <span class="agent-unsupported" data-i18n="agentUnsupportedAgents"></span>
+            <span data-i18n="agentWarningCannot"></span>
+          </div>
+          <pre id="agentPrompt" class="agent-prompt"></pre>
           <div id="agentStatus" class="agent-status"></div>
         </div>
       </div>

@@ -338,12 +338,6 @@
   "agentTitle": {
     "message": "Agent AI"
   },
-  "agentIntro": {
-    "message": "Cole o prompt abaixo em uma IA agente. O agente perguntará o que monitorar, inspecionará o site no seu navegador e abrirá a página de confirmação de registro."
-  },
-  "agentWarning": {
-    "message": "Use Codex, Claude Code, OpenClaw, Antigravity ou outra IA agente que consiga controlar seu navegador local. Chats web comuns do GPT, Claude ou Gemini não conseguem registrar alertas nesta extensão."
-  },
   "agentPageTitle": {
     "message": "Web Change Alert Agent"
   },
@@ -388,5 +382,32 @@
   },
   "agentPromptTemplate": {
     "message": "Você é uma IA agente que consegue controlar um navegador local real e páginas de extensões do Chrome, como Codex, Claude Code, OpenClaw ou Antigravity. Não use um chat web comum do GPT/Claude/Gemini para esta tarefa, porque ele não consegue controlar o navegador do usuário nem registrar o alerta.\n\nPrimeiro pergunte ao usuário em linguagem simples:\n- Descreva a parte sobre a qual você quer receber alerta quando mudar.\n- URL do site alvo: peça para o usuário primeiro abrir o site, encontrar a parte desejada e copiar a URL da barra de endereço do navegador. Exemplo: https://www.google.com/search?q=...\n- Valor a monitorar: explique exemplos como texto de preço, texto de estoque/status, texto de botão, URL de imagem, href de link ou valor de input.\n- Frequência: pergunte com que frequência verificar, por exemplo a cada 10 minutos, todos os dias às 9:00 ou toda segunda às 9:00.\n- Condição opcional de alerta: pergunte se todo tipo de mudança deve alertar ou apenas mudanças que cumpram uma condição. Explique exemplos: só quando uma frase aparecer, só quando uma frase sumir, ou quando número/texto seguir um padrão repetido. Não pergunte primeiro por “valor de filtro” nem mencione regex. Se uma condição por padrão for útil, pergunte se existe outro padrão repetido que deve ser usado.\n\nDepois da resposta:\n1. Abra o site de destino no navegador do usuário. Mantenha a sessão conectada se o site exigir login.\n2. Inspecione a página e encontre o menor seletor CSS confiável para o valor pedido. Prefira ids, classes e atributos data estáveis. Não inclua UI do picker, menus, dicas ou overlays temporários da extensão no valor.\n3. Escolha extract: {\"type\":\"text\"} para texto visível, {\"type\":\"image\"} para URL de imagem, {\"type\":\"value\"} para valores de formulário ou {\"type\":\"attr\",\"attr\":\"href\"} para atributo.\n4. Escolha schedule: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} ou {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. Use filter somente para monitores text/value: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]} ou {\"mode\":\"only_regex\",\"values\":[\"...\"]}. Use only_regex apenas quando o usuário descrever um padrão repetido que não dê para expressar com contém/sumiu.\n6. Monte um JSON assim: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. Faça JSON.stringify em UTF-8, codifique em base64url e abra esta URL de registro da extensão: {commandPageUrl}#payload=ENCODED_JSON\n8. Na página de registro, confira a prévia e clique em Registrar."
+  },
+  "agentIntroLead": {
+    "message": "Cole este prompt em uma IA agente."
+  },
+  "agentIntroDetail": {
+    "message": "O agente perguntará o que monitorar, inspecionará o site no navegador e fará o registro para você."
+  },
+  "agentCopyPrompt": {
+    "message": "Copiar prompt para a área de transferência"
+  },
+  "agentCopyDone": {
+    "message": "Prompt copiado."
+  },
+  "agentCopyFailed": {
+    "message": "Não foi possível copiar o prompt."
+  },
+  "agentSupportedAgents": {
+    "message": "Codex, Claude Code, OpenClaw, Antigravity"
+  },
+  "agentWarningCan": {
+    "message": " e IAs agentes parecidas conseguem controlar seu navegador local. "
+  },
+  "agentUnsupportedAgents": {
+    "message": "Chats web comuns do GPT, Claude e Gemini"
+  },
+  "agentWarningCannot": {
+    "message": " não conseguem registrar alertas nesta extensão."
   }
 }

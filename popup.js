@@ -34,6 +34,7 @@ const agentOverlay = document.getElementById("agentOverlay");
 const agentBack = document.getElementById("agentBack");
 const agentCloseIcon = document.getElementById("agentCloseIcon");
 const agentPrompt = document.getElementById("agentPrompt");
+const copyAgentPrompt = document.getElementById("copyAgentPrompt");
 const agentStatus = document.getElementById("agentStatus");
 const noticeText = document.getElementById("noticeText");
 const aboutAppName = document.getElementById("aboutAppName");
@@ -223,8 +224,8 @@ function bindEvents() {
   agentCloseIcon?.addEventListener("click", () => {
     closeAgentPanel();
   });
-  agentPrompt?.addEventListener("focus", () => {
-    agentPrompt.select();
+  copyAgentPrompt?.addEventListener("click", async () => {
+    await copyAgentGuide();
   });
 
   aboutOverlay.addEventListener("click", (event) => {
@@ -341,7 +342,7 @@ function applyStaticTexts() {
   }
 
   noticeText.textContent = t("notice");
-  if (agentPrompt) agentPrompt.value = buildAgentGuidePrompt();
+  setAgentPrompt(buildAgentGuidePrompt());
   aboutAppName.textContent = t("extensionName") || MANIFEST_NAME;
   aboutVersion.textContent = APP_VERSION;
   aboutAuthor.textContent = AUTHOR_NAME;
@@ -1159,10 +1160,7 @@ function closeAbout() {
 }
 
 function openAgentPanel() {
-  if (agentPrompt) {
-    agentPrompt.value = buildAgentGuidePrompt();
-    agentPrompt.scrollTop = 0;
-  }
+  setAgentPrompt(buildAgentGuidePrompt());
   if (agentStatus) agentStatus.textContent = "";
   agentOverlay.classList.remove("hidden");
 }
@@ -1179,6 +1177,43 @@ function buildAgentGuidePrompt() {
   return t("agentPromptTemplate", {
     commandPageUrl: getAgentCommandPageUrl()
   });
+}
+
+function setAgentPrompt(prompt) {
+  if (!agentPrompt) return;
+  agentPrompt.textContent = prompt;
+  agentPrompt.scrollTop = 0;
+}
+
+async function copyAgentGuide() {
+  const prompt = buildAgentGuidePrompt();
+  setAgentPrompt(prompt);
+  const copied = await copyText(prompt);
+  if (agentStatus) {
+    agentStatus.textContent = copied ? t("agentCopyDone") : t("agentCopyFailed");
+  }
+}
+
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    return true;
+  } catch {
+    try {
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "");
+      textarea.style.position = "fixed";
+      textarea.style.left = "-9999px";
+      document.body.appendChild(textarea);
+      textarea.select();
+      const ok = document.execCommand("copy");
+      textarea.remove();
+      return ok;
+    } catch {
+      return false;
+    }
+  }
 }
 
 function openScheduleEditor(monitor) {

@@ -338,12 +338,6 @@
   "agentTitle": {
     "message": "Agent AI"
   },
-  "agentIntro": {
-    "message": "把下面的提示词粘贴给 Agent AI。Agent 会先询问要监控什么，再在浏览器中检查网站并打开注册确认页。"
-  },
-  "agentWarning": {
-    "message": "只能使用 Codex、Claude Code、OpenClaw、Antigravity 等可以控制本地浏览器的 Agent AI。普通网页 GPT、Claude、Gemini 聊天无法在此扩展中注册提醒。"
-  },
   "agentPageTitle": {
     "message": "Web Change Alert Agent"
   },
@@ -388,5 +382,32 @@
   },
   "agentPromptTemplate": {
     "message": "你是可以控制真实本地浏览器和 Chrome 扩展页面的 Agent AI，例如 Codex、Claude Code、OpenClaw 或 Antigravity。普通网页 GPT/Claude/Gemini 聊天无法控制用户浏览器或注册提醒，请不要用于此任务。\n\n请先用自然语言询问用户:\n- 请描述当它变化时想收到提醒的部分。\n- 目标网站 URL：请用户先打开网站，找到想监控的部分，然后复制浏览器顶部地址栏中的 URL。例如: https://www.google.com/search?q=...\n- 要监控的值：用示例说明，比如价格文本、库存/状态文字、按钮文案、图片 URL、链接 href 或输入框值。\n- 周期：询问多久检查一次，例如每 10 分钟、每天 9 点、每周一 9 点。\n- 可选提醒条件：询问是否每次变化都提醒，还是只有满足条件时提醒。请解释例子，例如只在某个短语出现时、只在某个短语消失时、数字/文本符合某种重复模式时。不要一开始就问“过滤值”或“正则”。如果需要模式条件，请问是否还有其他重复出现的格式或规律。\n\n用户回答后:\n1. 在用户的浏览器中打开目标网站。需要登录的网站请保持当前登录会话。\n2. 检查页面，找到请求值对应的最小且稳定的 CSS 选择器。优先使用稳定的 id、class、data 属性。不要把扩展的 picker UI、下拉菜单、提示或临时遮罩包含进值中。\n3. 选择提取方式：可见文本用 {\"type\":\"text\"}，图片 URL 用 {\"type\":\"image\"}，表单值用 {\"type\":\"value\"}，属性用 {\"type\":\"attr\",\"attr\":\"href\"}。\n4. 选择周期：{\"type\":\"interval\",\"minutes\":10}、{\"type\":\"daily\",\"hour\":9,\"minute\":0}、{\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} 或 {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}。\n5. 过滤器只用于 text/value 监控：{\"mode\":\"none\",\"values\":[]}、{\"mode\":\"only_contains\",\"values\":[\"...\"]}、{\"mode\":\"only_missing\",\"values\":[\"...\"]} 或 {\"mode\":\"only_regex\",\"values\":[\"...\"]}。only_regex 只在简单“包含/消失”无法表达用户说的重复规律时使用。\n6. 构建类似这样的 JSON：{\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}。\n7. 将 JSON 以 UTF-8 JSON.stringify 后进行 base64url 编码，然后打开这个扩展注册 URL：{commandPageUrl}#payload=ENCODED_JSON\n8. 在注册页面确认预览并点击注册。"
+  },
+  "agentIntroLead": {
+    "message": "把下面的提示词粘贴给 Agent AI。"
+  },
+  "agentIntroDetail": {
+    "message": "Agent 会先询问要监控什么，在浏览器中检查网站，然后替你完成注册。"
+  },
+  "agentCopyPrompt": {
+    "message": "复制提示词到剪贴板"
+  },
+  "agentCopyDone": {
+    "message": "提示词已复制。"
+  },
+  "agentCopyFailed": {
+    "message": "无法复制提示词。"
+  },
+  "agentSupportedAgents": {
+    "message": "Codex、Claude Code、OpenClaw、Antigravity"
+  },
+  "agentWarningCan": {
+    "message": " 等可以控制本地浏览器的 Agent AI 可以使用。"
+  },
+  "agentUnsupportedAgents": {
+    "message": "普通网页 GPT、Claude、Gemini 聊天"
+  },
+  "agentWarningCannot": {
+    "message": "无法在此扩展中注册提醒。"
   }
 }

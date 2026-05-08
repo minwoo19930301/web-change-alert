@@ -338,12 +338,6 @@
   "agentTitle": {
     "message": "Agent AI"
   },
-  "agentIntro": {
-    "message": "下のプロンプトを Agent AI に貼り付けてください。Agent が監視したい内容を質問し、ブラウザーでサイトを確認して登録確認ページを開きます。"
-  },
-  "agentWarning": {
-    "message": "Codex、Claude Code、OpenClaw、Antigravity などローカルブラウザーを操作できる Agent AI のみ使用できます。通常の Web GPT、Claude、Gemini チャットではこの拡張機能にアラームを登録できません。"
-  },
   "agentPageTitle": {
     "message": "Web Change Alert Agent"
   },
@@ -388,5 +382,32 @@
   },
   "agentPromptTemplate": {
     "message": "あなたは Codex、Claude Code、OpenClaw、Antigravity のように、実際のローカルブラウザーと Chrome 拡張機能ページを操作できる Agent AI です。通常の Web 版 GPT/Claude/Gemini チャットはユーザーのブラウザーや拡張機能を操作してアラーム登録できないため、この作業には使わないでください。\n\nまずユーザーに自然な言葉で確認してください:\n- 変更されたときに通知を受けたい部分を説明してもらう。\n- 対象サイト URL: 先にサイトを開き、目的の部分を見つけてから、ブラウザー上部のアドレスバーの URL をコピーしてもらう。例: https://www.google.com/search?q=...\n- 監視する値: 価格テキスト、在庫/状態文、ボタン文言、画像 URL、リンク href、入力値などの例を出して確認する。\n- 周期: 10分ごと、毎日9時、毎週月曜9時など、どれくらいの頻度で確認するかを聞く。\n- 任意の通知条件: すべての変更で通知するか、特定条件のときだけ通知するかを説明して聞く。例: 特定の文言が表示されたときだけ、消えたときだけ、数値や文言が繰り返しパターンに合うときだけ。最初から「フィルター値」や「正規表現」とは聞かない。パターン条件が必要そうなら、ほかに繰り返される形式があるかを聞く。\n\nユーザーが回答したら:\n1. ユーザーのブラウザーで対象サイトを開きます。ログインが必要な場合はログイン状態を維持します。\n2. ページを確認し、対象値に対して最小で安定した CSS セレクターを探します。安定した id、class、data 属性を優先し、拡張機能の picker UI、ドロップダウン、ヒント、一時オーバーレイを値に含めないでください。\n3. 抽出方法を選びます: 表示テキストは {\"type\":\"text\"}、画像 URL は {\"type\":\"image\"}、フォーム値は {\"type\":\"value\"}、属性は {\"type\":\"attr\",\"attr\":\"href\"}。\n4. スケジュールを選びます: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0}, {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}。\n5. フィルターは text/value モニターだけに使います: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]}, {\"mode\":\"only_regex\",\"values\":[\"...\"]}。only_regex は単純な含む/消える条件では表せない繰り返しパターンの場合のみ使います。\n6. 次のような JSON を作ります: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}。\n7. JSON を UTF-8 で JSON.stringify し、base64url エンコードして、この拡張機能登録 URL を開きます: {commandPageUrl}#payload=ENCODED_JSON\n8. 登録ページでプレビューを確認し、登録をクリックします。"
+  },
+  "agentIntroLead": {
+    "message": "下のプロンプトを Agent AI に貼り付けてください。"
+  },
+  "agentIntroDetail": {
+    "message": "Agent が何を監視するかを先に確認し、ブラウザーでサイトを調べて登録まで行います。"
+  },
+  "agentCopyPrompt": {
+    "message": "プロンプトをクリップボードにコピー"
+  },
+  "agentCopyDone": {
+    "message": "プロンプトをコピーしました。"
+  },
+  "agentCopyFailed": {
+    "message": "プロンプトをコピーできませんでした。"
+  },
+  "agentSupportedAgents": {
+    "message": "Codex, Claude Code, OpenClaw, Antigravity"
+  },
+  "agentWarningCan": {
+    "message": " などのローカルブラウザーを操作できる Agent AI のみ使用できます。"
+  },
+  "agentUnsupportedAgents": {
+    "message": "通常の Web GPT、Claude、Gemini チャット"
+  },
+  "agentWarningCannot": {
+    "message": "ではこの拡張機能にアラームを登録できません。"
   }
 }
