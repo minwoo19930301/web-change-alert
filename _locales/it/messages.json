@@ -339,28 +339,10 @@
     "message": "Agent AI"
   },
   "agentIntro": {
-    "message": "Copia il prompt per un’IA agent. Può ispezionare il sito, scegliere un selettore e aprire la pagina comando con il payload del monitor."
+    "message": "Incolla il prompt qui sotto in un’IA agent. L’agent chiederà cosa monitorare, ispezionerà il sito nel browser e aprirà la pagina di conferma registrazione."
   },
   "agentWarning": {
     "message": "Usa Codex, Claude Code, OpenClaw, Antigravity o un’altra IA agent che possa controllare il browser locale. Le normali chat web GPT, Claude o Gemini non possono registrare allarmi in questa estensione."
-  },
-  "agentExtensionIdLabel": {
-    "message": "ID estensione"
-  },
-  "agentCommandPageLabel": {
-    "message": "Pagina comando"
-  },
-  "agentCopyPrompt": {
-    "message": "Copia prompt agent"
-  },
-  "agentOpenCommandPage": {
-    "message": "Apri pagina comando"
-  },
-  "agentCopyDone": {
-    "message": "Prompt copiato."
-  },
-  "agentCopyFailed": {
-    "message": "Impossibile copiare il prompt."
   },
   "agentPageTitle": {
     "message": "Web Change Alert Agent"
@@ -405,6 +387,6 @@
     "message": "Apri sito"
   },
   "agentPromptTemplate": {
-    "message": "Sei un'IA agent che può controllare un vero browser locale e pagine di estensioni Chrome, come Codex, Claude Code, OpenClaw o Antigravity. Non usare una normale chat web GPT/Claude/Gemini per questo compito, perché non può controllare il browser dell'utente né registrare l'allarme.\n\nObiettivo: registrare un monitor Web Change Alert.\n\nPassaggi:\n1. Apri il sito target nel browser dell'utente. Mantieni la sessione se il sito richiede login.\n2. Ispeziona la pagina e trova il selettore CSS più piccolo e affidabile per il valore richiesto. Preferisci id, classi e attributi data stabili. Non includere UI del picker, menu, suggerimenti o overlay temporanei dell'estensione nel valore.\n3. Scegli extract: {\"type\":\"text\"} per testo visibile, {\"type\":\"image\"} per URL immagine, {\"type\":\"value\"} per valori modulo o {\"type\":\"attr\",\"attr\":\"href\"} per un attributo.\n4. Scegli schedule: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} o {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. Usa filter solo per monitor text/value: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]} o {\"mode\":\"only_regex\",\"values\":[\"...\"]}.\n6. Crea un JSON come questo: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. Esegui JSON.stringify UTF-8, codifica in base64url e apri questo URL: {commandPageUrl}#payload=ENCODED_JSON\n8. L'extension id attuale è {extensionId}. Non hardcodare un altro extension id. Usa l'URL della pagina comando sopra.\n9. Nella pagina comando, controlla l'anteprima e clicca Registra."
+    "message": "Sei un'IA agent che può controllare un vero browser locale e pagine di estensioni Chrome, come Codex, Claude Code, OpenClaw o Antigravity. Non usare una normale chat web GPT/Claude/Gemini per questo compito, perché non può controllare il browser dell'utente né registrare l'allarme.\n\nPrima chiedi all’utente in modo semplice:\n- Descrivi la parte per cui vuoi ricevere un avviso quando cambia.\n- URL del sito target: chiedi all’utente di aprire prima il sito, trovare la parte desiderata e copiare l’URL dalla barra degli indirizzi del browser. Esempio: https://www.google.com/search?q=...\n- Valore da monitorare: spiega esempi come testo prezzo, testo stock/stato, etichetta pulsante, URL immagine, href link o valore input.\n- Frequenza: chiedi ogni quanto controllare, per esempio ogni 10 minuti, ogni giorno alle 9:00 o ogni lunedì alle 9:00.\n- Condizione opzionale di avviso: chiedi se ogni cambiamento deve avvisare o solo i cambiamenti che rispettano una condizione. Spiega esempi: solo quando compare una frase, solo quando scompare una frase, o quando numero/testo segue uno schema ripetuto. Non chiedere prima un “valore filtro” e non menzionare regex. Se serve una condizione basata su schema, chiedi se c’è un altro schema ripetuto da usare.\n\nDopo la risposta:\n1. Apri il sito target nel browser dell'utente. Mantieni la sessione se il sito richiede login.\n2. Ispeziona la pagina e trova il selettore CSS più piccolo e affidabile per il valore richiesto. Preferisci id, classi e attributi data stabili. Non includere UI del picker, menu, suggerimenti o overlay temporanei dell'estensione nel valore.\n3. Scegli extract: {\"type\":\"text\"} per testo visibile, {\"type\":\"image\"} per URL immagine, {\"type\":\"value\"} per valori modulo o {\"type\":\"attr\",\"attr\":\"href\"} per un attributo.\n4. Scegli schedule: {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} o {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. Usa filter solo per monitor text/value: {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]} o {\"mode\":\"only_regex\",\"values\":[\"...\"]}. Usa only_regex solo quando l’utente descrive uno schema ripetuto che non si esprime con semplice presenza/scomparsa.\n6. Crea un JSON come questo: {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. Esegui JSON.stringify UTF-8, codifica in base64url e apri questo URL di registrazione dell’estensione: {commandPageUrl}#payload=ENCODED_JSON\n8. Nella pagina di registrazione, controlla l’anteprima e clicca Registra."
   }
 }

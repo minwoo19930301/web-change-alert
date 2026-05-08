@@ -253,10 +253,12 @@ async function previewAgentMonitor(input) {
   }
 
   const value = normalizeValue(result?.ok ? result.value || "" : "");
-  const title = spec.title || result?.meta?.title || buildTitleFromUrl(spec.url);
+  const title = result?.meta?.title || spec.title || buildTitleFromUrl(spec.url);
+  const faviconUrl = result?.meta?.faviconUrl || spec.faviconUrl || "";
   return {
     spec,
     title,
+    faviconUrl,
     value,
     missing: isMissing,
     meta: result?.meta || null
@@ -265,7 +267,7 @@ async function previewAgentMonitor(input) {
 
 async function registerAgentMonitor(input) {
   const preview = await previewAgentMonitor(input);
-  const monitor = buildAgentMonitor(preview.spec, preview.value, preview.title);
+  const monitor = buildAgentMonitor(preview.spec, preview.value, preview.title, preview.faviconUrl);
   await saveMonitor(monitor);
   return { monitor, value: preview.value, missing: preview.missing };
 }
@@ -282,7 +284,8 @@ function normalizeAgentMonitorSpec(input) {
   return {
     url,
     selector,
-    title: String(payload.title || "").trim() || buildTitleFromUrl(url),
+    title: String(payload.title || "").trim(),
+    faviconUrl: String(payload.faviconUrl || "").trim(),
     extract,
     displayStyle: payload.displayStyle || null,
     schedule: normalizeAgentSchedule(payload.schedule),
@@ -380,12 +383,13 @@ function normalizeAgentFilterValues(filter) {
     .filter(Boolean);
 }
 
-function buildAgentMonitor(spec, value, title) {
+function buildAgentMonitor(spec, value, title, faviconUrl = "") {
   const now = Date.now();
   return {
     id: buildRequestId(),
     url: spec.url,
     title: title || spec.title || buildTitleFromUrl(spec.url),
+    faviconUrl: faviconUrl || spec.faviconUrl || "",
     selector: spec.selector,
     extract: spec.extract,
     displayStyle: spec.displayStyle || null,
@@ -545,6 +549,7 @@ async function runCheck(monitorId, force = false) {
     ts: now
   };
   debugLog("check result", monitor.id, monitor.lastError || "ok", result?.meta || {});
+  applyPageMeta(monitor, result?.meta);
 
   if (treatAsValueResult) {
     const filterResult = evaluateValueFilter(newValue, monitor.filter);
@@ -627,6 +632,7 @@ async function runBatch(url, monitors) {
       ts: now
     };
     debugLog("batch result", monitor.id, monitor.lastError || "ok", result?.meta || {});
+    applyPageMeta(monitor, result?.meta);
 
     if (treatAsValueResult) {
       const filterResult = evaluateValueFilter(newValue, monitor.filter);
@@ -668,6 +674,16 @@ async function runBatch(url, monitors) {
     if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
       scheduleMonitor(monitor);
     }
+  }
+}
+
+function applyPageMeta(monitor, meta) {
+  if (!monitor || !meta) return;
+  if (meta.title) {
+    monitor.title = meta.title;
+  }
+  if (meta.faviconUrl) {
+    monitor.faviconUrl = meta.faviconUrl;
   }
 }
 
@@ -891,10 +907,36 @@ async function extractValuesFromPage(requests, timeoutMs) {
     return tokens[Number(index || 0)] || "";
   };
 
+  const getFaviconUrl = () => {
+    const selectors = [
+      'link[rel~="icon"][href]',
+      'link[rel="shortcut icon"][href]',
+      'link[rel="apple-touch-icon"][href]',
+      'link[rel="apple-touch-icon-precomposed"][href]'
+    ];
+    for (const selector of selectors) {
+      const link = document.querySelector(selector);
+      const href = link?.href || link?.getAttribute?.("href") || "";
+      if (href) {
+        try {
+          return new URL(href, location.href).href;
+        } catch {
+          return href;
+        }
+      }
+    }
+    try {
+      return new URL("/favicon.ico", location.origin).href;
+    } catch {
+      return "";
+    }
+  };
+
   const baseMeta = {
     readyState: document.readyState,
     visibility: document.visibilityState,
     title: document.title,
+    faviconUrl: getFaviconUrl(),
     url: location.href
   };
   const selectors = requests.map((request) => request?.selector || "");
@@ -1090,10 +1132,36 @@ async function extractValueFromPage(selector, extract, timeoutMs) {
       return tokens[Number(index || 0)] || "";
     };
 
+    const getFaviconUrl = () => {
+      const selectors = [
+        'link[rel~="icon"][href]',
+        'link[rel="shortcut icon"][href]',
+        'link[rel="apple-touch-icon"][href]',
+        'link[rel="apple-touch-icon-precomposed"][href]'
+      ];
+      for (const selector of selectors) {
+        const link = document.querySelector(selector);
+        const href = link?.href || link?.getAttribute?.("href") || "";
+        if (href) {
+          try {
+            return new URL(href, location.href).href;
+          } catch {
+            return href;
+          }
+        }
+      }
+      try {
+        return new URL("/favicon.ico", location.origin).href;
+      } catch {
+        return "";
+      }
+    };
+
     const baseMeta = {
       readyState: document.readyState,
       visibility: document.visibilityState,
       title: document.title,
+      faviconUrl: getFaviconUrl(),
       url: location.href
     };
     const element = await waitForSelector(selector, waitMs);
@@ -1338,6 +1406,7 @@ async function updateMonitorFields(id, updates) {
     "extract",
     "displayStyle",
     "title",
+    "faviconUrl",
     "lastValue",
     "lastChangedAt",
     "lastCheckedAt",

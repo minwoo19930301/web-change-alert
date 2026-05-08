@@ -53,6 +53,10 @@
         height: 16px;
         display: block;
       }
+      .agent-star {
+        width: 18px;
+        height: 18px;
+      }
       .popover {
         position: absolute;
         top: 34px;
@@ -125,6 +129,21 @@
         word-break: break-all;
         max-height: 36px;
         overflow: auto;
+      }
+      .title-row {
+        min-width: 0;
+        flex: 1 1 100%;
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .favicon {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 16px;
+        margin-top: 1px;
+        border-radius: 4px;
+        object-fit: contain;
       }
       .value {
         font-size: 13px;
@@ -691,32 +710,20 @@
         line-height: 1.45;
         color: #7a4d00;
       }
-      .agent-meta {
-        display: grid;
-        gap: 6px;
-      }
-      .agent-meta-row {
-        display: grid;
-        gap: 3px;
-        font-size: 11px;
-      }
-      .agent-meta-label {
-        color: #5f6368;
-      }
-      .agent-code {
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        background: #f8f9fa;
+      .agent-prompt {
+        width: 100%;
+        min-height: 260px;
+        max-height: 360px;
+        resize: vertical;
+        overflow: auto;
         border: 1px solid var(--border);
-        border-radius: 8px;
-        padding: 7px;
+        border-radius: 10px;
+        background: #f8f9fa;
+        padding: 10px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         font-size: 10px;
-        line-height: 1.45;
-        word-break: break-all;
-      }
-      .agent-actions {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 8px;
+        line-height: 1.55;
+        color: #202124;
       }
       .agent-status {
         min-height: 14px;
@@ -735,9 +742,19 @@
       <div class="topbar-right">
         <button id="langBtn" class="icon-btn" type="button" title="Language">🌐</button>
         <button id="agentBtn" class="icon-btn" type="button" title="Agent">
-          <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="4.5" y="4.5" width="15" height="15" rx="3"></rect>
-            <path d="M12 7.5l1.2 3.3 3.3 1.2-3.3 1.2L12 16.5l-1.2-3.3L7.5 12l3.3-1.2L12 7.5z"></path>
+          <svg class="agent-star" viewBox="0 0 24 24" aria-hidden="true">
+            <defs>
+              <linearGradient id="agentStarGradient" x1="3" y1="3" x2="21" y2="21" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#ff3b30"></stop>
+                <stop offset="0.2" stop-color="#ff9500"></stop>
+                <stop offset="0.4" stop-color="#ffcc00"></stop>
+                <stop offset="0.6" stop-color="#34c759"></stop>
+                <stop offset="0.8" stop-color="#007aff"></stop>
+                <stop offset="1" stop-color="#af52de"></stop>
+              </linearGradient>
+            </defs>
+            <path fill="url(#agentStarGradient)" d="M12 2.8l2.05 5.72 5.72 2.05-5.72 2.05L12 18.35l-2.05-5.73-5.72-2.05 5.72-2.05L12 2.8z"></path>
+            <path fill="url(#agentStarGradient)" opacity="0.75" d="M18.2 15.3l.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8.8-2.1z"></path>
           </svg>
         </button>
         <button id="aboutBtn" class="icon-btn" type="button" title="About">i</button>
@@ -825,20 +842,7 @@
         <div class="agent-copy">
           <p data-i18n="agentIntro"></p>
           <div class="agent-warning" data-i18n="agentWarning"></div>
-          <div class="agent-meta">
-            <div class="agent-meta-row">
-              <span class="agent-meta-label" data-i18n="agentExtensionIdLabel"></span>
-              <div id="agentExtensionId" class="agent-code"></div>
-            </div>
-            <div class="agent-meta-row">
-              <span class="agent-meta-label" data-i18n="agentCommandPageLabel"></span>
-              <div id="agentCommandPage" class="agent-code"></div>
-            </div>
-          </div>
-          <div class="agent-actions">
-            <button id="copyAgentPrompt" type="button" class="primary" data-i18n="agentCopyPrompt"></button>
-            <button id="openAgentCommand" type="button" class="secondary" data-i18n="agentOpenCommandPage"></button>
-          </div>
+          <textarea id="agentPrompt" class="agent-prompt" readonly spellcheck="false"></textarea>
           <div id="agentStatus" class="agent-status"></div>
         </div>
       </div>

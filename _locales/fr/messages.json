@@ -339,28 +339,10 @@
     "message": "Agent AI"
   },
   "agentIntro": {
-    "message": "Copiez le prompt pour une IA agent. Elle peut inspecter le site, choisir un sélecteur et ouvrir la page de commande avec le payload du monitor."
+    "message": "Collez le prompt ci-dessous dans une IA agent. Elle demandera quoi surveiller, inspectera le site dans votre navigateur, puis ouvrira la page de confirmation d’enregistrement."
   },
   "agentWarning": {
     "message": "Utilisez Codex, Claude Code, OpenClaw, Antigravity ou une autre IA agent capable de contrôler votre navigateur local. Les chats web GPT, Claude ou Gemini classiques ne peuvent pas enregistrer d’alertes dans cette extension."
-  },
-  "agentExtensionIdLabel": {
-    "message": "ID de l’extension"
-  },
-  "agentCommandPageLabel": {
-    "message": "Page de commande"
-  },
-  "agentCopyPrompt": {
-    "message": "Copier le prompt agent"
-  },
-  "agentOpenCommandPage": {
-    "message": "Ouvrir la page de commande"
-  },
-  "agentCopyDone": {
-    "message": "Prompt copié."
-  },
-  "agentCopyFailed": {
-    "message": "Impossible de copier le prompt."
   },
   "agentPageTitle": {
     "message": "Web Change Alert Agent"
@@ -405,6 +387,6 @@
     "message": "Ouvrir le site"
   },
   "agentPromptTemplate": {
-    "message": "Vous êtes une IA agent capable de contrôler un vrai navigateur local et des pages d'extension Chrome, comme Codex, Claude Code, OpenClaw ou Antigravity. N'utilisez pas un chat web GPT/Claude/Gemini classique pour cette tâche, car il ne peut pas contrôler le navigateur de l'utilisateur ni enregistrer l'alerte.\n\nObjectif : enregistrer un monitor Web Change Alert.\n\nÉtapes :\n1. Ouvrez le site cible dans le navigateur de l'utilisateur. Gardez la session connectée si le site nécessite une connexion.\n2. Inspectez la page et trouvez le plus petit sélecteur CSS fiable pour la valeur demandée. Privilégiez les ids, classes et attributs data stables. N'incluez pas l'UI du picker, les menus, les aides ou les overlays temporaires de l'extension dans la valeur.\n3. Choisissez extract : {\"type\":\"text\"} pour le texte visible, {\"type\":\"image\"} pour une URL d'image, {\"type\":\"value\"} pour les valeurs de formulaire ou {\"type\":\"attr\",\"attr\":\"href\"} pour un attribut.\n4. Choisissez schedule : {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} ou {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. Utilisez filter uniquement pour les monitors text/value : {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]} ou {\"mode\":\"only_regex\",\"values\":[\"...\"]}.\n6. Construisez un JSON comme ceci : {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. Faites JSON.stringify en UTF-8, encodez en base64url, puis ouvrez cette URL : {commandPageUrl}#payload=ENCODED_JSON\n8. L'extension id actuel est {extensionId}. Ne codez pas en dur un autre extension id. Utilisez l'URL de commande ci-dessus.\n9. Sur la page de commande, vérifiez l'aperçu et cliquez sur Enregistrer."
+    "message": "Vous êtes une IA agent capable de contrôler un vrai navigateur local et des pages d'extension Chrome, comme Codex, Claude Code, OpenClaw ou Antigravity. N'utilisez pas un chat web GPT/Claude/Gemini classique pour cette tâche, car il ne peut pas contrôler le navigateur de l'utilisateur ni enregistrer l'alerte.\n\nCommencez par demander clairement à l’utilisateur:\n- Décrivez la partie pour laquelle vous voulez recevoir une alerte quand elle change.\n- URL du site cible : demandez à l’utilisateur d’ouvrir d’abord le site, de trouver la partie voulue, puis de copier l’URL depuis la barre d’adresse du navigateur. Exemple : https://www.google.com/search?q=...\n- Valeur à surveiller : expliquez des exemples comme texte de prix, texte de stock/statut, libellé d’un bouton, URL d’image, href d’un lien ou valeur d’un champ.\n- Fréquence : demandez à quelle fréquence vérifier, par exemple toutes les 10 minutes, tous les jours à 9 h, ou chaque lundi à 9 h.\n- Condition d’alerte facultative : demandez si chaque changement doit déclencher une alerte, ou seulement les changements qui respectent une condition. Expliquez des exemples : seulement quand une phrase apparaît, seulement quand une phrase disparaît, ou quand un nombre/texte suit un motif répété. Ne demandez pas d’abord une « valeur de filtre » et ne mentionnez pas regex. Si une condition par motif est utile, demandez s’il existe un autre motif répété à utiliser.\n\nAprès la réponse:\n1. Ouvrez le site cible dans le navigateur de l'utilisateur. Gardez la session connectée si le site nécessite une connexion.\n2. Inspectez la page et trouvez le plus petit sélecteur CSS fiable pour la valeur demandée. Privilégiez les ids, classes et attributs data stables. N'incluez pas l'UI du picker, les menus, les aides ou les overlays temporaires de l'extension dans la valeur.\n3. Choisissez extract : {\"type\":\"text\"} pour le texte visible, {\"type\":\"image\"} pour une URL d'image, {\"type\":\"value\"} pour les valeurs de formulaire ou {\"type\":\"attr\",\"attr\":\"href\"} pour un attribut.\n4. Choisissez schedule : {\"type\":\"interval\",\"minutes\":10}, {\"type\":\"daily\",\"hour\":9,\"minute\":0}, {\"type\":\"weekly\",\"weekday\":1,\"hour\":9,\"minute\":0} ou {\"type\":\"monthly\",\"day\":1,\"hour\":9,\"minute\":0}.\n5. Utilisez filter uniquement pour les monitors text/value : {\"mode\":\"none\",\"values\":[]}, {\"mode\":\"only_contains\",\"values\":[\"...\"]}, {\"mode\":\"only_missing\",\"values\":[\"...\"]} ou {\"mode\":\"only_regex\",\"values\":[\"...\"]}. Utilisez only_regex seulement si l’utilisateur décrit un motif répété impossible à exprimer par simple présence/disparition.\n6. Construisez un JSON comme ceci : {\"action\":\"registerMonitor\",\"url\":\"https://example.com\",\"selector\":\".price\",\"extract\":{\"type\":\"text\"},\"schedule\":{\"type\":\"interval\",\"minutes\":10},\"filter\":{\"mode\":\"none\",\"values\":[]}}.\n7. Faites JSON.stringify en UTF-8, encodez en base64url, puis ouvrez cette URL d’enregistrement de l’extension : {commandPageUrl}#payload=ENCODED_JSON\n8. Sur la page d’enregistrement, vérifiez l’aperçu et cliquez sur Enregistrer."
   }
 }

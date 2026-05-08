@@ -33,10 +33,7 @@ const agentBtn = document.getElementById("agentBtn");
 const agentOverlay = document.getElementById("agentOverlay");
 const agentBack = document.getElementById("agentBack");
 const agentCloseIcon = document.getElementById("agentCloseIcon");
-const agentExtensionId = document.getElementById("agentExtensionId");
-const agentCommandPage = document.getElementById("agentCommandPage");
-const copyAgentPrompt = document.getElementById("copyAgentPrompt");
-const openAgentCommand = document.getElementById("openAgentCommand");
+const agentPrompt = document.getElementById("agentPrompt");
 const agentStatus = document.getElementById("agentStatus");
 const noticeText = document.getElementById("noticeText");
 const aboutAppName = document.getElementById("aboutAppName");
@@ -226,11 +223,8 @@ function bindEvents() {
   agentCloseIcon?.addEventListener("click", () => {
     closeAgentPanel();
   });
-  copyAgentPrompt?.addEventListener("click", async () => {
-    await copyAgentGuide();
-  });
-  openAgentCommand?.addEventListener("click", () => {
-    chrome.tabs.create({ url: getAgentCommandPageUrl() });
+  agentPrompt?.addEventListener("focus", () => {
+    agentPrompt.select();
   });
 
   aboutOverlay.addEventListener("click", (event) => {
@@ -347,8 +341,7 @@ function applyStaticTexts() {
   }
 
   noticeText.textContent = t("notice");
-  if (agentExtensionId) agentExtensionId.textContent = chrome.runtime.id;
-  if (agentCommandPage) agentCommandPage.textContent = getAgentCommandPageUrl();
+  if (agentPrompt) agentPrompt.value = buildAgentGuidePrompt();
   aboutAppName.textContent = t("extensionName") || MANIFEST_NAME;
   aboutVersion.textContent = APP_VERSION;
   aboutAuthor.textContent = AUTHOR_NAME;
@@ -578,6 +571,10 @@ function render(monitors) {
     const line = document.createElement("div");
     line.className = "line";
 
+    const titleRow = document.createElement("div");
+    titleRow.className = "title-row";
+    const favicon = buildFavicon(monitor);
+
     const link = document.createElement("a");
     link.className = "title-link";
     link.href = monitor.url;
@@ -589,11 +586,37 @@ function render(monitors) {
     const valueRow = buildValueRow(monitor);
 
     card.appendChild(header);
-    line.appendChild(link);
+    if (favicon) titleRow.appendChild(favicon);
+    titleRow.appendChild(link);
+    line.appendChild(titleRow);
     line.appendChild(valueRow);
     card.appendChild(line);
 
     listEl.appendChild(card);
+  }
+}
+
+function buildFavicon(monitor) {
+  const faviconUrl = getFaviconUrl(monitor);
+  if (!faviconUrl) return null;
+  const image = document.createElement("img");
+  image.className = "favicon";
+  image.src = faviconUrl;
+  image.alt = "";
+  image.loading = "lazy";
+  image.referrerPolicy = "no-referrer";
+  image.addEventListener("error", () => {
+    image.remove();
+  });
+  return image;
+}
+
+function getFaviconUrl(monitor) {
+  if (monitor?.faviconUrl) return monitor.faviconUrl;
+  try {
+    return new URL("/favicon.ico", new URL(monitor.url).origin).href;
+  } catch {
+    return "";
   }
 }
 
@@ -1136,8 +1159,10 @@ function closeAbout() {
 }
 
 function openAgentPanel() {
-  if (agentExtensionId) agentExtensionId.textContent = chrome.runtime.id;
-  if (agentCommandPage) agentCommandPage.textContent = getAgentCommandPageUrl();
+  if (agentPrompt) {
+    agentPrompt.value = buildAgentGuidePrompt();
+    agentPrompt.scrollTop = 0;
+  }
   if (agentStatus) agentStatus.textContent = "";
   agentOverlay.classList.remove("hidden");
 }
@@ -1150,41 +1175,10 @@ function getAgentCommandPageUrl() {
   return chrome.runtime.getURL("agent.html");
 }
 
-async function copyAgentGuide() {
-  const prompt = buildAgentGuidePrompt();
-  const copied = await copyText(prompt);
-  if (agentStatus) {
-    agentStatus.textContent = copied ? t("agentCopyDone") : t("agentCopyFailed");
-  }
-}
-
 function buildAgentGuidePrompt() {
   return t("agentPromptTemplate", {
-    extensionId: chrome.runtime.id,
     commandPageUrl: getAgentCommandPageUrl()
   });
-}
-
-async function copyText(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch {
-    try {
-      const textarea = document.createElement("textarea");
-      textarea.value = text;
-      textarea.setAttribute("readonly", "");
-      textarea.style.position = "fixed";
-      textarea.style.left = "-9999px";
-      document.body.appendChild(textarea);
-      textarea.select();
-      const ok = document.execCommand("copy");
-      textarea.remove();
-      return ok;
-    } catch {
-      return false;
-    }
-  }
 }
 
 function openScheduleEditor(monitor) {

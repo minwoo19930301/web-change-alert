@@ -1528,11 +1528,12 @@
 
   function buildMonitor(selection, schedule, filter) {
     const url = selection.url || location.href;
-    const title = document.title || buildTitleFromUrl(url);
+    const title = selection.title || document.title || buildTitleFromUrl(url);
     return {
       id: buildRequestId(),
       url,
       title,
+      faviconUrl: selection.faviconUrl || getPageFaviconUrl(),
       selector: selection.selector,
       extract: selection.extract,
       displayStyle: selection.displayStyle || null,
@@ -1549,10 +1550,11 @@
 
   function buildUpdate(selection, modalRoot) {
     const url = selection.url || location.href;
-    const title = document.title || buildTitleFromUrl(url);
+    const title = selection.title || document.title || buildTitleFromUrl(url);
     return {
       url,
       title,
+      faviconUrl: selection.faviconUrl || getPageFaviconUrl(),
       selector: selection.selector,
       extract: selection.extract,
       displayStyle: selection.displayStyle || null,
@@ -1576,6 +1578,31 @@
       return parsed.hostname;
     } catch {
       return url;
+    }
+  }
+
+  function getPageFaviconUrl() {
+    const selectors = [
+      'link[rel~="icon"][href]',
+      'link[rel="shortcut icon"][href]',
+      'link[rel="apple-touch-icon"][href]',
+      'link[rel="apple-touch-icon-precomposed"][href]'
+    ];
+    for (const selector of selectors) {
+      const link = document.querySelector(selector);
+      const href = link?.href || link?.getAttribute?.("href") || "";
+      if (href) {
+        try {
+          return new URL(href, location.href).href;
+        } catch {
+          return href;
+        }
+      }
+    }
+    try {
+      return new URL("/favicon.ico", location.origin).href;
+    } catch {
+      return "";
     }
   }
 
@@ -1668,6 +1695,7 @@
       selector: selector || getSelector(element),
       url: location.href,
       title: document.title || "",
+      faviconUrl: getPageFaviconUrl(),
       value: valueData.value,
       extract: buildExtract(valueData),
       displayStyle: shouldKeepDisplayStyle(element, valueData)
