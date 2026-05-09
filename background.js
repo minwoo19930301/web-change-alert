@@ -523,10 +523,11 @@ async function runCheck(monitorId, force = false) {
   try {
     result = await fetchValueViaHiddenTab(monitor.url, monitor.selector, monitor.extract);
   } catch (error) {
+    const hadFailure = Boolean(monitor.lastError);
     monitor.lastError = error?.message || String(error);
     monitor.lastCheckedAt = Date.now();
     monitor.lastDebug = { ok: false, error: monitor.lastError, meta: null, ts: monitor.lastCheckedAt };
-    await notifyFailure(monitor, monitor.lastError);
+    await notifyFailureOnce(monitor, monitor.lastError, hadFailure);
     await setMonitors(monitors);
     debugLog("check failed", monitor.id, monitor.lastError);
     return;
@@ -540,6 +541,7 @@ async function runCheck(monitorId, force = false) {
   const now = Date.now();
   const prevCheckedAt = monitor.lastCheckedAt || null;
   const prevCheckedValue = monitor.lastValue || "";
+  const hadFailure = Boolean(monitor.lastError);
   monitor.lastCheckedAt = now;
   monitor.lastError = treatAsValueResult ? null : result?.error || null;
   monitor.lastDebug = {
@@ -558,7 +560,7 @@ async function runCheck(monitorId, force = false) {
       if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
         scheduleMonitor(monitor);
       }
-      await notifyFailure(monitor, monitor.lastError);
+      await notifyFailureOnce(monitor, monitor.lastError, hadFailure);
       await setMonitors(monitors);
       return;
     }
@@ -585,7 +587,7 @@ async function runCheck(monitorId, force = false) {
       monitor.lastValue = newValue;
     }
   } else if (monitor.lastError) {
-    await notifyFailure(monitor, monitor.lastError);
+    await notifyFailureOnce(monitor, monitor.lastError, hadFailure);
   }
 
   await setMonitors(monitors);
@@ -603,10 +605,11 @@ async function runBatch(url, monitors) {
   } catch (error) {
     const now = Date.now();
     for (const monitor of monitors) {
+      const hadFailure = Boolean(monitor.lastError);
       monitor.lastError = error?.message || String(error);
       monitor.lastCheckedAt = now;
       monitor.lastDebug = { ok: false, error: monitor.lastError, meta: null, ts: now };
-      await notifyFailure(monitor, monitor.lastError);
+      await notifyFailureOnce(monitor, monitor.lastError, hadFailure);
     }
     debugLog("batch failed", url, error?.message || String(error));
     return;
@@ -623,6 +626,7 @@ async function runBatch(url, monitors) {
     const prevNormalized = normalizeValue(monitor.lastValue || "");
     const prevCheckedAt = monitor.lastCheckedAt || null;
     const prevCheckedValue = monitor.lastValue || "";
+    const hadFailure = Boolean(monitor.lastError);
     monitor.lastCheckedAt = now;
     monitor.lastError = treatAsValueResult ? null : result?.error || null;
     monitor.lastDebug = {
@@ -641,7 +645,7 @@ async function runBatch(url, monitors) {
         if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
           scheduleMonitor(monitor);
         }
-        await notifyFailure(monitor, monitor.lastError);
+        await notifyFailureOnce(monitor, monitor.lastError, hadFailure);
         continue;
       }
       if (filterResult.ignored) {
@@ -668,7 +672,7 @@ async function runBatch(url, monitors) {
     }
 
     if (!treatAsValueResult && monitor.lastError) {
-      await notifyFailure(monitor, monitor.lastError);
+      await notifyFailureOnce(monitor, monitor.lastError, hadFailure);
     }
 
     if (monitor.schedule?.enabled && monitor.schedule.type !== "interval") {
@@ -1266,6 +1270,11 @@ async function notifyFailure(monitor, errorMessage) {
     buttons: [{ title: tr("reselect") }],
     requireInteraction: false
   });
+}
+
+async function notifyFailureOnce(monitor, errorMessage, hadFailure) {
+  if (hadFailure) return;
+  await notifyFailure(monitor, errorMessage);
 }
 
 function formatNotificationValue(value, preferImage, tr = fallbackTranslate, baseUrl = "") {
