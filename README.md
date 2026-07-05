@@ -1,5 +1,8 @@
 # Web Change Alert
 
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Published-blue?style=for-the-badge&logo=googlechrome)](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc?utm_source=item-share-cb)
+
+
 Web Change Alert monitors selected parts of webpages and sends a browser notification only when the value actually changes.
 
 Chrome Web Store: [Web Change Alert](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc?utm_source=item-share-cb)
