@@ -39,13 +39,14 @@ above stays free — Pro only adds new capabilities on top.
 | Change history per monitor + CSV / JSON export | last value only | up to 500 entries |
 | Catch up on checks missed while the browser was closed | — | ✅ |
 
-**Price:** $24.9 one-time, permanent, includes future updates.
-Launch price **$14.9** for the first 100 buyers.
+**Price:** $24.90 one-time, permanent, includes future updates.
+Launch price **$14.90** for the first 100 buyers.
 For comparison, Distill Web Monitor's Starter plan is $15 *per month*.
 
-**Buy:** [Pro page](https://minwoo19930301.github.io/web-change-alert/) — the checkout page is
-being set up. Until it is live, email rlaalsdn456456@naver.com to buy at the launch price or to be
-notified when it opens.
+**Buy:** [Pro page](https://minwoo19930301.github.io/web-change-alert/). Pro is sold directly by
+email for now — mail rlaalsdn456456@naver.com, you get payment details back, and the license key
+arrives within 24 hours. A hosted checkout will replace this once there is enough demand to justify
+the setup.
 
 ### How the license works
 
