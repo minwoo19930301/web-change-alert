@@ -24,3 +24,43 @@ Chrome Web Store: [Web Change Alert](https://chromewebstore.google.com/detail/jc
 - Login-required sites need an active signed-in session
 - Sites protected by anti-bot systems may require manual verification
 - Very short intervals can cause rate limiting or blocking from the target site
+
+## Web Change Alert Pro
+
+Pro is an optional paid upgrade inside the same extension. Everything listed under **Features**
+above stays free — Pro only adds new capabilities on top.
+
+| | Free | Pro |
+|---|---|---|
+| Visual target picking, scheduling, browser notifications | ✅ | ✅ |
+| Number of monitors | unlimited | unlimited |
+| Telegram / Slack / Discord / Webhook / ntfy alerts | — | ✅ |
+| Number rules (alert only when a value crosses a threshold or moves by X%) | — | ✅ |
+| Change history per monitor + CSV / JSON export | last value only | up to 500 entries |
+| Catch up on checks missed while the browser was closed | — | ✅ |
+
+**Price:** $24.9 one-time, permanent, includes future updates.
+Launch price **$14.9** for the first 100 buyers.
+For comparison, Distill Web Monitor's Starter plan is $15 *per month*.
+
+**Buy:** _purchase link is being set up — open an issue or email the address on the
+[Chrome Web Store listing](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc)
+to be notified or to buy early._
+
+### How the license works
+
+No account, no license server, no phone-home. After purchase you get a signed license key;
+the extension verifies its ECDSA P-256 signature locally and works completely offline.
+
+### Honest limitation
+
+Checks run inside your own browser. That is why login-protected pages work and why bot
+protection rarely blocks you — but it also means checks pause while your browser is closed.
+Pro runs the missed checks as soon as you come back. It is not a 24/7 cloud monitor.
+
+### Source layout
+
+This repository holds the free extension. The Pro-only code lives in a separate private
+repository (`web-change-alert-pro`) because a paywall whose bypass logic is public is not a
+paywall. The package published to the Chrome Web Store is the free code in this repository
+plus that Pro module, which stays locked until a license is activated.
