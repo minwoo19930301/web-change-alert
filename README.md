@@ -43,9 +43,9 @@ above stays free — Pro only adds new capabilities on top.
 Launch price **$14.9** for the first 100 buyers.
 For comparison, Distill Web Monitor's Starter plan is $15 *per month*.
 
-**Buy:** _purchase link is being set up — open an issue or email the address on the
-[Chrome Web Store listing](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc)
-to be notified or to buy early._
+**Buy:** [Pro page](https://minwoo19930301.github.io/web-change-alert/) — the checkout page is
+being set up. Until it is live, email rlaalsdn456456@naver.com to buy at the launch price or to be
+notified when it opens.
 
 ### How the license works
 

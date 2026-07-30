@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Web Change Alert Pro — page monitoring that runs in your own browser</title>
+<meta name="description" content="Monitor the exact part of a page you pick. Get alerts on Telegram, Slack, Discord, webhooks, or ntfy. Price threshold rules and change history. $24.9 once, no subscription." />
+<link rel="canonical" href="https://minwoo19930301.github.io/web-change-alert/" />
+<style>
+  :root {
+    --ink: #14181d;
+    --muted: #5b6570;
+    --line: #dfe3e8;
+    --accent: #1a73e8;
+    --ok: #1e7f4f;
+    --bg: #ffffff;
+    --soft: #f6f8fa;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    background: var(--bg);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+  header { padding: 56px 0 32px; border-bottom: 1px solid var(--line); }
+  h1 { font-size: 34px; line-height: 1.25; margin: 0 0 12px; }
+  .badge {
+    display: inline-block; padding: 3px 10px; border-radius: 999px; font-size: 12px;
+    font-weight: 700; letter-spacing: .4px; color: #fff;
+    background: linear-gradient(135deg, #1a73e8, #6f42c1); vertical-align: middle; margin-left: 6px;
+  }
+  .lede { font-size: 18px; color: var(--muted); margin: 0 0 24px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .btn {
+    display: inline-block; padding: 12px 22px; border-radius: 8px; text-decoration: none;
+    font-weight: 600; border: 1px solid var(--line); color: var(--ink); background: #fff;
+  }
+  .btn.buy { background: var(--ok); border-color: var(--ok); color: #fff; }
+  .btn.free { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .price { font-size: 15px; color: var(--muted); }
+  .price s { color: #98a1ab; }
+  section { padding: 40px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 22px; margin: 0 0 14px; }
+  h3 { font-size: 17px; margin: 24px 0 6px; }
+  table { width: 100%; border-collapse: collapse; margin-top: 12px; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; }
+  td.mark { text-align: center; width: 90px; }
+  ul { padding-left: 20px; }
+  li { margin: 6px 0; }
+  .note { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 16px 18px; }
+  .note strong { display: block; margin-bottom: 4px; }
+  footer { padding: 32px 0 64px; color: var(--muted); font-size: 14px; }
+  code { background: var(--soft); padding: 2px 5px; border-radius: 4px; font-size: 90%; }
+  a:focus-visible, .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+  @media (prefers-color-scheme: dark) {
+    :root { --ink: #e7ebf0; --muted: #9aa4b0; --line: #333a42; --bg: #15181c; --soft: #1d2126; }
+    .btn { background: #22272d; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>Web Change Alert <span class="badge">PRO</span><br />Page monitoring that runs in <em>your</em> browser.</h1>
+    <p class="lede">
+      Pick the exact part of a page — a price, a seat count, a status line — and get told the moment
+      it changes. Checks run inside the browser you already use, so pages behind a login work and
+      bot protection does not lock you out.
+    </p>
+    <div class="cta">
+      <a class="btn free" href="https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc">Install free from Chrome Web Store</a>
+      <!-- 결제 상품이 만들어지면 href 를 체크아웃 URL 로 바꾸세요. 확장 재배포는 필요 없습니다. -->
+      <a class="btn buy" id="buy" href="#buy-status">Get Pro</a>
+      <span class="price"><s>$24.90</s> <strong>$14.90</strong> launch price · one-time, not a subscription</span>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Why it is different from cloud monitors</h2>
+    <ul>
+      <li><strong>Login-protected pages work.</strong> The check uses your own signed-in session, so a
+        members-only price or an internal dashboard is readable.</li>
+      <li><strong>Bot protection rarely triggers.</strong> The request comes from your everyday browser,
+        not a data-center IP that anti-bot systems are tuned to catch.</li>
+      <li><strong>Your data stays put.</strong> Monitored values are stored locally. No account, no
+        server, nothing uploaded. <a href="https://github.com/minwoo19930301/web-change-alert/blob/main/PRIVACY.md">Privacy policy</a>.</li>
+    </ul>
+
+    <div class="note">
+      <strong>The honest trade-off — read this before buying</strong>
+      Checks run while your browser is open. If your computer is off, checks pause. Pro runs the
+      missed checks as soon as you come back and warns you if things fell too far behind, but this is
+      not a 24/7 cloud monitor. If you need checks while your machine is asleep, a cloud service is
+      the right tool and I would rather you buy that instead.
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Free vs Pro</h2>
+    <p class="price">Nothing that used to be free became paid. Pro only adds new capabilities.</p>
+    <table>
+      <thead>
+        <tr><th>Feature</th><th class="mark">Free</th><th class="mark">Pro</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Visual target picking (text, number, image, SVG, canvas, link, input value)</td><td class="mark">✅</td><td class="mark">✅</td></tr>
+        <tr><td>Schedules: interval, daily, weekly, monthly</td><td class="mark">✅</td><td class="mark">✅</td></tr>
+        <tr><td>Browser notification only when the value really changed</td><td class="mark">✅</td><td class="mark">✅</td></tr>
+        <tr><td>Number of monitors</td><td class="mark">unlimited</td><td class="mark">unlimited</td></tr>
+        <tr><td>Alerts to Telegram, Slack, Discord, JSON webhook, ntfy</td><td class="mark">—</td><td class="mark">✅</td></tr>
+        <tr><td>Number rules — fire only below/above a threshold, or on a set amount or % move</td><td class="mark">—</td><td class="mark">✅</td></tr>
+        <tr><td>Change history per monitor, exportable as CSV or JSON</td><td class="mark">last value</td><td class="mark">up to 500</td></tr>
+        <tr><td>Catch up on checks missed while the browser was closed</td><td class="mark">—</td><td class="mark">✅</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>What Pro costs, and why it is one payment</h2>
+    <p>
+      <strong>$24.90 once. Launch price $14.90.</strong> Permanent, includes future updates, up to 3
+      browsers per license.
+    </p>
+    <p>
+      There is no server behind this product and license checks happen offline, so there is no
+      recurring cost to pass on to you. Charging monthly would mean building a license server just to
+      be able to switch your copy off — which is the opposite of the point.
+    </p>
+    <table>
+      <thead><tr><th>Tool</th><th>Entry paid plan</th><th>Cost over a year</th></tr></thead>
+      <tbody>
+        <tr><td>Distill Web Monitor</td><td>$15 / month</td><td>$180</td></tr>
+        <tr><td>Visualping</td><td>from about $10 / month</td><td>about $120</td></tr>
+        <tr><td><strong>Web Change Alert Pro</strong></td><td><strong>$24.90 once</strong></td><td><strong>$24.90</strong></td></tr>
+      </tbody>
+    </table>
+    <p class="price">Competitor pricing checked 2026-07-31. Those services also run checks in the cloud, which this one deliberately does not.</p>
+
+    <h3>Refunds</h3>
+    <p>14 days, no questions asked. Email and it is done.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How the license works</h2>
+    <p>
+      After payment you receive a license key. Paste it into the extension's Pro page and the
+      features unlock. The key is a token signed with an ECDSA P-256 private key; the extension
+      verifies the signature with a bundled public key.
+    </p>
+    <ul>
+      <li>No account to create.</li>
+      <li>No license server — verification makes <strong>zero network requests</strong> and works offline.</li>
+      <li>Nothing about you is reported when you activate or use Pro.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="buy-status">
+  <div class="wrap">
+    <h2>Buying</h2>
+    <p>
+      The checkout page is being set up. Until it is live, email
+      <a href="mailto:rlaalsdn456456@naver.com?subject=Web%20Change%20Alert%20Pro">rlaalsdn456456@naver.com</a>
+      to buy at the launch price or to be told when it opens.
+    </p>
+    <p class="price">
+      Payment will be handled by a third-party provider that acts as merchant of record. Purchases
+      happen outside the Chrome Web Store.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <a href="https://github.com/minwoo19930301/web-change-alert">Source (free extension)</a> ·
+    <a href="https://github.com/minwoo19930301/web-change-alert/blob/main/PRIVACY.md">Privacy</a> ·
+    <a href="https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc">Chrome Web Store</a>
+    <p>© 2026 Web Change Alert</p>
+  </div>
+</footer>
+
+</body>
+</html>
