@@ -48,10 +48,12 @@ at all.
 Launch price **$24.90** for the first 100 buyers.
 For comparison, Distill Web Monitor's Starter plan is $15 *per month* ($180 a year).
 
-**Buy:** [Pro page](https://minwoo19930301.github.io/web-change-alert/). Pro is sold directly by
-email for now — mail rlaalsdn456456@naver.com, you get payment details back, and the license key
-arrives within 24 hours. A hosted checkout will replace this once there is enough demand to justify
-the setup.
+**Buy:** [Pro page](https://minwoo19930301.github.io/web-change-alert/). A hosted checkout is
+being set up; until it is linked there, email rlaalsdn456456@naver.com and the license key follows.
+
+The Chrome Web Store has not supported paid extensions since February 2021, so every paid extension
+is bought outside the store and unlocked with a license key. This one verifies the key offline, with
+no license server.
 
 ### How credentials are stored (Pro)
 
