@@ -108,12 +108,12 @@ May 8, 2026 (v1.5):
 ============================================================
 
 Short description:
-Monitor webpage changes with exact target selection, schedules, filters, Agent AI setup, and site icons.
+Watch one exact part of a page and get told the moment it changes — on your phone, not only on the machine you are sitting at.
 
 Detailed description:
-Tired of repeatedly opening a site just to see whether one part changed? Web Change Alert checks it for you.
+Watch one exact part of a page and get told the moment it changes — on your phone, not only on the machine you are sitting at.
 
-Open the extension popup in the browser/profile where Web Change Alert is installed, go to the site you want to monitor, select the exact target (text, image, SVG, canvas, attribute, link href, or input value), and set the schedule once. After that, you get alerts only when the value actually changes compared with the previous value.
+Checks run inside your own browser. That is the point: pages behind a login work, and sites that block data-center crawlers do not block you. Nothing about the pages you watch is sent anywhere. No account.
 
 Key features:
 • Direct target selection (text/image/SVG/canvas/attribute/link href/input value)
@@ -126,6 +126,28 @@ Key features:
 • Fast re-select when collection fails
 • Agent AI setup prompt for Codex, Claude Code, OpenClaw, Antigravity, and similar browser-controlling agents
 • Site title and favicon saved in the popup
+
+WHAT PRO ADDS
+• Scenario steps — click a tab, scroll to load more, type in a search box, press Enter, and only then read the value
+• Order-based targeting — pick a target by its visible text or by "the 3rd match", not just a CSS selector
+• Automatic login — store credentials encrypted with your own master passphrase; when a check hits a login wall, Pro signs in, walks the scenario again and collects the value
+• Failure diagnosis — tells a dropped session apart from a captcha, an empty page, or an element that moved
+• Alerts to Telegram, Slack, Discord, any JSON webhook, or ntfy
+• Number rules — fire only below or above a threshold, or on a set amount or percentage move
+• Change history, up to 500 entries per monitor, exportable as CSV or JSON
+• Catch-up — checks missed while the browser was closed run as soon as you return
+
+CREDENTIALS
+Encrypted with AES-GCM from your master passphrase (PBKDF2, 250,000 iterations). The passphrase is stored nowhere. Decrypted values live in memory only and vanish when the browser closes. No local helper program, no server.
+
+HONEST LIMIT
+Checks run while your browser is open. If your computer is off, checks pause and Pro catches up when you return. This is not a 24/7 cloud monitor.
+
+LICENSE
+One purchase, permanent. Verified offline inside the extension by checking a signature — no license server, no phone-home.
+
+Buy and details: https://minwoo19930301.github.io/web-change-alert/
+Free version: https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc
 
 If notifications do not appear:
 • macOS: System Settings > Notifications > Allow notifications for your browser helper, such as Google Chrome Helper

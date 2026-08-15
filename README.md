@@ -1,11 +1,13 @@
 # Web Change Alert
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Published-blue?style=for-the-badge&logo=googlechrome)](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc?utm_source=item-share-cb)
+[![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Published-blue?style=for-the-badge&logo=googlechrome)](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc)
 
+Watch one exact part of a page and get told the moment it changes — on your phone, not only on the machine you are sitting at.
 
-Web Change Alert monitors selected parts of webpages and sends a browser notification only when the value actually changes.
+Checks run inside your own browser. That is the point: pages behind a login work, and sites that block data-center crawlers do not block you. Nothing about the pages you watch is sent anywhere. No account.
 
-Chrome Web Store: [Web Change Alert](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc?utm_source=item-share-cb)
+- **Free version:** [Chrome Web Store](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc)
+- **Pro & Details:** [Landing Page](https://minwoo19930301.github.io/web-change-alert/)
 
 ## Features
 
@@ -25,7 +27,29 @@ Chrome Web Store: [Web Change Alert](https://chromewebstore.google.com/detail/jc
 - Sites protected by anti-bot systems may require manual verification
 - Very short intervals can cause rate limiting or blocking from the target site
 
-## Web Change Alert Pro
+## WHAT PRO ADDS
+
+• **Scenario steps** — click a tab, scroll to load more, type in a search box, press Enter, and only then read the value  
+• **Order-based targeting** — pick a target by its visible text or by "the 3rd match", not just a CSS selector  
+• **Automatic login** — store credentials encrypted with your own master passphrase; when a check hits a login wall, Pro signs in, walks the scenario again and collects the value  
+• **Failure diagnosis** — tells a dropped session apart from a captcha, an empty page, or an element that moved  
+• **Alerts to Telegram, Slack, Discord, any JSON webhook, or ntfy**  
+• **Number rules** — fire only below or above a threshold, or on a set amount or percentage move  
+• **Change history**, up to 500 entries per monitor, exportable as CSV or JSON  
+• **Catch-up** — checks missed while the browser was closed run as soon as you return  
+
+### CREDENTIALS
+Encrypted with AES-GCM from your master passphrase (PBKDF2, 250,000 iterations). The passphrase is stored nowhere. Decrypted values live in memory only and vanish when the browser closes. No local helper program, no server.
+
+### HONEST LIMIT
+Checks run while your browser is open. If your computer is off, checks pause and Pro catches up when you return. This is not a 24/7 cloud monitor.
+
+### LICENSE
+One purchase, permanent. Verified offline inside the extension by checking a signature — no license server, no phone-home.
+
+- **Buy and details:** https://minwoo19930301.github.io/web-change-alert/  
+- **Free version:** https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc  
+
 
 Pro is a **separate extension**, not an in-app purchase. This free version stays exactly as it is —
 nothing that used to be free was moved behind a paywall, and the free package contains no Pro code
