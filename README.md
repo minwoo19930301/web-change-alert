@@ -28,27 +28,17 @@ Checks run inside your own browser. That is the point: pages behind a login work
 - Very short intervals can cause rate limiting or blocking from the target site
 
 ## WHAT PRO ADDS
+• **Multi-step scenarios** (click, scroll, type, wait, extract)  
+• **Encrypted auto-login** for session walls (AES-GCM, 100% offline)  
+• **Order & text targeting** ("the 3rd match" / visible text)  
+• **Smart failure diagnosis** (session drop vs captcha vs moved element)  
+• **Mobile alerts** to Telegram, Slack, Discord, ntfy & webhooks  
+• **Price & threshold rules** ("drops below $50", "moves by 10%")  
+• **500-entry change history** per monitor + CSV/JSON export  
+• **Catch-up** on missed checks after browser restart  
 
-• **Scenario steps** — click a tab, scroll to load more, type in a search box, press Enter, and only then read the value  
-• **Order-based targeting** — pick a target by its visible text or by "the 3rd match", not just a CSS selector  
-• **Automatic login** — store credentials encrypted with your own master passphrase; when a check hits a login wall, Pro signs in, walks the scenario again and collects the value  
-• **Failure diagnosis** — tells a dropped session apart from a captcha, an empty page, or an element that moved  
-• **Alerts to Telegram, Slack, Discord, any JSON webhook, or ntfy**  
-• **Number rules** — fire only below or above a threshold, or on a set amount or percentage move  
-• **Change history**, up to 500 entries per monitor, exportable as CSV or JSON  
-• **Catch-up** — checks missed while the browser was closed run as soon as you return  
-
-### CREDENTIALS
-Encrypted with AES-GCM from your master passphrase (PBKDF2, 250,000 iterations). The passphrase is stored nowhere. Decrypted values live in memory only and vanish when the browser closes. No local helper program, no server.
-
-### HONEST LIMIT
-Checks run while your browser is open. If your computer is off, checks pause and Pro catches up when you return. This is not a 24/7 cloud monitor.
-
-### LICENSE
-One purchase, permanent. Verified offline inside the extension by checking a signature — no license server, no phone-home.
-
-- **Buy and details:** https://minwoo19930301.github.io/web-change-alert/  
-- **Free version:** https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc  
+- **Get Pro:** https://minwoo19930301.github.io/web-change-alert/  
+- **Free Store Listing:** https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc  
 
 
 Pro is a **separate extension**, not an in-app purchase. This free version stays exactly as it is —
