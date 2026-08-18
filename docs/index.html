@@ -60,7 +60,7 @@
     :root { --ink: #e7ebf0; --muted: #9aa4b0; --line: #333a42; --bg: #15181c; --soft: #1d2126; }
     .btn { background: #22272d; }
   }
-<script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@polar-sh/checkout@0.1/dist/embed.global.js" defer data-auto-init></script>
 </head>
 <body>
 
@@ -74,7 +74,7 @@
     </p>
     <div class="cta">
       <a class="btn free" href="https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc">Install free from Chrome Web Store</a>
-      <a class="btn buy lemonsqueezy-button" id="buy" href="#buy-status">Get Pro</a>
+      <a class="btn buy" id="buy" href="https://buy.polar.sh/polar_cl_rZofvOYsQg1kjJl3uelyqmY1QF6hmDtIAJoaq44jZg5" data-polar-checkout>Get Pro ($24.90)</a>
       <span class="price"><s>$39.90</s> <strong>$24.90</strong> launch price · one-time, not a subscription</span>
     </div>
   </div>
@@ -111,17 +111,15 @@
         <tr><th>Feature</th><th class="mark">Free</th><th class="mark">Pro</th></tr>
       </thead>
       <tbody>
-        <tr><td>Visual target picking (text, number, image, SVG, canvas, link, input value)</td><td class="mark">✅</td><td class="mark">✅</td></tr>
-        <tr><td>Schedules: interval, daily, weekly, monthly</td><td class="mark">✅</td><td class="mark">✅</td></tr>
-        <tr><td>Browser notification only when the value really changed</td><td class="mark">✅</td><td class="mark">✅</td></tr>
+        <tr><td>Visual target picking, scheduling, browser notifications</td><td class="mark">✅</td><td class="mark">✅</td></tr>
         <tr><td>Number of monitors</td><td class="mark">unlimited</td><td class="mark">unlimited</td></tr>
-        <tr><td><strong>Scenario steps</strong> — click a tab, scroll to load more, type, press Enter, <em>then</em> read the value</td><td class="mark">—</td><td class="mark">✅</td></tr>
+        <tr><td><strong>Scenario steps</strong> — click a tab, scroll to load, type, press Enter, <em>then</em> read the value</td><td class="mark">—</td><td class="mark">✅</td></tr>
         <tr><td><strong>Order-based targeting</strong> — pick by visible text or "the 3rd match", not just a CSS selector</td><td class="mark">—</td><td class="mark">✅</td></tr>
-        <tr><td><strong>Automatic login</strong> — credentials encrypted with your own master passphrase</td><td class="mark">—</td><td class="mark">✅</td></tr>
-        <tr><td><strong>Failure diagnosis</strong> — dropped session vs captcha vs empty page vs moved element</td><td class="mark">—</td><td class="mark">✅</td></tr>
-        <tr><td>Alerts to Telegram, Slack, Discord, JSON webhook, ntfy</td><td class="mark">—</td><td class="mark">✅</td></tr>
-        <tr><td>Number rules — fire only below/above a threshold, or on a set amount or % move</td><td class="mark">—</td><td class="mark">✅</td></tr>
-        <tr><td>Change history per monitor, exportable as CSV or JSON</td><td class="mark">last value</td><td class="mark">up to 500</td></tr>
+        <tr><td><strong>Automatic login</strong> — credentials encrypted with your own master passphrase, used when a check hits a login wall</td><td class="mark">—</td><td class="mark">✅</td></tr>
+        <tr><td><strong>Failure diagnosis</strong> — tells a dropped session apart from a captcha, an empty page, or a moved element</td><td class="mark">—</td><td class="mark">✅</td></tr>
+        <tr><td>Telegram / Slack / Discord / Webhook / ntfy alerts</td><td class="mark">—</td><td class="mark">✅</td></tr>
+        <tr><td>Number rules (alert only when a value crosses a threshold or moves by X%)</td><td class="mark">—</td><td class="mark">✅</td></tr>
+        <tr><td>Change history per monitor + CSV / JSON export</td><td class="mark">last only</td><td class="mark">500 entries</td></tr>
         <tr><td>Catch up on checks missed while the browser was closed</td><td class="mark">—</td><td class="mark">✅</td></tr>
       </tbody>
     </table>
