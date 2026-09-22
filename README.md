@@ -1,11 +1,5 @@
 # Web Change Alert
 
-<!-- PROJECT-PRESENTATION:START -->
-<a href="https://minwoo19930301.github.io/web-change-alert/"><img src=".github/project-cover.svg" alt="Web Change Alert" width="960"></a>
-
-[![OPEN APP](https://img.shields.io/badge/OPEN%20APP-2C6049?style=for-the-badge)](https://minwoo19930301.github.io/web-change-alert/) [![SOURCE](https://img.shields.io/badge/SOURCE-444444?style=for-the-badge)](https://github.com/minwoo19930301/web-change-alert)
-<!-- PROJECT-PRESENTATION:END -->
-
 [![Chrome Web Store](https://img.shields.io/badge/Chrome%20Web%20Store-Published-blue?style=for-the-badge&logo=googlechrome)](https://chromewebstore.google.com/detail/jcfhchhliffpofclnhhjjdjakinpmfmc)
 
 Watch one exact part of a page and get told the moment it changes — on your phone, not only on the machine you are sitting at.
